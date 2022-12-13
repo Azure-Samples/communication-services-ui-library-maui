@@ -1,0 +1,262 @@
+.vs/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.userprefs
+
+# ignore Xamarin.Android Resource.Designer.cs files
+**/*.Droid/**/[Rr]esource.[Dd]esigner.cs
+**/*.Android/**/[Rr]esource.[Dd]esigner.cs
+**/Android/**/[Rr]esource.[Dd]esigner.cs
+**/Droid/**/[Rr]esource.[Dd]esigner.cs
+
+# Xamarin Components
+Components/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+**/DerivedData
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+#NUNIT
+*.VisualState.xml
+TestResult.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Chutzpah Test files
+_Chutzpah*
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# TFS 2012 Local Workspace
+$tf/
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# JustCode is a .NET coding addin-in
+.JustCode
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# NCrunch
+*.ncrunch*
+_NCrunch_*
+.*crunch*.local.xml
+
+# MightyMoose
+*.mm.*
+AutoTest.Net/
+
+# Web workbench (sass)
+.sass-cache/
+
+# Installshield output folder
+[Ee]xpress/
+
+# DocProject is a documentation generator add-in
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+# Click-Once directory
+publish/
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+
+# NuGet Packages Directory
+packages/
+*.nuget.targets
+*.lock.json
+*.nuget.props
+
+## TODO: If the tool you use requires repositories.config uncomment the next line
+#!packages/repositories.config
+
+# Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
+# This line needs to be after the ignore of the build folder (and the packages folder if the line above has been uncommented)
+!packages/build/
+
+# Windows Azure Build Output
+csx/
+*.build.csdef
+
+# Windows Store app package directory
+AppPackages/
+
+# Others
+sql/
+*.Cache
+ClientBin/
+[Ss]tyle[Cc]op.*
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.pfx
+*.publishsettings
+node_modules/
+.DS_Store
+*.bak
+
+# RIA/Silverlight projects
+Generated_Code/
+
+# Backup & report files from converting an old project file to a newer
+# Visual Studio version. Backup files are not needed, because we have git ;-)
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# Business Intelligence projects
+*.rdl.data
+*.bim.layout
+*.bim_*.settings
+
+# Microsoft Fakes
+FakesAssemblies/
+
+.vscode/settings.json
+CommunicationCallingXamarinSampleApp/CommunicationCallingXamarinSampleApp.Android/Resources/
+XamarinAndroidBindings/CommunicationCommon/CommunicationCommon/obj/
+XamarinAndroidBindings/CommunicationCommon/CommunicationCommon/bin/
+XamarinAndroidBindings/CommunicationCore/CommunicationCore/obj/
+XamarinAndroidBindings/CommunicationCore/CommunicationCore/bin/
+XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/obj/
+XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/bin/
+
+XamariniOSBindings/CommunicationUIProxy.Binding/.vs
+
+MAUIAndroidBindings/CommunicationCommon/CommunicationCommon/obj/
+MAUIAndroidBindings/CommunicationCommon/CommunicationCommon/bin/
+MAUIAndroidBindings/CommunicationCore/CommunicationCore/obj/
+MAUIAndroidBindings/CommunicationCore/CommunicationCore/bin/
+MAUIAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/obj/
+MAUIAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/bin/
+
+MAUIiOSBindings/CommunicationUIProxy.Binding/.vs
+
+
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+# Pods/
+XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/
+XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/Framework
+
+XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcworkspace/xcuserdata/
+XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcodeproj/xcuserdata/
+
+MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/
+MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/Framework
+MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcworkspace/xcuserdata/
+MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcodeproj/xcuserdata/
+
+#Frameworks
+XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/Framework
+XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/DeviceFramework
+XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/SimulatorFramework
+XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/Framework/
+XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/bin/
+XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/.vs
+XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/obj
+
+MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/Framework
+MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/DeviceFramework
+MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/SimulatorFramework
+MAUIiOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/Framework/
+MAUIiOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/bin/
+MAUIiOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/.vs
+MAUIiOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/obj
+
+obj/
+bin/
+# Jars/
+XamarinAndroidBindings/CommunicationCore/CommunicationCore/Jars/
+XamarinAndroidBindings/CommunicationCommon/CommunicationCommon/Jars/
+XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/Jars/
+
+MAUIAndroidBindings/CommunicationCore/CommunicationCore/Jars/
+MAUIAndroidBindings/CommunicationCommon/CommunicationCommon/Jars/
+MAUIAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/Jars/
+CommunicationCallingXamarinSampleApp/CommunicationCallingXamarinSampleApp.Android/aar
+
+*.jar
+*.aar
