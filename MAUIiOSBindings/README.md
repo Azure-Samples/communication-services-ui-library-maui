@@ -1,6 +1,6 @@
-# Azure Communication UI iOS Library Xamarin Support
+# Azure Communication UI iOS Library MAUI Support
 
-This project demonstrates the integration of Communication UI library into Xamarin Forms.
+This project demonstrates the integration of Communication UI library into MAUI app.
 
 ## Getting Started
 
