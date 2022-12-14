@@ -1,57 +1,72 @@
-# Project Name
+![Hero Image](/mobile-ui-library-hero-image.png)
 
-(short, 1-3 sentenced, description of the project)
+# Azure Communication UI Mobile Library for MAUI
+
+This project demonstrates the integration of Azure Communication UI library into MAUI applications that utilizes the native Azure Communication UI library and Azure Communication Services to build a calling experience that features both voice and video calling.
 
 ## Features
 
-This project framework provides the following features:
+Please refer to our native [UI Library overview](https://docs.microsoft.com/en-us/azure/communication-services/concepts/ui-library/ui-library-overview?pivots=platform-mobile)
 
-* Feature 1
-* Feature 2
-* ...
+## Prerequisites
 
-## Getting Started
+- iOS [Requirements](https://github.com/Azure/communication-ui-library-ios#requirements)
+- Android [Requirements](https://github.com/Azure/communication-ui-library-android#prerequisites)
+- Visual Studio [Setup Instructions](https://docs.microsoft.com/en-us/xamarin/get-started/installation/?pivots=macos)
+- Azure Communication Services Token [See example](https://docs.microsoft.com/azure/communication-services/tutorials/trusted-service-tutorial)
 
-### Prerequisites
+## Run Sample
 
-(ideally very short, if any)
+Clone repo and open `MyMauiApp.sln` in Visual Studio
 
-- OS
-- Library version
-- ...
+#### For Android
 
-### Installation
+#### For iOS
 
-(ideally very short)
+1. Navigate to `/MAUIiOSBinding/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `sh iOSFramework -d`
+2. Next navigate to `/MAUIiOSBinding/iOS.CallingUI.Binding` and build the `iOS.CallingUI.Binding.sln`. This will generate `iOS.CallingUI.Binding\bin` folder where it will have `iOS.CallingUI.Binding.dll` for you to use.
 
-- npm install [package name]
-- mvn install
-- ...
+## Key Sample Highlights
 
-### Quickstart
-(Add steps to get up and running quickly)
+### Folder Structure
 
-1. git clone [repository clone url]
-2. cd [repository name]
-3. ...
+```
+| MyMauiApp
+    | Platforms/(Android | iOS)/Composite.cs -> Class to communicate with native binding libraries
+    | MyMauiApp.sln -> MAUI application
+| MAUIiOSBindings
+    | iOS.CallingUI.Binding -> Bindings for Azure Communication UI library
+    | ProxyLibs -> CommunicationUI proxy library to bridge swift methods to objective-c and generate frameworks
+```
 
+### Android and iOS Common code
 
-## Demo
+The common code for Android and iOS is all under the `MyMauiApp.sln`
+Depending on the platform we are running on we use the appropriate library.
 
-A demo app is included to show how to use the project.
+```cs
+#if ANDROID
+using MyMauiApp.Platforms.Android;
+#elif IOS
+using MyMauiApp.Platforms.iOS;
+#endif
+```
 
-To run the demo, follow these steps:
+`MainPage.xaml.cs` has common UI code for Android and iOS. On Button click, Android and iOS app is triggered to start a call.
 
-(Add steps to start up the demo)
+```cs
+Composite composite = new Composite();
+string name = <DISPLAY_NAME>;
+string acsToken = <TOKEN>;
+string callId = <GROUP_CALL_ID>;
+bool isTeamsCall = false;
+composite.JoinCall(name, acsToken, callId, isTeamsCall);
+```
 
-1.
-2.
-3.
+### Bridging Guide
 
-## Resources
+To learn more about how this sample was created and communicates with the native ACS Mobile UI Library, please refer to our briding guides:
 
-(Any additional resources or related projects)
+[Android Bridging Guide](XamarinAndroidBindings/README.md)
 
-- Link to supporting information
-- Link to similar sample
-- ...
+[iOS Bridging Guide](MAUIiOSBindings/README.md)
