@@ -89,6 +89,6 @@ curl -0 -L "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_listi
 curl -0 -L "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_others/0.0.20/fluentui_others-0.0.20.aar" --output fluentui_others-0.0.20.aar
 curl -0 -L "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_persona/0.0.20/fluentui_persona-0.0.20.aar" --output fluentui_persona-0.0.20.aar
 curl -0 -L "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_transients/0.0.20/fluentui_transients-0.0.20.aar" --output fluentui_transients-0.0.20.aar
-curl -0 -L "https://repo1.maven.org/maven2/com/microsoft/device/dualscreen/layouts/1.0.0-beta9/layouts-1.0.0-beta9.aar" --output layouts-1.0.0-beta9.aar
+curl -0 -L "https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1/com/microsoft/device/dualscreen-layout/dualscreen-layout-1.0.0-alpha01.aar" --output dualscreen-layout-1.0.0-alpha01.aar
 
 echo "All required jars/aars downloaded"
