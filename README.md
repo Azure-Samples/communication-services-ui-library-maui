@@ -21,6 +21,8 @@ Clone repo and open `MyMauiApp.sln` in Visual Studio
 
 #### For Android
 
+1. Navigate to `/MAUIAndroidBindings` and follow `README.md` to download dependencies for Android (section: `Download JAR's/AAR's`).
+
 #### For iOS
 
 1. Navigate to `/MAUIiOSBinding/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `sh iOSFramework -d`

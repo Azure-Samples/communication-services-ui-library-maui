@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+     <IsBinding>True</IsBinding>
+    <EnableDefaultAndroidItems>false</EnableDefaultAndroidItems>
+  </PropertyGroup>
+   <ItemGroup>
+     <PackageReference Include="Slf4jApi" Version="1.7.30">
+    </PackageReference>
+  </ItemGroup>
+     
+  <ItemGroup>
+    <AndroidLibrary Include="Jars\azure-core-logging-1.0.0-beta.9.aar" />
+  </ItemGroup>
+</Project>

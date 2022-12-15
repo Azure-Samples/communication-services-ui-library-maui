@@ -105,5 +105,8 @@
 		<AndroidAarLibrary Include="aar\azure-communication-calling-2.2.0.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
+		<AndroidAarLibrary Include="aar\layouts-1.0.0-beta9.aar">
+		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
+		</AndroidAarLibrary>
   </ItemGroup>
 </Project>
