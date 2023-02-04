@@ -16,7 +16,7 @@ fi
 cd Jars
 
 echo "Downloading CommunicationUILibrary Jars"
-curl -0 -L "https://repo1.maven.org/maven2/com/azure/android/azure-communication-ui-calling/1.0.0/azure-communication-ui-calling-1.0.0.aar" --output azure-communication-ui-calling-1.0.0.aar
+curl -0 -L "https://repo1.maven.org/maven2/com/azure/android/azure-communication-ui-calling/1.1.0/azure-communication-ui-calling-1.1.0.aar" --output azure-communication-ui-calling-1.1.0.aar
 
 echo "CommunicationUILibrary Jars Download Complete"
 cd ../../
