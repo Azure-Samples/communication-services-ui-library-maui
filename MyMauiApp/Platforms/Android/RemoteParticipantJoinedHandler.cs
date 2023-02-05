@@ -11,10 +11,12 @@ namespace MyMauiApp.Platforms.Android
     {
 
         private CallComposite callComposite;
+        private DataModelInjectionProps? dataModelInjection;
 
-        public RemoteParticipantJoinedHandler(CallComposite callComposite)
+        public RemoteParticipantJoinedHandler(CallComposite callComposite, DataModelInjectionProps? dataModelInjection)
         {
             this.callComposite = callComposite;
+            this.dataModelInjection = dataModelInjection;
         }
 
         public void Disposed()
@@ -33,7 +35,39 @@ namespace MyMauiApp.Platforms.Android
         {
             if (eventArgs is CallCompositeRemoteParticipantJoinedEvent)
             {
+                var participantJoinedEvent = eventArgs as CallCompositeRemoteParticipantJoinedEvent;
 
+                foreach (var id in participantJoinedEvent.Identifiers)
+                {
+                    try
+                    {
+                        if (!String.IsNullOrEmpty(dataModelInjection.Value.remoteAvatar))
+                        {
+                            var context = MainActivity.Instance.ApplicationContext;
+                            int resID = context.Resources.GetIdentifier(dataModelInjection.Value.remoteAvatar, "drawable", context.PackageName);
+                            Bitmap avatarBitMap = BitmapFactory.DecodeResource(context.Resources, resID);
+                            CallCompositeParticipantViewData personaData = new CallCompositeParticipantViewData();
+                            personaData.SetAvatarBitmap(avatarBitMap);
+                            personaData.SetDisplayName(dataModelInjection.Value.remoteAvatar);
+                            var result = callComposite.SetRemoteParticipantViewData(id, personaData);
+
+                            if (result == CallCompositeSetParticipantViewDataResult.Success)
+                            {
+
+                            }
+                            if (result == CallCompositeSetParticipantViewDataResult.ParticipantNotInCall)
+                            {
+
+                            }
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
+                }
             }
         }
 

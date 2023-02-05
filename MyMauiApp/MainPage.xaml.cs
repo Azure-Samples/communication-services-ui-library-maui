@@ -1,9 +1,4 @@
-﻿#if ANDROID
-using MyMauiApp.Platforms.Android;
-#elif IOS
-using MyMauiApp.Platforms.iOS;
-#endif
-using System;
+﻿using System;
 
 namespace MyMauiApp;
 
@@ -14,15 +9,10 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	private async void OnJoinCallButtonClicked(object sender, EventArgs e)
 	{
-		Composite composite = new Composite();
-		string name = "";
-		string acsToken = "";
-		string callId = "";
-		bool isTeamsCall = false;
-		composite.JoinCall(name, acsToken, callId, isTeamsCall);
-	}
+        await Navigation.PushAsync(new JoinCallPage());
+    }
 }
 
 

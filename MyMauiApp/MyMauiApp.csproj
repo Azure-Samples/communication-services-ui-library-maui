@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<!-- <TargetFrameworks>net7.0-ios</TargetFrameworks> -->
 		<!-- <TargetFrameworks>net7.0-android</TargetFrameworks> -->
-		<TargetFrameworks>net7.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0-android</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>MyMauiApp</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -35,12 +35,12 @@
 	  <ProvisioningType>manual</ProvisioningType>
 	  <CodesignKey>iPhone Developer</CodesignKey>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
-		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

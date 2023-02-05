@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="MyMauiApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -10,5 +10,15 @@
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <ShellContent
+        Title="Join"
+        ContentTemplate="{DataTemplate local:JoinCallPage}"
+        Route="JoinCallPage" />
+
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate local:SettingsPage}"
+        Route="SettingsPage" />
 
 </Shell>
