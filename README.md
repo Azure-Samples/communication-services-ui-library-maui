@@ -17,11 +17,11 @@ Please refer to our native [UI Library overview](https://docs.microsoft.com/en-u
 
 ## Run Sample
 
-Clone repo and open `MyMauiApp.sln` in Visual Studio
+Clone repo and open `CommunicationCallingSampleMauiApp.sln` in Visual Studio
 
 #### For Android
 
-1. Navigate to `/MAUIAndroidBindings` and follow `README.md` to download dependencies for Android (section: `Download JAR's/AAR's`).
+1. Navigate to `/AndroidMauiBindings` and follow `README.md` to download dependencies for Android (section: `Download JAR's/AAR's`).
 
 #### For iOS
 
@@ -33,7 +33,7 @@ Clone repo and open `MyMauiApp.sln` in Visual Studio
 ### Folder Structure
 
 ```
-| MyMauiApp
+| CommunicationCallingSampleMauiApp
     | Platforms/(Android | iOS)/Composite.cs -> Class to communicate with native binding libraries
     | MyMauiApp.sln -> MAUI application
 | MAUIiOSBindings

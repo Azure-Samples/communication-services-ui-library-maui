@@ -198,16 +198,16 @@ XamarinAndroidBindings/CommunicationCore/CommunicationCore/bin/
 XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/obj/
 XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/bin/
 
-XamariniOSBindings/CommunicationUIProxy.Binding/.vs
+iOSMauiBindings/CommunicationUIProxy.Binding/.vs
 
-MAUIAndroidBindings/CommunicationCommon/CommunicationCommon/obj/
-MAUIAndroidBindings/CommunicationCommon/CommunicationCommon/bin/
-MAUIAndroidBindings/CommunicationCore/CommunicationCore/obj/
-MAUIAndroidBindings/CommunicationCore/CommunicationCore/bin/
-MAUIAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/obj/
-MAUIAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/bin/
+AndroidMauiBindings/CommunicationCommon/CommunicationCommon/obj/
+AndroidMauiBindings/CommunicationCommon/CommunicationCommon/bin/
+AndroidMauiBindings/CommunicationCore/CommunicationCore/obj/
+AndroidMauiBindings/CommunicationCore/CommunicationCore/bin/
+AndroidMauiBindings/CommunicationUILibrary/CommunicationUILibrary/obj/
+AndroidMauiBindings/CommunicationUILibrary/CommunicationUILibrary/bin/
 
-MAUIiOSBindings/CommunicationUIProxy.Binding/.vs
+iOSMauiBindings/CommunicationUIProxy.Binding/.vs
 
 
 
@@ -224,10 +224,10 @@ XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/Framework
 XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcworkspace/xcuserdata/
 XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcodeproj/xcuserdata/
 
-MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/
-MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/Framework
-MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcworkspace/xcuserdata/
-MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcodeproj/xcuserdata/
+iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/Pods/
+iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/Pods/Framework
+iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcworkspace/xcuserdata/
+iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcodeproj/xcuserdata/
 
 #Frameworks
 XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/Framework
@@ -238,13 +238,13 @@ XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/bin
 XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/.vs
 XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/obj
 
-MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/Framework
-MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/DeviceFramework
-MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/SimulatorFramework
-MAUIiOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/Framework/
-MAUIiOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/bin/
-MAUIiOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/.vs
-MAUIiOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/obj
+iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/Framework
+iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/DeviceFramework
+iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/SimulatorFramework
+iOSMauiBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/Framework/
+iOSMauiBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/bin/
+iOSMauiBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/.vs
+iOSMauiBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/obj
 
 obj/
 bin/
@@ -253,9 +253,9 @@ XamarinAndroidBindings/CommunicationCore/CommunicationCore/Jars/
 XamarinAndroidBindings/CommunicationCommon/CommunicationCommon/Jars/
 XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/Jars/
 
-MAUIAndroidBindings/CommunicationCore/CommunicationCore/Jars/
-MAUIAndroidBindings/CommunicationCommon/CommunicationCommon/Jars/
-MAUIAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/Jars/
+AndroidMauiBindings/CommunicationCore/CommunicationCore/Jars/
+AndroidMauiBindings/CommunicationCommon/CommunicationCommon/Jars/
+AndroidMauiBindings/CommunicationUILibrary/CommunicationUILibrary/Jars/
 CommunicationCallingXamarinSampleApp/CommunicationCallingXamarinSampleApp.Android/aar
 
 *.jar
