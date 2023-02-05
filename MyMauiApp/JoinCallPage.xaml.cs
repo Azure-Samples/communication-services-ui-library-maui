@@ -32,6 +32,8 @@ public partial class JoinCallPage : ContentPage
         _dataModelInjection = new DataModelInjectionProps();
         _dataModelInjection.localAvatar = "";
         _dataModelInjection.remoteAvatar = "";
+        groupCallFrame.IsVisible = true;
+        teamsCallFrame.IsVisible = false;
     }
 
     async void OnToolbarClicked(object sender, EventArgs e)
@@ -53,9 +55,9 @@ public partial class JoinCallPage : ContentPage
         if (isTeamsCall)
         {
             isTeamsCall = false;
-            //runningFrame.TranslateTo(runningFrame.X, 0, 150);
         }
-
+        groupCallFrame.IsVisible = true;
+        teamsCallFrame.IsVisible = false;
         teamsMeetingPivot.TextColor = Color.FromHex("#6E6E6E");
         groupCallPivot.TextColor = Colors.White;
         meetingTitleLabel.Text = groupCallTitle;
@@ -68,8 +70,9 @@ public partial class JoinCallPage : ContentPage
         if (!isTeamsCall)
         {
             isTeamsCall = true;
-            //runningFrame.TranslateTo(runningFrame.X + 171.5, 0, 150);
         }
+        groupCallFrame.IsVisible = false;
+        teamsCallFrame.IsVisible = true;
         groupCallPivot.TextColor = Color.FromHex("#6E6E6E");
         teamsMeetingPivot.TextColor = Colors.White;
         meetingTitleLabel.Text = teamsMeetingTitle;

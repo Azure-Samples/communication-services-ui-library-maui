@@ -5,50 +5,9 @@
     <ScrollView>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-               <Label Text="Video calling sample" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontSize="26" FontFamily="SF Pro Display" FontAttributes="Bold"/>
+               <Label Text="Video calling samples" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontSize="26" FontFamily="SF Pro Display" FontAttributes="Bold"/>
            </StackLayout>     
            <Button Text="Join a call" Margin="20" HorizontalOptions="Center" VerticalOptions="Center" Clicked="OnJoinCallButtonClicked" BackgroundColor="#0078D4" TextColor="White"></Button>
-
-            <Grid HorizontalOptions="Center" Margin="16, 8">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="170"></ColumnDefinition>
-                    <ColumnDefinition Width="170"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#F1F1F1"  Padding="0" Margin="0" HasShadow="False" VerticalOptions="Center" HeightRequest="32" HorizontalOptions="Center">
-                    <Frame.CornerRadius>
-                        <OnPlatform x:TypeArguments="x:Single">
-                            <On Platform="iOS" Value="15"></On>
-                            <On Platform="Android" Value="20"></On>
-                        </OnPlatform>
-                    </Frame.CornerRadius>
-                </Frame>
-
-                <Frame x:Name="runningFrame" HeightRequest="32" Grid.Column="0" BackgroundColor="#0078D4" HasShadow="False" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Center">
-                    <Frame.CornerRadius>
-                        <OnPlatform x:TypeArguments="x:Single">
-                            <On Platform="iOS" Value="15"></On>
-                            <On Platform="Android" Value="20"></On>
-                        </OnPlatform>
-                    </Frame.CornerRadius>
-                </Frame>
-
-
-                <StackLayout Orientation="Horizontal" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="170" HeightRequest="32">
-                    <StackLayout.GestureRecognizers>
-                    </StackLayout.GestureRecognizers>
-                    <Label x:Name="groupCallPivot" Text="Group Call" TextColor="White" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="170" HeightRequest="32">
-                    <StackLayout.GestureRecognizers>
-                    </StackLayout.GestureRecognizers>
-                    <Label x:Name="teamsMeetingPivot" MaximumWidthRequest="170" Text="Teams Meetings" TextColor="#6E6E6E" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
-                </StackLayout>
-            </Grid>
         </StackLayout>
     </ScrollView>
 </ContentPage>
