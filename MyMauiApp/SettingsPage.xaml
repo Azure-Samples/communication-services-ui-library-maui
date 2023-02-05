@@ -7,14 +7,14 @@
         <ScrollView>
             <StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Settings" Margin="0, 11" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Subtitle"/>
+                    <Label Text="Settings" Margin="0, 8" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Subtitle"/>
                 </StackLayout>
-                <Label Text="Localization" FontSize="13" HorizontalTextAlignment="Start" Margin="16, 24, 16, 8"/>
+                <Label Text="Localization" FontSize="13" HorizontalTextAlignment="Start" Margin="16, 11, 16, 8"/>
                 <Label Text="Left to Right Text" FontSize="12" HorizontalTextAlignment="Start" Margin="16, 8"/>
                 <Switch x:Name="leftToRightToggle" IsToggled="true" Margin="16, 0" Toggled="OnLeftToRightToggled"/>
-                <Label Text="Language" FontSize="12" HorizontalTextAlignment="Start" Margin="16, 24, 16, 8"/>
+                <Label Text="Language" FontSize="12" HorizontalTextAlignment="Start" Margin="16, 11, 16, 8"/>
                 <Picker Margin="16,0,0,0" x:Name="languagePicker" Title="Select a language"/>
-                <Label Text="Data Model Injection" FontSize="13" HorizontalTextAlignment="Start" Margin="16, 28, 16, 8"/>
+                <Label Text="Data Model Injection" FontSize="13" HorizontalTextAlignment="Start" Margin="16, 11, 16, 8"/>
                 <Label Text="Local Avatar" FontSize="13" HorizontalTextAlignment="Start" Margin="16, 8"/>
                 <StackLayout Margin="10" Orientation="Horizontal" HorizontalOptions="Center">
                     <ImageButton x:Name="localCatBtn" Source="cat.png" Margin="1" BorderWidth="4" HeightRequest="60" WidthRequest="40" HorizontalOptions="Center" Clicked="OnLocalCatAvatarClicked"/>

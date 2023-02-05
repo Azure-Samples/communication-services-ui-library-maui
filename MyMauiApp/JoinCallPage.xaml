@@ -13,11 +13,11 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="170"></ColumnDefinition>
-                    <ColumnDefinition Width="170"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Frame Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="#F1F1F1"  Padding="0" Margin="0" HasShadow="False" VerticalOptions="Center" HeightRequest="32" HorizontalOptions="Center">
+                <Frame Grid.Row="0" Grid.ColumnSpan="2" WidthRequest="280" BackgroundColor="#F1F1F1"  Padding="0" Margin="0" HasShadow="False" VerticalOptions="Center" HeightRequest="32" HorizontalOptions="Center">
                     <Frame.CornerRadius>
                         <OnPlatform x:TypeArguments="x:Single">
                             <On Platform="iOS" Value="15"></On>
@@ -26,7 +26,7 @@
                     </Frame.CornerRadius>
                 </Frame>
 
-                <Frame x:Name="groupCallFrame" HeightRequest="32" Grid.Column="0" BackgroundColor="#0078D4" HasShadow="False" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Center">
+                <Frame x:Name="groupCallFrame" WidthRequest="140" HeightRequest="32" Grid.Column="0" BackgroundColor="#0078D4" HasShadow="False" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Center">
                     <Frame.CornerRadius>
                         <OnPlatform x:TypeArguments="x:Single">
                             <On Platform="iOS" Value="15"></On>
@@ -34,7 +34,7 @@
                         </OnPlatform>
                     </Frame.CornerRadius>
                 </Frame>
-                <Frame x:Name="teamsCallFrame" HeightRequest="32" Grid.Column="1" BackgroundColor="#0078D4" HasShadow="False" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Center">
+                <Frame x:Name="teamsCallFrame" WidthRequest="140" HeightRequest="32" Grid.Column="1" BackgroundColor="#0078D4" HasShadow="False" Margin="0" Padding="0" HorizontalOptions="Start" VerticalOptions="Center">
                     <Frame.CornerRadius>
                         <OnPlatform x:TypeArguments="x:Single">
                             <On Platform="iOS" Value="15"></On>
@@ -42,18 +42,18 @@
                         </OnPlatform>
                     </Frame.CornerRadius>
                 </Frame>
-                <StackLayout Orientation="Horizontal" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="170" HeightRequest="32">
+                <StackLayout Orientation="Horizontal" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="140" HeightRequest="32">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnGroupCallClicked"></TapGestureRecognizer>
                     </StackLayout.GestureRecognizers>
-                    <Label x:Name="groupCallPivot" Text="Group Call" WidthRequest="170" TextColor="White" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
+                    <Label x:Name="groupCallPivot" Text="Group Call" WidthRequest="140" TextColor="White" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="170" HeightRequest="32">
+                <StackLayout Orientation="Horizontal" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="140" HeightRequest="32">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnTeamsMeetingClicked"></TapGestureRecognizer>
                     </StackLayout.GestureRecognizers>
-                    <Label x:Name="teamsMeetingPivot" WidthRequest="170" Text="Teams Meetings" TextColor="#6E6E6E" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
+                    <Label x:Name="teamsMeetingPivot" WidthRequest="140" Text="Teams Meetings" TextColor="#6E6E6E" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
                 </StackLayout>
             </Grid>
             <Label Text="Access Token" FontSize="13" HorizontalTextAlignment="Start" Margin="16, 24, 16, 8"/>
