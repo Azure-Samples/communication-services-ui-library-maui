@@ -10,11 +10,11 @@ Open `CommunicationUI-Proxy.xcworkspace` and in a terminal `pod install`.
 
 ### Create Frameworks
 
-Under `MAUIiOSBindings/ProxyLibs/CommunicationUI-Proxy/` there is a script to help you build the fat framework files `iOSFramework.sh`.
+Under `iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/` there is a script to help you build the fat framework files `iOSFramework.sh`.
 
 ### Sharpie Bind
 
-Make a copy of `CommunicationUI_Proxy.framework`, so we can work on it safely. Open up a Terminal in the directory that contains the framework and run the below command:
+Sharpie bind helps to generate `iOSMauiBindings/iOS.CallingUI.Binding/ApiDefinitions.cs`. Make a copy of `communication-services-ui-library-maui/iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/DeviceFramework/Debug-iphoneos/CommunicationUI_Proxy.framework`, so we can work on it safely. Open up a Terminal in the directory that contains the framework and run the below command:
 
 ```
 sharpie bind -sdk iphoneos -output ./ -namespace iOS.CallingUI.Binding -scope ./CommunicationUI_Proxy.framework/Headers ./CommunicationUI_Proxy.framework/Headers/CommunicationUI_Proxy-Swift.h

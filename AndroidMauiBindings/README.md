@@ -6,13 +6,12 @@ This project demonstrates the integration of Communication UI library into .Net 
 
 The sample application has following dependencies.
 
-* Bindings for `azure-communication-common`
-* Bindings for `azure-core`
-* Bindings for `azure-core-logging`
-* Bindings for `azure-communication-ui-calling`
-* .aar - All these aar's are included in sample application `aar` folder. 
+* Bindings for `azure-communication-ui-calling-*.aar`
+* Bindings for `azure-core-logging-1.0.0-beta.9.aar`
+* Bindings for `azure-core-1.0.0-beta.9.aar`
+* Bindings for `azure-communication-common-1.0.0.aar`
+* .aar - The aar's not requiring bindings included in sample application `aar` folder. 
   * azure-communication-calling
-  * azure-core-logging
   * dualscreen-layout
   * fluentui_core
   * fluentui_drawer
@@ -29,7 +28,7 @@ After cloning repo, open terminal and navigate to the `AndroidMauiBindings` fold
 
 ### Windows
 
-Windows users can use powershell and run the script as an administator.
+Windows users can use powershell and run the script as an administrator.
 
 ```cs
 ./downloadJarScript.sh
@@ -40,59 +39,38 @@ Windows users can use powershell and run the script as an administator.
 chmod +x downloadJarScript.sh && ./downloadJarScript.sh
 ```
 
-
 ### .Net MAUI Android Bindings
 
 To support .Net MAUI for Calling UI library, the following bindings are required. Bindings are required for `.aar` when `c#` code requires to access object.
 
-`CommunicationUICallingLibrary` - Bindings for Azure Communication UI Calling library. The `C#` code requires to access `CallComposite` class from `azure-communication-ui-calling-*.aar`. This binding has following dependencies.
+`Android.CallingUI.Bindings` - Bindings for Azure Communication UI Calling library. The `C#` code requires to access `CallComposite` class from `azure-communication-ui-calling-*.aar`. This binding has following dependencies.
 
 ```xml
   <ItemGroup>
-    <ProjectReference Include="..\azure_common_binding\azure_common_binding.csproj" />
-    <ProjectReference Include="..\azure_core_binding\azure_core_binding.csproj" />
-    <ProjectReference Include="..\azure_log_binding\azure_log_binding.csproj" />
+    <AndroidLibrary Include="Jars\azure-communication-ui-calling-1.1.0.aar" />
   </ItemGroup>
 ```
 
-`CommunicationCommon` - Bindings for `azure-communication-common-*.aar` are required for accessing class  `CommunicationTokenCredentials` in `C#`. This binding has following dependencies.
+`Android.Azure.Common.Bindings` - Bindings for `azure-communication-common-*.aar` are required for accessing class  `CommunicationTokenCredentials` in `C#`. This binding has following dependencies.
 
 ``` xml
   <ItemGroup>
     <AndroidLibrary Include="Jars\azure-communication-common-1.0.0.aar" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\azure_core_binding\azure_core_binding.csproj" />
-  </ItemGroup>
 ```
 
 
-`CommunicationCore` - Bindings for `azure-core-*.aar` are required to access `ExpandableStringEnum` in `C#`. This binding has following dependencies.
+`Android.Azure.Core.Bindings` - Bindings for `azure-core-*.aar` are required to access `ExpandableStringEnum` in `C#`. This binding has following dependencies.
 
 ```xml
-  <ItemGroup>
-       <AndroidLibrary Include="Jars\jackson-annotations-2.11.2.jar" Bind="false" />
-        <AndroidLibrary Include="Jars\jackson-core-2.11.2.jar" Bind="false" />
-        <AndroidLibrary Include="Jars\jackson-databind-2.11.3.jar" Bind="false" />
-        <AndroidLibrary Include="Jars\jackson-dataformat-xml-2.11.2.jar" Bind="false" />
-        <AndroidLibrary Include="Jars\jackson-module-jaxb-annotations-2.11.2.jar" Bind="false" />
-  </ItemGroup>
   <ItemGroup>
     <AndroidLibrary Include="Jars\azure-core-1.0.0-beta.9.aar" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\azure_log_binding\azure_log_binding.csproj" />
-  </ItemGroup>
 ```
 
-`AzureCoreLogging` - Bindings for `azure-core-logging-*.aa`. This binding has following dependencies.
+`Android.Azure.Log.Bindings` - Bindings for `azure-core-logging-*.aa`. This binding has following dependencies.
 
 ```xml
-  <ItemGroup>
-     <PackageReference Include="Slf4jApi" Version="1.7.30">
-    </PackageReference>
-  </ItemGroup>
-     
   <ItemGroup>
     <AndroidLibrary Include="Jars\azure-core-logging-1.0.0-beta.9.aar" />
   </ItemGroup>
