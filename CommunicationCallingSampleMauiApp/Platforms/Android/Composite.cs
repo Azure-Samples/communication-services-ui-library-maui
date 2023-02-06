@@ -35,7 +35,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 Bitmap avatarBitMap = BitmapFactory.DecodeResource(context.Resources, resID);
                 personaData = new CallCompositeParticipantViewData();
                 personaData.SetAvatarBitmap(avatarBitMap);
-                personaData.SetDisplayName(name);
+                personaData.SetDisplayName(dataModelInjection.Value.localAvatar);
             }
 
 
