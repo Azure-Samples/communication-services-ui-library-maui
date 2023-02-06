@@ -190,26 +190,14 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 .vscode/settings.json
-CommunicationCallingXamarinSampleApp/CommunicationCallingXamarinSampleApp.Android/Resources/
-XamarinAndroidBindings/CommunicationCommon/CommunicationCommon/obj/
-XamarinAndroidBindings/CommunicationCommon/CommunicationCommon/bin/
-XamarinAndroidBindings/CommunicationCore/CommunicationCore/obj/
-XamarinAndroidBindings/CommunicationCore/CommunicationCore/bin/
-XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/obj/
-XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/bin/
-
 iOSMauiBindings/CommunicationUIProxy.Binding/.vs
-
 AndroidMauiBindings/CommunicationCommon/CommunicationCommon/obj/
 AndroidMauiBindings/CommunicationCommon/CommunicationCommon/bin/
 AndroidMauiBindings/CommunicationCore/CommunicationCore/obj/
 AndroidMauiBindings/CommunicationCore/CommunicationCore/bin/
 AndroidMauiBindings/CommunicationUILibrary/CommunicationUILibrary/obj/
 AndroidMauiBindings/CommunicationUILibrary/CommunicationUILibrary/bin/
-
 iOSMauiBindings/CommunicationUIProxy.Binding/.vs
-
-
 
 # CocoaPods
 #
@@ -218,26 +206,12 @@ iOSMauiBindings/CommunicationUIProxy.Binding/.vs
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 # Pods/
-XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/
-XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/Pods/Framework
-
-XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcworkspace/xcuserdata/
-XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcodeproj/xcuserdata/
-
 iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/Pods/
 iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/Pods/Framework
 iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcworkspace/xcuserdata/
 iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/CommunicationUI-Proxy.xcodeproj/xcuserdata/
 
 #Frameworks
-XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/Framework
-XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/DeviceFramework
-XamariniOSBindings/ProxyLibs/CommunicationUI-Proxy/SimulatorFramework
-XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/Framework/
-XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/bin/
-XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/.vs
-XamariniOSBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/obj
-
 iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/Framework
 iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/DeviceFramework
 iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy/SimulatorFramework
@@ -248,15 +222,6 @@ iOSMauiBindings/CommunicationUIProxy.Binding/CommunicationUIProxy.Binding/obj
 
 obj/
 bin/
-# Jars/
-XamarinAndroidBindings/CommunicationCore/CommunicationCore/Jars/
-XamarinAndroidBindings/CommunicationCommon/CommunicationCommon/Jars/
-XamarinAndroidBindings/CommunicationUILibrary/CommunicationUILibrary/Jars/
-
-AndroidMauiBindings/CommunicationCore/CommunicationCore/Jars/
-AndroidMauiBindings/CommunicationCommon/CommunicationCommon/Jars/
-AndroidMauiBindings/CommunicationUILibrary/CommunicationUILibrary/Jars/
-CommunicationCallingXamarinSampleApp/CommunicationCallingXamarinSampleApp.Android/aar
-
+Jars/
 *.jar
 *.aar
