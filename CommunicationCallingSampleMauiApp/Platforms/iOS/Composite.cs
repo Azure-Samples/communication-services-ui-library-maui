@@ -28,7 +28,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 _dataModelInjection = dataModelInjection;
                 UIImage avatar = UIImage.FromBundle(dataModelInjection.Value.localAvatar);
                 CommunicationPersonaDataProxy personaDataProxy = new CommunicationPersonaDataProxy();
-                personaDataProxy.SetPersonaDataProperties(avatar, name);
+                personaDataProxy.SetPersonaDataProperties(avatar, dataModelInjection.Value.localAvatar);
                 localDataOption.SetLocalDataOptionProperties(personaDataProxy);
             }
 
