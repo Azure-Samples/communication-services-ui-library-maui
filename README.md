@@ -22,7 +22,7 @@ Clone repo and open `CommunicationCallingSampleMauiApp/CommunicationCallingSampl
 #### For Android
 
 1. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net7.0-android</TargetFrameworks>`.
-2. Navigate to `/AndroidMauiBindings` and in this directory in terminal run `./downloadJarScript.sh`.
+2. Navigate to `/AndroidMauiBindings` and in this directory in terminal run `./downloadJarScript.sh`. `GitBash` OR `Windows Subsystem for Linux (WSL)` should be enabled to run `.sh` on Windows.
 3. Select android device/emulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 #### For iOS
