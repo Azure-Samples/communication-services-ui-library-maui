@@ -32,7 +32,7 @@ Clone repo and open `CommunicationCallingSampleMauiApp/CommunicationCallingSampl
 
 1. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net7.0-ios</TargetFrameworks>`.
 2. Navigate to `communication-services-ui-library-maui/iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `./iOSFramework -d`.
-3. Select android device/emulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
+3. Select iOS device/simulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 ##### Visual Studio Windows 2022
 
@@ -44,7 +44,7 @@ Clone repo and open `CommunicationCallingSampleMauiApp/CommunicationCallingSampl
 		<Reference Include="iOS.CallingUI.Binding" HintPath="iOS.CallingUI.Binding.dll" />
 	</ItemGroup>
     ```
-4. Select android device/emulator [following](https://learn.microsoft.com/en-us/dotnet/maui/ios/device-provisioning/?view=net-maui-7.0) in visual studio and run `CommunicationCallingSampleMauiApp` app.
+4. Select iOS device/simulator [following](https://learn.microsoft.com/en-us/dotnet/maui/ios/device-provisioning/?view=net-maui-7.0) in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 ## Key Sample Highlights
 
