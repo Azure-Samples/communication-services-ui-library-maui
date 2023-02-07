@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CommunicationCallingSampleMauiApp.MainPage">
+    <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+           <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+               <Label Text="Video calling samples" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontSize="26" FontFamily="SF Pro Display" FontAttributes="Bold"/>
+           </StackLayout>     
+           <Button Text="Join a call" Margin="20" HorizontalOptions="Center" VerticalOptions="Center" Clicked="OnJoinCallButtonClicked" BackgroundColor="#0078D4" TextColor="White"></Button>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

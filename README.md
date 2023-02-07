@@ -17,58 +17,78 @@ Please refer to our native [UI Library overview](https://docs.microsoft.com/en-u
 
 ## Run Sample
 
-Clone repo and open `MyMauiApp.sln` in Visual Studio
+Clone repo and open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.sln` in Visual Studio
 
 #### For Android
 
-1. Navigate to `/MAUIAndroidBindings` and follow `README.md` to download dependencies for Android (section: `Download JAR's/AAR's`).
+1. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net7.0-android</TargetFrameworks>`.
+2. Navigate to `/AndroidMauiBindings` and in this directory in terminal run `./downloadJarScript.sh`. `GitBash` or `Windows Subsystem for Linux (WSL)` should be enabled to run `.sh` on Windows.
+3. Select android device/emulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 #### For iOS
 
-1. Navigate to `/MAUIiOSBinding/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `sh iOSFramework -d`
-2. Next navigate to `/MAUIiOSBinding/iOS.CallingUI.Binding` and build the `iOS.CallingUI.Binding.sln`. This will generate `iOS.CallingUI.Binding\bin` folder where it will have `iOS.CallingUI.Binding.dll` for you to use.
+
+##### Visual Studio Mac 2022
+
+1. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net7.0-ios</TargetFrameworks>`.
+2. Navigate to `communication-services-ui-library-maui/iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `./iOSFramework -d`.
+3. Select iOS device/simulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
+
+##### Visual Studio Windows 2022
+
+1. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net7.0-ios</TargetFrameworks>`.
+2. Download `iOS.CallingUI.Binding.dll` from latest release [releases](https://github.com/Azure-Samples/communication-services-ui-library-maui/releases) and move to folder `CommunicationCallingSampleMauiApp`.
+3. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and replace `<ProjectReference Include="..\iOSMauiBindings\iOS.CallingUI.Binding\iOS.CallingUI.Binding.csproj" />` with `<Reference Include="iOS.CallingUI.Binding" HintPath="iOS.CallingUI.Binding.dll" />`.
+    ```xml
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+		<Reference Include="iOS.CallingUI.Binding" HintPath="iOS.CallingUI.Binding.dll" />
+	</ItemGroup>
+    ```
+4. Select iOS device/simulator [following](https://learn.microsoft.com/en-us/dotnet/maui/ios/device-provisioning/?view=net-maui-7.0) in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 ## Key Sample Highlights
 
 ### Folder Structure
 
 ```
-| MyMauiApp
+| CommunicationCallingSampleMauiApp
     | Platforms/(Android | iOS)/Composite.cs -> Class to communicate with native binding libraries
-    | MyMauiApp.sln -> MAUI application
+    | CommunicationCallingSampleMauiApp.sln -> MAUI application
 | MAUIiOSBindings
     | iOS.CallingUI.Binding -> Bindings for Azure Communication UI library
-    | ProxyLibs -> CommunicationUI proxy library to bridge swift methods to objective-c and generate frameworks
+| AndroidMauiBindings
+    | Android.CallingUI.Bindings -> Bindings for Azure Communication UI library
 ```
 
 ### Android and iOS Common code
 
-The common code for Android and iOS is all under the `MyMauiApp.sln`
+The common code for Android and iOS is all under the `CommunicationCallingSampleMauiApp.sln`
 Depending on the platform we are running on we use the appropriate library.
 
 ```cs
 #if ANDROID
-using MyMauiApp.Platforms.Android;
+using CommunicationCallingSampleMauiApp.Platforms.Android;
 #elif IOS
-using MyMauiApp.Platforms.iOS;
+using CommunicationCallingSampleMauiApp.Platforms.iOS;
 #endif
 ```
 
-`MainPage.xaml.cs` has common UI code for Android and iOS. On Button click, Android and iOS app is triggered to start a call.
+`JoinCallPage.xaml.cs` has common UI code for Android and iOS. On Button click, Android and iOS app is triggered to start a call.
 
 ```cs
-Composite composite = new Composite();
-string name = <DISPLAY_NAME>;
-string acsToken = <TOKEN>;
-string callId = <GROUP_CALL_ID>;
-bool isTeamsCall = false;
-composite.JoinCall(name, acsToken, callId, isTeamsCall);
+    void OnButtonClicked(object sender, EventArgs e)
+    {
+        if (!String.IsNullOrEmpty(tokenEntry.Text) && !String.IsNullOrEmpty(meetingEntry.Text))
+        {
+            callComposite.joinCall(name.Text, tokenEntry.Text, meetingEntry.Text, isTeamsCall, _localization, _dataModelInjection);
+        }
+    }
 ```
 
 ### Bridging Guide
 
-To learn more about how this sample was created and communicates with the native ACS Mobile UI Library, please refer to our briding guides:
+To learn more about how this sample was created and communicates with the native ACS Mobile UI Library, please refer to our bridging guides:
 
-[Android Bridging Guide](XamarinAndroidBindings/README.md)
+[Android Bridging Guide](AndroidMauiBindings/README.md)
 
-[iOS Bridging Guide](MAUIiOSBindings/README.md)
+[iOS Bridging Guide](iOSMauiBindings/README.md)
