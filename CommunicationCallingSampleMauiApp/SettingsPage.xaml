@@ -11,7 +11,7 @@
                 </StackLayout>
                 <Label Text="Localization" FontSize="13" HorizontalTextAlignment="Start" Margin="16, 11, 16, 8"/>
                 <Label Text="Left to Right Text" FontSize="12" HorizontalTextAlignment="Start" Margin="16, 8"/>
-                <Switch x:Name="leftToRightToggle" IsToggled="false" Margin="16, 0" Toggled="OnLeftToRightToggled"/>
+                <Switch x:Name="leftToRightToggle" IsToggled="true" Margin="16, 0" Toggled="OnLeftToRightToggled"/>
                 <Label Text="Language" FontSize="12" HorizontalTextAlignment="Start" Margin="16, 11, 16, 8"/>
                 <Picker Margin="16,0,0,0" x:Name="languagePicker" Title="Select a language"/>
                 <Label Text="Data Model Injection" FontSize="13" HorizontalTextAlignment="Start" Margin="16, 11, 16, 8"/>
