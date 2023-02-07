@@ -36,14 +36,10 @@ Clone repo and open `CommunicationCallingSampleMauiApp/CommunicationCallingSampl
 
 ##### Visual Studio Windows 2022
 
+[Known Issues for bindings for iOS on Visual Studio Windows](https://github.com/Azure-Samples/communication-services-ui-library-maui/wiki/Known-Issues)
 1. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net7.0-ios</TargetFrameworks>`.
-2. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and replace `<ProjectReference Include="..\iOSMauiBindings\iOS.CallingUI.Binding\iOS.CallingUI.Binding.csproj" />` with below:
-    ```xml
-	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-		<Reference Include="iOS.CallingUI.Binding" HintPath="..\iOSMauiBindings\iOS.CallingUI.Binding.dll\iOS.CallingUI.Binding.dll" />
-	</ItemGroup>
-    ```
-3. Select iOS device/simulator [following](https://learn.microsoft.com/en-us/dotnet/maui/ios/device-provisioning/?view=net-maui-7.0) in visual studio and run `CommunicationCallingSampleMauiApp` app.
+2. Visual studio for Windows should be connected to Mac to build bindings [following](https://learn.microsoft.com/en-us/dotnet/maui/ios/pair-to-mac?view=net-maui-7.0) in visual studio and run `CommunicationCallingSampleMauiApp` app.
+3. Select iOS device/simulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 ## Key Sample Highlights
 
