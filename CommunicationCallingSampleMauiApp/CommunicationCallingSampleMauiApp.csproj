@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<!-- <TargetFrameworks>net7.0-ios</TargetFrameworks> -->
 		<!-- <TargetFrameworks>net7.0-android</TargetFrameworks> -->
-		<TargetFrameworks>net7.0-android</TargetFrameworks>
+		<TargetFrameworks>net7.0-ios</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>CommunicationCallingSampleMauiApp</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -52,12 +52,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
-	  <Reference Include="iOS.CallingUI.Binding">
-	    <HintPath>..\MAUIiOSBindings\iOS.CallingUI.Binding\bin\Debug\net7.0-ios\iOS.CallingUI.Binding.dll</HintPath>
-	  </Reference>
 	</ItemGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
