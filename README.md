@@ -92,3 +92,7 @@ To learn more about how this sample was created and communicates with the native
 [Android Bridging Guide](AndroidMauiBindings/README.md)
 
 [iOS Bridging Guide](iOSMauiBindings/README.md)
+
+### Known Issues
+
+[Known Issues](https://github.com/Azure-Samples/communication-services-ui-library-maui/wiki/Known-Issues)
