@@ -28,8 +28,9 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 _dataModelInjection = dataModelInjection;
                 UIImage avatar = UIImage.FromBundle(dataModelInjection.Value.localAvatar);
                 CommunicationPersonaDataProxy personaDataProxy = new CommunicationPersonaDataProxy();
+                var displayName = dataModelInjection.Value.localAvatar.Length == 0 ? name : dataModelInjection.Value.localAvatar;
                 personaDataProxy.SetPersonaDataProperties(avatar, dataModelInjection.Value.localAvatar);
-                localDataOption.SetLocalDataOptionProperties(personaDataProxy);
+                localDataOption.SetLocalDataOptionProperties(displayName);
             }
 
             if (isTeamsCall)
