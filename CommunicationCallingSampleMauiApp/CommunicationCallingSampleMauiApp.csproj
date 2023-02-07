@@ -55,6 +55,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+		<!-- <Reference Include="iOS.CallingUI.Binding" HintPath="..\iOSMauiBindings\iOS.CallingUI.Binding.dll\iOS.CallingUI.Binding.dll" /> -->
 		<ProjectReference Include="..\iOSMauiBindings\iOS.CallingUI.Binding\iOS.CallingUI.Binding.csproj" />
 	</ItemGroup>
 	
