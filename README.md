@@ -44,7 +44,7 @@ Clone repo and open `CommunicationCallingSampleMauiApp/CommunicationCallingSampl
 		<Reference Include="iOS.CallingUI.Binding" HintPath="iOS.CallingUI.Binding.dll" />
 	</ItemGroup>
     ```
-4. Select android device/emulator [here](https://learn.microsoft.com/en-us/dotnet/maui/ios/device-provisioning/?view=net-maui-7.0) in visual studio and run `CommunicationCallingSampleMauiApp` app.
+4. Select android device/emulator [following](https://learn.microsoft.com/en-us/dotnet/maui/ios/device-provisioning/?view=net-maui-7.0) in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 ## Key Sample Highlights
 
