@@ -32,7 +32,7 @@ Clone repo and open `CommunicationCallingSampleMauiApp/CommunicationCallingSampl
 ##### Visual Studio Mac 2022
 
 1. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net7.0-ios</TargetFrameworks>`.
-2. Navigate to `communication-services-ui-library-maui/iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `./iOSFramework -d`.
+2. Navigate to `communication-services-ui-library-maui/iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `./iOSFramework.sh -d`.
 3. Select iOS device/simulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 ### Folder Structure
