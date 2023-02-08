@@ -44,7 +44,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                         if (!String.IsNullOrEmpty(dataModelInjection.Value.remoteAvatar))
                         {
                             var context = MainActivity.Instance.ApplicationContext;
-                            int resID = context.Resources.GetIdentifier(dataModelInjection.Value.remoteAvatar, "drawable", context.PackageName);
+                            int resID = context.Resources.GetIdentifier(dataModelInjection.Value.remoteAvatar.Replace(".png", ""), "drawable", context.PackageName);
                             Bitmap avatarBitMap = BitmapFactory.DecodeResource(context.Resources, resID);
                             CallCompositeParticipantViewData personaData = new CallCompositeParticipantViewData();
                             personaData.SetAvatarBitmap(avatarBitMap);

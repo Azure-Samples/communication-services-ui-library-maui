@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<!-- <TargetFrameworks>net7.0-ios</TargetFrameworks> -->
 		<!-- <TargetFrameworks>net7.0-android</TargetFrameworks> -->
-		<TargetFrameworks>net7.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0-android</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>CommunicationCallingSampleMauiApp</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -91,7 +91,7 @@
 		<AndroidAarLibrary Include="aar\azure-communication-calling-2.2.0.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
-		<AndroidAarLibrary Include="aar\layouts-1.0.0-beta9.aar">
+		<AndroidAarLibrary Include="aar\dualscreen-layout-1.0.0-alpha01.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
   </ItemGroup>
