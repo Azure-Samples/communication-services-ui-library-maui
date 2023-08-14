@@ -35,6 +35,7 @@ mkdir -p "${UNIVERSAL_OUTPUTFOLDER}"
 # Copy Device(arm64) Framework at fresh universal folder location 
 cp -af $(PWD)/'SimulatorFramework'/${CONFIGURATION}'-iphonesimulator'/'CommunicationUI_Proxy.framework' "${UNIVERSAL_OUTPUTFOLDER}/"
 cp -af $(PWD)/'SimulatorFramework'/${CONFIGURATION}'-iphonesimulator'/'AzureCommunicationCommon'/'AzureCommunicationCommon.framework' "${UNIVERSAL_OUTPUTFOLDER}/"
+cp -af $(PWD)/'SimulatorFramework'/${CONFIGURATION}'-iphonesimulator'/'AzureCore'/'AzureCore.framework' "${UNIVERSAL_OUTPUTFOLDER}/"
 cp -af $(PWD)/'SimulatorFramework'/${CONFIGURATION}'-iphonesimulator'/'AzureCommunicationUICalling'/'AzureCommunicationUICalling.framework' "${UNIVERSAL_OUTPUTFOLDER}/"
 cp -af $(PWD)/'SimulatorFramework'/${CONFIGURATION}'-iphonesimulator'/'MicrosoftFluentUI'/'FluentUI.framework' "${UNIVERSAL_OUTPUTFOLDER}/"
 cp -af $(PWD)/'SimulatorFramework'/${CONFIGURATION}'-iphonesimulator'/'XCFrameworkIntermediates'/'AzureCommunicationCalling'/'AzureCommunicationCalling.framework' "${UNIVERSAL_OUTPUTFOLDER}/"
@@ -43,6 +44,8 @@ cp -af $(PWD)/'SimulatorFramework'/${CONFIGURATION}'-iphonesimulator'/'XCFramewo
 lipo -create "$(PWD)/SimulatorFramework/${CONFIGURATION}-iphonesimulator/CommunicationUI_Proxy.framework/CommunicationUI_Proxy" "$(PWD)/DeviceFramework/${CONFIGURATION}-iphoneos/CommunicationUI_Proxy.framework/CommunicationUI_Proxy" -output "${UNIVERSAL_OUTPUTFOLDER}/CommunicationUI_Proxy.framework/CommunicationUI_Proxy"
 
 lipo -create "$(PWD)/SimulatorFramework/${CONFIGURATION}-iphonesimulator/AzureCommunicationCommon/AzureCommunicationCommon.framework/AzureCommunicationCommon" "$(PWD)/DeviceFramework/${CONFIGURATION}-iphoneos/AzureCommunicationCommon/AzureCommunicationCommon.framework/AzureCommunicationCommon" -output "${UNIVERSAL_OUTPUTFOLDER}/AzureCommunicationCommon.framework/AzureCommunicationCommon"
+
+lipo -create "$(PWD)/SimulatorFramework/${CONFIGURATION}-iphonesimulator/AzureCore/AzureCore.framework/AzureCore" "$(PWD)/DeviceFramework/${CONFIGURATION}-iphoneos/AzureCore/AzureCore.framework/AzureCore" -output "${UNIVERSAL_OUTPUTFOLDER}/AzureCore.framework/AzureCore"
 
 lipo -create "$(PWD)/SimulatorFramework/${CONFIGURATION}-iphonesimulator/AzureCommunicationUICalling/AzureCommunicationUICalling.framework/AzureCommunicationUICalling" "$(PWD)/DeviceFramework/${CONFIGURATION}-iphoneos/AzureCommunicationUICalling/AzureCommunicationUICalling.framework/AzureCommunicationUICalling" -output "${UNIVERSAL_OUTPUTFOLDER}/AzureCommunicationUICalling.framework/AzureCommunicationUICalling"
 

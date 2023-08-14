@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<!-- <TargetFrameworks>net7.0-ios</TargetFrameworks> -->
 		<!-- <TargetFrameworks>net7.0-android</TargetFrameworks> -->
-		<TargetFrameworks>net7.0-android</TargetFrameworks>
+		<TargetFrameworks>net7.0-ios</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>CommunicationCallingSampleMauiApp</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -70,25 +70,25 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
-		<AndroidAarLibrary Include="aar\fluentui_drawer-0.0.20.aar">
+		<AndroidAarLibrary Include="aar\fluentui_drawer-0.0.21.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
-		<AndroidAarLibrary Include="aar\fluentui_listitem-0.0.20.aar">
+		<AndroidAarLibrary Include="aar\fluentui_listitem-0.0.21.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
-		<AndroidAarLibrary Include="aar\fluentui_core-0.0.20.aar">
+		<AndroidAarLibrary Include="aar\fluentui_core-0.0.21.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
-		<AndroidAarLibrary Include="aar\fluentui_others-0.0.20.aar">
+		<AndroidAarLibrary Include="aar\fluentui_others-0.0.21.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
-		<AndroidAarLibrary Include="aar\fluentui_transients-0.0.20.aar">
+		<AndroidAarLibrary Include="aar\fluentui_transients-0.0.21.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
-		<AndroidAarLibrary Include="aar\fluentui_persona-0.0.20.aar">
+		<AndroidAarLibrary Include="aar\fluentui_persona-0.0.21.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
-		<AndroidAarLibrary Include="aar\azure-communication-calling-2.2.0.aar">
+		<AndroidAarLibrary Include="aar\azure-communication-calling-2.6.0.beta-1.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
 		<AndroidAarLibrary Include="aar\dualscreen-layout-1.0.0-alpha01.aar">

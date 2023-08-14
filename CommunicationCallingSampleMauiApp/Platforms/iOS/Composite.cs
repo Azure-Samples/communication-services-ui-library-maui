@@ -37,13 +37,27 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
             {
                 TeamsMeetingObjectProxy _teamsMeetingObject = new TeamsMeetingObjectProxy();
                 _teamsMeetingObject.SetTeamsMeetingsProperties(callID, name);
-                _p.StartExperienceWithTeamsMeeting(teamsMeeting: _teamsMeetingObject, token: acsToken, localData: localDataOption, theme: null, localization: localizationProxy, errorCallback: null, onRemoteParticipantJoinedCallback: null);
+                _p.StartExperienceWithTeamsMeeting(teamsMeeting: _teamsMeetingObject, 
+                token: acsToken, 
+                localData: localDataOption, 
+                theme: null, localization: localizationProxy, errorCallback: null, 
+                onRemoteParticipantJoinedCallback: null,
+                (callstate) => onCallStateChanged(callstate),
+                (exited)=> onExited(exited));
             }
             else
             {
                 GroupCallObjectProxy _groupCallObject = new GroupCallObjectProxy();
                 _groupCallObject.SetGroupCallProperties(callID, name);
-                _p.StartExperienceWithGroupCall(_groupCallObject, acsToken, localDataOption, null, localizationProxy, (error) => handleError(error), (rawIds) => onRemoteParticipant(rawIds));
+                _p.StartExperienceWithGroupCall(_groupCallObject,
+                 acsToken,
+                  localDataOption,
+                   null,
+                   localizationProxy,
+                    (error) => handleError(error),
+                     (rawIds) => onRemoteParticipant(rawIds),
+                    (callstate) => onCallStateChanged(callstate),
+                    (exited)=> onExited(exited));
             }
         }
 
@@ -55,6 +69,17 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
         private void handleError(CommunicationErrorProxy error)
         {
             Console.WriteLine("handleCall errorCode " + error.Code);
+        }
+
+        private void onExited(CommunicationExitProxy exited)
+        {
+            Console.WriteLine("onExited " + exited.Code);
+        }
+
+        private void onCallStateChanged(CommunicationCallStateProxy callstate)
+        {
+            Console.WriteLine("CallStateCode " + _p.CallStateCode);
+            Console.WriteLine("onCallStateChanged " + callstate.Code);
         }
 
         private void onRemoteParticipant(NSArray<NSString> rawIds)

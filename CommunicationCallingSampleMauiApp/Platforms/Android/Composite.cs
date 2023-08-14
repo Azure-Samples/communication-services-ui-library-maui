@@ -24,7 +24,8 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
 
             callComposite.AddOnErrorEventHandler(new EventHandler());
             callComposite.AddOnRemoteParticipantJoinedEventHandler(new RemoteParticipantJoinedHandler(callComposite, dataModelInjection));
-
+            callComposite.AddOnCallStateChangedEventHandler(new CallStateChangedEventHandler());
+            callComposite.AddOnDismissedEventHandler(new CallCompositeDismissedEventHandler());
 
             CallCompositeParticipantViewData personaData = null;
 
@@ -79,6 +80,9 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 }
 
             }
+
+            // to dismiss composite
+            // callComposite.Dismiss();
         }
 
         public List<string> languages()
@@ -113,6 +117,107 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 {
                     var error = eventArgs as CallCompositeErrorEvent;
                     Console.WriteLine(error.ErrorCode.ToString());
+                }
+            }
+
+            public void SetJniIdentityHashCode(int value)
+            {
+            }
+
+            public void SetJniManagedPeerState(JniManagedPeerStates value)
+            {
+            }
+
+            public void SetPeerReference(JniObjectReference reference)
+            {
+            }
+
+            public void UnregisterFromRuntime()
+            {
+            }
+
+            protected virtual void Dispose(bool disposing)
+            {
+
+            }
+
+            public void Dispose()
+            {
+
+            }
+        }
+
+
+        private class CallStateChangedEventHandler : Java.Lang.Object, ICallCompositeEventHandler
+        {
+            public void Disposed()
+            {
+            }
+
+            public void DisposeUnlessReferenced()
+            {
+            }
+
+            public void Finalized()
+            {
+            }
+
+            public void Handle(Java.Lang.Object eventArgs)
+            {
+                if (eventArgs is CallCompositeCallStateEvent)
+                {
+                    var callState = eventArgs as CallCompositeCallStateEvent;
+                    Console.WriteLine(callState.Code.ToString());
+                }
+            }
+
+            public void SetJniIdentityHashCode(int value)
+            {
+            }
+
+            public void SetJniManagedPeerState(JniManagedPeerStates value)
+            {
+            }
+
+            public void SetPeerReference(JniObjectReference reference)
+            {
+            }
+
+            public void UnregisterFromRuntime()
+            {
+            }
+
+            protected virtual void Dispose(bool disposing)
+            {
+
+            }
+
+            public void Dispose()
+            {
+
+            }
+        }
+
+        private class CallCompositeDismissedEventHandler : Java.Lang.Object, ICallCompositeEventHandler
+        {
+            public void Disposed()
+            {
+            }
+
+            public void DisposeUnlessReferenced()
+            {
+            }
+
+            public void Finalized()
+            {
+            }
+
+            public void Handle(Java.Lang.Object eventArgs)
+            {
+                if (eventArgs is CallCompositeDismissedEvent)
+                {
+                    var dismissedEvent = eventArgs as CallCompositeDismissedEvent;
+                    Console.WriteLine("CallCompositeDismissedEvent");
                 }
             }
 

@@ -69,6 +69,17 @@ public class CommunicationErrorProxy: NSObject {
 }
 
 @objcMembers
+public class CommunicationExitProxy: NSObject {
+    public var code: String = ""
+    public var error: NSError?
+}
+
+@objcMembers
+public class CommunicationCallStateProxy: NSObject {
+    public var code: String = ""
+}
+
+@objcMembers
 public class CommunicationUIProxy: NSObject {
     var callComposite: CallComposite? = nil
     
@@ -78,7 +89,9 @@ public class CommunicationUIProxy: NSObject {
                                 theme: CommunicationThemeProxy?,
                                 localization: CommunicationLocalizationProxy?,
                                 errorCallback: ((CommunicationErrorProxy) -> Void)?,
-                                onRemoteParticipantJoinedCallback: (([String]) -> Void)?) {
+                                onRemoteParticipantJoinedCallback: (([String]) -> Void)?,
+                                onCallStateChangedCallback: ((CommunicationCallStateProxy) -> Void)?,
+                                onExitCallback: ((CommunicationExitProxy) -> Void)?) {
         let options: CallCompositeOptions
         var xamarinTheme: XamarinTheme?
         var localizationOptions: LocalizationOptions? 
@@ -102,6 +115,23 @@ public class CommunicationUIProxy: NSObject {
                 errorProxy.error = errorEvent.error as NSError?
 
                 callback(errorProxy)
+        }
+
+
+        callComposite?.events.onCallStateChanged = { callState in
+            guard let callback = onCallStateChangedCallback else { return }
+            let callStateProxy = CommunicationCallStateProxy()
+            callStateProxy.code = callState.code
+            callback(callStateProxy)
+        }
+
+        callComposite?.events.onExited = { exitEvent in
+            guard let callback = onExitCallback else { return }
+            let exitProxy = CommunicationExitProxy()
+            exitProxy.code = exitEvent.code
+            exitProxy.error = exitEvent.error as NSError?
+
+            callback(exitProxy)
         }
         
         callComposite?.events.onRemoteParticipantJoined = { identifiers in
@@ -143,7 +173,9 @@ public class CommunicationUIProxy: NSObject {
                                 theme: CommunicationThemeProxy?,
                                 localization: CommunicationLocalizationProxy?,
                                 errorCallback: ((CommunicationErrorProxy) -> Void)?,
-                                onRemoteParticipantJoinedCallback: (([String]) -> Void)?) {
+                                onRemoteParticipantJoinedCallback: (([String]) -> Void)?,
+                                onCallStateChangedCallback: ((CommunicationCallStateProxy) -> Void)?,
+                                onExitCallback: ((CommunicationExitProxy) -> Void)?) {
         let options: CallCompositeOptions
         var xamarinTheme: XamarinTheme?
         var localizationOptions: LocalizationOptions?
@@ -167,6 +199,23 @@ public class CommunicationUIProxy: NSObject {
                 errorProxy.error = errorEvent.error as NSError?
 
                 callback(errorProxy)
+        }
+
+
+        callComposite?.events.onCallStateChanged = { callState in
+            guard let callback = onCallStateChangedCallback else { return }
+            let callStateProxy = CommunicationCallStateProxy()
+            callStateProxy.code = callState.code
+            callback(callStateProxy)
+        }
+
+        callComposite?.events.onExited = { exitEvent in
+            guard let callback = onExitCallback else { return }
+            let exitProxy = CommunicationExitProxy()
+            exitProxy.code = exitEvent.code
+            exitProxy.error = exitEvent.error as NSError?
+
+            callback(exitProxy)
         }
         
         callComposite?.events.onRemoteParticipantJoined = { identifiers in
@@ -232,6 +281,14 @@ public class CommunicationUIProxy: NSObject {
     
     public func getAvailableLanguages() -> [String] {
         return SupportedLocale.values.map{ $0.identifier }
+    }
+
+    public func exit() {
+        callComposite?.exit()
+    }
+
+    public func getCallStateCode() -> String {
+        return callComposite?.callStateCode ?? ""
     }
 }
 
