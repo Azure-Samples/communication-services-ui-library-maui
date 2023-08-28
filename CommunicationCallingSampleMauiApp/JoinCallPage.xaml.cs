@@ -20,6 +20,7 @@ public partial class JoinCallPage : ContentPage
 
     LocalizationProps _localization;
     DataModelInjectionProps _dataModelInjection;
+    OrientationProps _orientationProps;
 
     public JoinCallPage()
     {
@@ -28,6 +29,10 @@ public partial class JoinCallPage : ContentPage
         _localization = new LocalizationProps();
         _localization.locale = "en";
         _localization.isLeftToRight = true;
+
+        _orientationProps = new OrientationProps();
+        _orientationProps.setupScreenOrientation = "PORTRAIT";
+        _orientationProps.callScreenOrientation = "USER";
 
         _dataModelInjection = new DataModelInjectionProps();
         _dataModelInjection.localAvatar = "";
@@ -38,15 +43,16 @@ public partial class JoinCallPage : ContentPage
 
     async void OnToolbarClicked(object sender, EventArgs e)
     {
-        SettingsPage settingsPage = new SettingsPage(callComposite, _localization, _dataModelInjection);
+        SettingsPage settingsPage = new SettingsPage(callComposite, _localization, _dataModelInjection, _orientationProps);
         settingsPage.Callback += new SettingsPage.ProcessSettingsCallback(ProcessSettings);
         await Navigation.PushModalAsync(settingsPage);
     }
 
-    void ProcessSettings(LocalizationProps localization, DataModelInjectionProps dataModelInjection)
+    void ProcessSettings(LocalizationProps localization, DataModelInjectionProps dataModelInjection, OrientationProps orientationProps)
     {
         _localization = localization;
         _dataModelInjection = dataModelInjection;
+        _orientationProps = orientationProps;
         Console.WriteLine("locale is " + localization.locale + " isLeftToRight is " + localization.isLeftToRight);
     }
 
@@ -84,7 +90,7 @@ public partial class JoinCallPage : ContentPage
     {
         if (!String.IsNullOrEmpty(tokenEntry.Text) && !String.IsNullOrEmpty(meetingEntry.Text))
         {
-            callComposite.joinCall(name.Text, tokenEntry.Text, meetingEntry.Text, isTeamsCall, _localization, _dataModelInjection);
+            callComposite.joinCall(name.Text, tokenEntry.Text, meetingEntry.Text, isTeamsCall, _localization, _dataModelInjection, _orientationProps);
         }
     }
 

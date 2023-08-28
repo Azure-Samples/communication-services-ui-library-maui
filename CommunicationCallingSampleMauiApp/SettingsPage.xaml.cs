@@ -2,22 +2,28 @@
 
 public partial class SettingsPage : ContentPage
 {
-    public delegate void ProcessSettingsCallback(LocalizationProps localization, DataModelInjectionProps dataModelInjection);
+    public delegate void ProcessSettingsCallback(LocalizationProps localization, DataModelInjectionProps dataModelInjection, OrientationProps orientationProps);
     public event ProcessSettingsCallback Callback;
 
     String localAvatarName = "";
     String remoteAvatarName = "";
     LocalizationProps _localizationProps;
     DataModelInjectionProps _dataModelInjectionProps;
+    OrientationProps _orientationProps;
 
-    public SettingsPage(IComposite callComposite, LocalizationProps localizationProps, DataModelInjectionProps dataModelInjectionProps)
+    public SettingsPage(IComposite callComposite, LocalizationProps localizationProps, DataModelInjectionProps dataModelInjectionProps, OrientationProps orientationProps)
     {
         InitializeComponent();
 
         _localizationProps = localizationProps;
         _dataModelInjectionProps = dataModelInjectionProps;
+        _orientationProps = orientationProps;
         languagePicker.ItemsSource = callComposite.languages();
         languagePicker.SelectedItem = _localizationProps.locale;
+        callScreenOrientationPicker.ItemsSource = callComposite.orientations();
+        callScreenOrientationPicker.SelectedItem = _orientationProps.callScreenOrientation;
+        setupScreenOrientationPicker.ItemsSource = callComposite.orientations();
+        setupScreenOrientationPicker.SelectedItem = _orientationProps.setupScreenOrientation;
         SetLocalAvatarSelection(_dataModelInjectionProps.localAvatar);
         SetRemoteAvatarSelection(_dataModelInjectionProps.remoteAvatar);
     }
@@ -39,7 +45,11 @@ public partial class SettingsPage : ContentPage
             dataModelInjection.localAvatar = localAvatarName;
             dataModelInjection.remoteAvatar = remoteAvatarName;
 
-            Callback(localization, dataModelInjection);
+            OrientationProps orientationProps = new OrientationProps();
+            orientationProps.setupScreenOrientation = setupScreenOrientationPicker.SelectedItem.ToString();
+            orientationProps.callScreenOrientation = callScreenOrientationPicker.SelectedItem.ToString();
+
+            Callback(localization, dataModelInjection, orientationProps);
         }
 
         await Navigation.PopModalAsync(true);
@@ -167,4 +177,10 @@ public struct DataModelInjectionProps
 {
     public string localAvatar;
     public string remoteAvatar;
+}
+
+public struct OrientationProps
+{
+    public string setupScreenOrientation;
+    public string callScreenOrientation;
 }

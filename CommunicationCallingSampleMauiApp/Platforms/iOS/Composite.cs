@@ -12,7 +12,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
         CommunicationUIProxy _p = new CommunicationUIProxy();
         DataModelInjectionProps? _dataModelInjection;
 
-        public void joinCall(string name, string acsToken, string callID, bool isTeamsCall, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection)
+        public void joinCall(string name, string acsToken, string callID, bool isTeamsCall, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps)
         {
             CommunicationLocalizationProxy localizationProxy = null;
             if (!(localization is null))
@@ -22,6 +22,10 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 localizationProxy.IsLeftToRight = localization.Value.isLeftToRight;
             }
             CommunicationLocalDataOptionProxy localDataOption = new CommunicationLocalDataOptionProxy();
+
+            CommunicationScreenOrientationProxy screenOrientationProxy = new CommunicationScreenOrientationProxy();
+            screenOrientationProxy.CallScreenOrientation = orientationProps.Value.callScreenOrientation;
+            screenOrientationProxy.SetupScreenOrientation = orientationProps.Value.setupScreenOrientation;
 
             if (!(dataModelInjection is null))
             {
@@ -40,7 +44,10 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 _p.StartExperienceWithTeamsMeeting(teamsMeeting: _teamsMeetingObject, 
                 token: acsToken, 
                 localData: localDataOption, 
-                theme: null, localization: localizationProxy, errorCallback: null, 
+                theme: null,
+                localization: localizationProxy,
+                orientationProxy: screenOrientationProxy,
+                errorCallback: null, 
                 onRemoteParticipantJoinedCallback: null,
                 (callstate) => onCallStateChanged(callstate),
                 (exited)=> onExited(exited));
@@ -54,6 +61,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                   localDataOption,
                    null,
                    localizationProxy,
+                   screenOrientationProxy,
                     (error) => handleError(error),
                      (rawIds) => onRemoteParticipant(rawIds),
                     (callstate) => onCallStateChanged(callstate),
@@ -95,6 +103,19 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                     _p.SetRemoteWithParticipantDataOption(participantOption, rawId, out error, null);
                 }
             }
+        }
+
+        public List<string> orientations()
+        {
+            List<String> orientationStrings = new List<String>();
+
+            orientationStrings.Add("portrait");
+            orientationStrings.Add("landscape");
+            orientationStrings.Add("landscapeRight");
+            orientationStrings.Add("landscapeLeft");
+            orientationStrings.Add("allButUpsideDown");
+
+            return orientationStrings;
         }
     }
 }

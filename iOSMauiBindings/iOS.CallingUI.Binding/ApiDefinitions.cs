@@ -70,8 +70,21 @@ namespace iOS.CallingUI.Binding
 		bool IsLeftToRight { get; set; }
 	}
 
-	// @interface CommunicationPersonaDataProxy : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC21CommunicationUI_Proxy29CommunicationPersonaDataProxy")]
+    // @interface CommunicationScreenOrientationProxy : NSObject
+    [BaseType(typeof(NSObject), Name = "_TtC21CommunicationUI_Proxy35CommunicationScreenOrientationProxy")]
+    interface CommunicationScreenOrientationProxy
+    {
+        // @property (nonatomic, copy) NSString * _Nonnull callScreenOrientation;
+        [Export("callScreenOrientation")]
+        string CallScreenOrientation { get; set; }
+
+        // @property (nonatomic, copy) NSString * _Nonnull setupScreenOrientation;
+        [Export("setupScreenOrientation")]
+        string SetupScreenOrientation { get; set; }
+    }
+
+    // @interface CommunicationPersonaDataProxy : NSObject
+    [BaseType (typeof(NSObject), Name = "_TtC21CommunicationUI_Proxy29CommunicationPersonaDataProxy")]
 	interface CommunicationPersonaDataProxy
 	{
 		// @property (nonatomic, strong) UIImage * _Nullable avatarImage;
@@ -100,13 +113,13 @@ namespace iOS.CallingUI.Binding
 	[BaseType (typeof(NSObject), Name = "_TtC21CommunicationUI_Proxy20CommunicationUIProxy")]
 	interface CommunicationUIProxy
 	{
-        // -(void)startExperienceWithGroupCall:(GroupCallObjectProxy * _Nonnull)groupCall token:(NSString * _Nonnull)token localData:(CommunicationLocalDataOptionProxy * _Nullable)localData theme:(CommunicationThemeProxy * _Nullable)theme localization:(CommunicationLocalizationProxy * _Nullable)localization errorCallback:(void (^ _Nullable)(CommunicationErrorProxy * _Nonnull))errorCallback onRemoteParticipantJoinedCallback:(void (^ _Nullable)(NSArray<NSString>))onRemoteParticipantJoinedCallback onCallStateChangedCallback:(void (^ _Nullable)(CommunicationCallStateProxy * _Nonnull))onCallStateChangedCallback onExitCallback:(void (^ _Nullable)(CommunicationExitProxy * _Nonnull))onExitCallback;
-        [Export ("startExperienceWithGroupCall:token:localData:theme:localization:errorCallback:onRemoteParticipantJoinedCallback:onCallStateChangedCallback:onExitCallback:")]
-		void StartExperienceWithGroupCall (GroupCallObjectProxy groupCall, string token, [NullAllowed] CommunicationLocalDataOptionProxy localData, [NullAllowed] CommunicationThemeProxy theme, [NullAllowed] CommunicationLocalizationProxy localization, [NullAllowed] Action<CommunicationErrorProxy> errorCallback, [NullAllowed] Action<NSArray<NSString>> onRemoteParticipantJoinedCallback, [NullAllowed] Action<CommunicationCallStateProxy> onCallStateChangedCallback, [NullAllowed] Action<CommunicationExitProxy> onExitCallback);
+        // - (void)startExperienceWithGroupCall:(GroupCallObjectProxy * _Nonnull)groupCall token:(NSString * _Nonnull)token localData:(CommunicationLocalDataOptionProxy * _Nullable)localData theme:(CommunicationThemeProxy * _Nullable)theme localization:(CommunicationLocalizationProxy * _Nullable)localization orientationProxy:(CommunicationScreenOrientationProxy * _Nullable)orientationProxy errorCallback:(void (^ _Nullable)(CommunicationErrorProxy * _Nonnull))errorCallback onRemoteParticipantJoinedCallback:(void (^ _Nullable)(NSArray<NSString *> * _Nonnull))onRemoteParticipantJoinedCallback onCallStateChangedCallback:(void (^ _Nullable)(CommunicationCallStateProxy * _Nonnull))onCallStateChangedCallback onExitCallback:(void (^ _Nullable)(CommunicationExitProxy * _Nonnull))onExitCallback;
+        [Export ("startExperienceWithGroupCall:token:localData:theme:localization:orientationProxy:errorCallback:onRemoteParticipantJoinedCallback:onCallStateChangedCallback:onExitCallback:")]
+		void StartExperienceWithGroupCall (GroupCallObjectProxy groupCall, string token, [NullAllowed] CommunicationLocalDataOptionProxy localData, [NullAllowed] CommunicationThemeProxy theme, [NullAllowed] CommunicationLocalizationProxy localization, [NullAllowed] CommunicationScreenOrientationProxy orientationProxy, [NullAllowed] Action<CommunicationErrorProxy> errorCallback, [NullAllowed] Action<NSArray<NSString>> onRemoteParticipantJoinedCallback, [NullAllowed] Action<CommunicationCallStateProxy> onCallStateChangedCallback, [NullAllowed] Action<CommunicationExitProxy> onExitCallback);
 
-        // -(void)startExperienceWithTeamsMeeting:(TeamsMeetingObjectProxy * _Nonnull)teamsMeeting token:(NSString * _Nonnull)token localData:(CommunicationLocalDataOptionProxy * _Nullable)localData theme:(CommunicationThemeProxy * _Nullable)theme localization:(CommunicationLocalizationProxy * _Nullable)localization errorCallback:(void (^ _Nullable)(CommunicationErrorProxy * _Nonnull))errorCallback onRemoteParticipantJoinedCallback:(void (^ _Nullable)(NSArray<NSString>))onRemoteParticipantJoinedCallback onCallStateChangedCallback:(void (^ _Nullable)(CommunicationCallStateProxy * _Nonnull))onCallStateChangedCallback onExitCallback:(void (^ _Nullable)(CommunicationExitProxy * _Nonnull))onExitCallback;
-        [Export ("startExperienceWithTeamsMeeting:token:localData:theme:localization:errorCallback:onRemoteParticipantJoinedCallback:onCallStateChangedCallback:onExitCallback:")]
-		void StartExperienceWithTeamsMeeting (TeamsMeetingObjectProxy teamsMeeting, string token, [NullAllowed] CommunicationLocalDataOptionProxy localData, [NullAllowed] CommunicationThemeProxy theme, [NullAllowed] CommunicationLocalizationProxy localization, [NullAllowed] Action<CommunicationErrorProxy> errorCallback, [NullAllowed] Action<NSArray<NSString>> onRemoteParticipantJoinedCallback, [NullAllowed] Action<CommunicationCallStateProxy> onCallStateChangedCallback, [NullAllowed] Action<CommunicationExitProxy> onExitCallback);
+        // (void)startExperienceWithTeamsMeeting:(TeamsMeetingObjectProxy * _Nonnull)teamsMeeting token:(NSString * _Nonnull)token localData:(CommunicationLocalDataOptionProxy * _Nullable)localData theme:(CommunicationThemeProxy * _Nullable)theme localization:(CommunicationLocalizationProxy * _Nullable)localization orientationProxy:(CommunicationScreenOrientationProxy * _Nullable)orientationProxy errorCallback:(void (^ _Nullable)(CommunicationErrorProxy * _Nonnull))errorCallback onRemoteParticipantJoinedCallback:(void (^ _Nullable)(NSArray<NSString *> * _Nonnull))onRemoteParticipantJoinedCallback onCallStateChangedCallback:(void (^ _Nullable)(CommunicationCallStateProxy * _Nonnull))onCallStateChangedCallback onExitCallback:(void (^ _Nullable)(CommunicationExitProxy * _Nonnull))onExitCallback;
+        [Export ("startExperienceWithTeamsMeeting:token:localData:theme:localization:orientationProxy:errorCallback:onRemoteParticipantJoinedCallback:onCallStateChangedCallback:onExitCallback:")]
+		void StartExperienceWithTeamsMeeting (TeamsMeetingObjectProxy teamsMeeting, string token, [NullAllowed] CommunicationLocalDataOptionProxy localData, [NullAllowed] CommunicationThemeProxy theme, [NullAllowed] CommunicationLocalizationProxy localization, [NullAllowed] CommunicationScreenOrientationProxy orientationProxy, [NullAllowed] Action<CommunicationErrorProxy> errorCallback, [NullAllowed] Action<NSArray<NSString>> onRemoteParticipantJoinedCallback, [NullAllowed] Action<CommunicationCallStateProxy> onCallStateChangedCallback, [NullAllowed] Action<CommunicationExitProxy> onExitCallback);
 
 		// -(BOOL)setRemoteWithParticipantDataOption:(CommunicationPersonaDataProxy * _Nonnull)participantDataOption rawId:(NSString * _Nonnull)rawId error:(NSError * _Nullable * _Nullable)error onCompletionCallback:(void (^ _Nullable)(BOOL, NSError * _Nullable))onCompletionCallback;
 		[Export ("setRemoteWithParticipantDataOption:rawId:error:onCompletionCallback:")]
