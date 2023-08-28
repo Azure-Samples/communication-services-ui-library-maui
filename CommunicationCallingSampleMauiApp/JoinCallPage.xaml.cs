@@ -21,6 +21,7 @@ public partial class JoinCallPage : ContentPage
     LocalizationProps _localization;
     DataModelInjectionProps _dataModelInjection;
     OrientationProps _orientationProps;
+    CallControlProps _callControlProps;
 
     public JoinCallPage()
     {
@@ -37,6 +38,12 @@ public partial class JoinCallPage : ContentPage
         _dataModelInjection = new DataModelInjectionProps();
         _dataModelInjection.localAvatar = "";
         _dataModelInjection.remoteAvatar = "";
+
+        _callControlProps = new CallControlProps();
+        _callControlProps.isSkipSetupON = false;
+        _callControlProps.isMicrophoneON = false;
+        _callControlProps.isCameraON = false;
+
         groupCallFrame.IsVisible = true;
         teamsCallFrame.IsVisible = false;
     }
@@ -48,11 +55,12 @@ public partial class JoinCallPage : ContentPage
         await Navigation.PushModalAsync(settingsPage);
     }
 
-    void ProcessSettings(LocalizationProps localization, DataModelInjectionProps dataModelInjection, OrientationProps orientationProps)
+    void ProcessSettings(LocalizationProps localization, DataModelInjectionProps dataModelInjection, OrientationProps orientationProps, CallControlProps callControlProps)
     {
         _localization = localization;
         _dataModelInjection = dataModelInjection;
         _orientationProps = orientationProps;
+        _callControlProps = callControlProps;
         Console.WriteLine("locale is " + localization.locale + " isLeftToRight is " + localization.isLeftToRight);
     }
 
@@ -90,7 +98,7 @@ public partial class JoinCallPage : ContentPage
     {
         if (!String.IsNullOrEmpty(tokenEntry.Text) && !String.IsNullOrEmpty(meetingEntry.Text))
         {
-            callComposite.joinCall(name.Text, tokenEntry.Text, meetingEntry.Text, isTeamsCall, _localization, _dataModelInjection, _orientationProps);
+            callComposite.joinCall(name.Text, tokenEntry.Text, meetingEntry.Text, isTeamsCall, _localization, _dataModelInjection, _orientationProps, _callControlProps);
         }
     }
 

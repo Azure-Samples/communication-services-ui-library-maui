@@ -12,7 +12,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
         CommunicationUIProxy _p = new CommunicationUIProxy();
         DataModelInjectionProps? _dataModelInjection;
 
-        public void joinCall(string name, string acsToken, string callID, bool isTeamsCall, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps)
+        public void joinCall(string name, string acsToken, string callID, bool isTeamsCall, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
         {
             CommunicationLocalizationProxy localizationProxy = null;
             if (!(localization is null))
@@ -22,6 +22,9 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 localizationProxy.IsLeftToRight = localization.Value.isLeftToRight;
             }
             CommunicationLocalDataOptionProxy localDataOption = new CommunicationLocalDataOptionProxy();
+            localDataOption.SkipSetupScreen = callControlProps.Value.isSkipSetupON;
+            localDataOption.MicrophoneOn = callControlProps.Value.isMicrophoneON;
+            localDataOption.CameraOn = callControlProps.Value.isCameraON;
 
             CommunicationScreenOrientationProxy screenOrientationProxy = new CommunicationScreenOrientationProxy();
             screenOrientationProxy.CallScreenOrientation = orientationProps.Value.callScreenOrientation;

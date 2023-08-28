@@ -48,8 +48,20 @@ namespace iOS.CallingUI.Binding
 		[NullAllowed, Export ("personaData", ArgumentSemantic.Strong)]
 		CommunicationPersonaDataProxy PersonaData { get; set; }
 
-		// -(void)setLocalDataOptionProperties:(CommunicationPersonaDataProxy * _Nonnull)personaData;
-		[Export ("setLocalDataOptionProperties:")]
+        // @property(nonatomic) BOOL skipSetupScreen;
+		[NullAllowed, Export ("skipSetupScreen")]
+		bool SkipSetupScreen { get; set; }
+
+		// @property(nonatomic) BOOL microphoneOn;
+		[NullAllowed, Export ("microphoneOn")]
+		bool MicrophoneOn { get; set; }
+
+		//@property(nonatomic) BOOL cameraOn;
+		[NullAllowed, Export ("cameraOn")]
+		bool CameraOn { get; set; }
+
+        // -(void)setLocalDataOptionProperties:(CommunicationPersonaDataProxy * _Nonnull)personaData;
+        [Export ("setLocalDataOptionProperties:")]
 		void SetLocalDataOptionProperties (CommunicationPersonaDataProxy personaData);
 	}
 

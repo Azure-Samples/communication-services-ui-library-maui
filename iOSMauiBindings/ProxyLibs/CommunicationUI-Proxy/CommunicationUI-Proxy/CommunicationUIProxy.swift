@@ -44,6 +44,9 @@ public class CommunicationPersonaDataProxy: NSObject {
 @objcMembers
 public class CommunicationLocalDataOptionProxy: NSObject {
     public var personaData: CommunicationPersonaDataProxy? = nil
+    public var skipSetupScreen: Bool = false
+    public var microphoneOn: Bool = false
+    public var cameraOn: Bool = false
 
     public func setLocalDataOptionProperties(_ personaData: CommunicationPersonaDataProxy) {
         self.personaData = personaData
@@ -323,7 +326,10 @@ extension CommunicationUIProxy {
         let renderDisplayName = localDataOptionsProxy.personaData?.renderDisplayName
         let persona: ParticipantViewData = ParticipantViewData(avatar: avatar, displayName: renderDisplayName)
 
-        return LocalOptions(participantViewData: persona)
+        return LocalOptions(participantViewData: persona,
+                            cameraOn: localDataOptionsProxy.cameraOn,
+                            microphoneOn: localDataOptionsProxy.microphoneOn,
+                            skipSetupScreen: localDataOptionsProxy.skipSetupScreen)
     }
 
     private func getOrientation(orientation: String) -> OrientationOptions {
