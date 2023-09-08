@@ -97,6 +97,13 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             return localeStrings;
         }
 
+        public List<string> orientations()
+        {
+            List<String> orientationStrings = new List<String>();
+
+            return orientationStrings;
+        }
+
         public class EventHandler : Java.Lang.Object, ICallCompositeEventHandler
         {
             public void Disposed()
