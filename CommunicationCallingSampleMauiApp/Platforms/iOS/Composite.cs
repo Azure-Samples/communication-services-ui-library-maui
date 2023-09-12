@@ -53,7 +53,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 errorCallback: null, 
                 onRemoteParticipantJoinedCallback: null,
                 (callstate) => onCallStateChanged(callstate),
-                (exited)=> onExited(exited));
+                (dismissed)=> onDismissed(dismissed));
             }
             else
             {
@@ -68,7 +68,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                     (error) => handleError(error),
                      (rawIds) => onRemoteParticipant(rawIds),
                     (callstate) => onCallStateChanged(callstate),
-                    (exited)=> onExited(exited));
+                    (dismissed)=> onDismissed(dismissed));
             }
         }
 
@@ -82,9 +82,9 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
             Console.WriteLine("handleCall errorCode " + error.Code);
         }
 
-        private void onExited(CommunicationExitProxy exited)
+        private void onDismissed(CommunicationExitProxy dismissed)
         {
-            Console.WriteLine("onExited " + exited.Code);
+            Console.WriteLine("onDismissed " + exited.ErrorCode);
         }
 
         private void onCallStateChanged(CommunicationCallStateProxy callstate)
