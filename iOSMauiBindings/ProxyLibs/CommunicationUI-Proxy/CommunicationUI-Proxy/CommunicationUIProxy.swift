@@ -310,12 +310,12 @@ public class CommunicationUIProxy: NSObject {
         return SupportedLocale.values.map{ $0.identifier }
     }
 
-    public func exit() {
-        callComposite?.exit()
+    public func dismiss() {
+        callComposite?.dismiss()
     }
 
     public func getCallStateCode() -> String {
-        return callComposite?.callStateCode ?? ""
+        return callComposite?.callState.requestString ?? ""
     }
 }
 
