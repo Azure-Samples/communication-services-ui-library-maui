@@ -28,7 +28,7 @@
         <AndroidLibrary Include="Jars\jackson-module-jaxb-annotations-2.11.2.jar" Bind="false" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidLibrary Include="Jars\azure-core-1.0.0-beta.9.aar" />
+    <AndroidLibrary Include="Jars\azure-core-1.0.0-beta.12.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Android.Azure.Log.Bindings\Android.Azure.Log.Bindings.csproj" />

@@ -20,6 +20,8 @@ public partial class JoinCallPage : ContentPage
 
     LocalizationProps _localization;
     DataModelInjectionProps _dataModelInjection;
+    OrientationProps _orientationProps;
+    CallControlProps _callControlProps;
 
     public JoinCallPage()
     {
@@ -29,24 +31,36 @@ public partial class JoinCallPage : ContentPage
         _localization.locale = "en";
         _localization.isLeftToRight = true;
 
+        _orientationProps = new OrientationProps();
+        _orientationProps.setupScreenOrientation = "PORTRAIT";
+        _orientationProps.callScreenOrientation = "USER";
+
         _dataModelInjection = new DataModelInjectionProps();
         _dataModelInjection.localAvatar = "";
         _dataModelInjection.remoteAvatar = "";
+
+        _callControlProps = new CallControlProps();
+        _callControlProps.isSkipSetupON = false;
+        _callControlProps.isMicrophoneON = false;
+        _callControlProps.isCameraON = false;
+
         groupCallFrame.IsVisible = true;
         teamsCallFrame.IsVisible = false;
     }
 
     async void OnToolbarClicked(object sender, EventArgs e)
     {
-        SettingsPage settingsPage = new SettingsPage(callComposite, _localization, _dataModelInjection);
+        SettingsPage settingsPage = new SettingsPage(callComposite, _localization, _dataModelInjection, _orientationProps);
         settingsPage.Callback += new SettingsPage.ProcessSettingsCallback(ProcessSettings);
         await Navigation.PushModalAsync(settingsPage);
     }
 
-    void ProcessSettings(LocalizationProps localization, DataModelInjectionProps dataModelInjection)
+    void ProcessSettings(LocalizationProps localization, DataModelInjectionProps dataModelInjection, OrientationProps orientationProps, CallControlProps callControlProps)
     {
         _localization = localization;
         _dataModelInjection = dataModelInjection;
+        _orientationProps = orientationProps;
+        _callControlProps = callControlProps;
         Console.WriteLine("locale is " + localization.locale + " isLeftToRight is " + localization.isLeftToRight);
     }
 
@@ -84,7 +98,7 @@ public partial class JoinCallPage : ContentPage
     {
         if (!String.IsNullOrEmpty(tokenEntry.Text) && !String.IsNullOrEmpty(meetingEntry.Text))
         {
-            callComposite.joinCall(name.Text, tokenEntry.Text, meetingEntry.Text, isTeamsCall, _localization, _dataModelInjection);
+            callComposite.joinCall(name.Text, tokenEntry.Text, meetingEntry.Text, isTeamsCall, _localization, _dataModelInjection, _orientationProps, _callControlProps);
         }
     }
 

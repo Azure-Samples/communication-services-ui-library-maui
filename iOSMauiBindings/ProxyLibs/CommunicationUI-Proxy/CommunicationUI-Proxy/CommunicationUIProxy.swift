@@ -44,6 +44,9 @@ public class CommunicationPersonaDataProxy: NSObject {
 @objcMembers
 public class CommunicationLocalDataOptionProxy: NSObject {
     public var personaData: CommunicationPersonaDataProxy? = nil
+    public var skipSetupScreen: Bool = false
+    public var microphoneOn: Bool = false
+    public var cameraOn: Bool = false
 
     public func setLocalDataOptionProperties(_ personaData: CommunicationPersonaDataProxy) {
         self.personaData = personaData
@@ -69,6 +72,23 @@ public class CommunicationErrorProxy: NSObject {
 }
 
 @objcMembers
+public class CommunicationDismissedProxy: NSObject {
+    public var errorCode: String?
+    public var error: NSError?
+}
+
+@objcMembers
+public class CommunicationCallStateProxy: NSObject {
+    public var code: String = ""
+}
+
+@objcMembers
+public class CommunicationScreenOrientationProxy: NSObject {
+    public var callScreenOrientation: String = ""
+    public var setupScreenOrientation: String = ""
+}
+
+@objcMembers
 public class CommunicationUIProxy: NSObject {
     var callComposite: CallComposite? = nil
     
@@ -77,11 +97,16 @@ public class CommunicationUIProxy: NSObject {
                                 localData: CommunicationLocalDataOptionProxy?,
                                 theme: CommunicationThemeProxy?,
                                 localization: CommunicationLocalizationProxy?,
+                                orientationProxy: CommunicationScreenOrientationProxy?,
                                 errorCallback: ((CommunicationErrorProxy) -> Void)?,
-                                onRemoteParticipantJoinedCallback: (([String]) -> Void)?) {
+                                onRemoteParticipantJoinedCallback: (([String]) -> Void)?,
+                                onCallStateChangedCallback: ((CommunicationCallStateProxy) -> Void)?,
+                                onDismissedCallback: ((CommunicationDismissedProxy) -> Void)?) {
         let options: CallCompositeOptions
         var xamarinTheme: XamarinTheme?
-        var localizationOptions: LocalizationOptions? 
+        var localizationOptions: LocalizationOptions?
+        var setupOrientation: OrientationOptions?
+        var callOrientation: OrientationOptions?
         if let theme = theme {
             xamarinTheme = XamarinTheme(customPrimaryColor: theme.primaryColor)
         }
@@ -91,8 +116,14 @@ public class CommunicationUIProxy: NSObject {
                                                       localizableFilename: localization.localizableFilename,
                                                       layoutDirection: (localization.isLeftToRight) ? .leftToRight : .rightToLeft)
         }
+        if let orientationSetupProxy = orientationProxy {
+            setupOrientation = getOrientation(orientation: orientationSetupProxy.setupScreenOrientation)
+        }
+        if let orientationCallProxy = orientationProxy {
+            callOrientation = getOrientation(orientation: orientationCallProxy.callScreenOrientation)
+        }
         
-        options = CallCompositeOptions(theme: xamarinTheme, localization: localizationOptions)
+        options = CallCompositeOptions(theme: xamarinTheme, localization: localizationOptions, setupScreenOrientation: setupOrientation, callingScreenOrientation: callOrientation)
 
         callComposite = CallComposite(withOptions: options)
         callComposite?.events.onError = { errorEvent in
@@ -102,6 +133,23 @@ public class CommunicationUIProxy: NSObject {
                 errorProxy.error = errorEvent.error as NSError?
 
                 callback(errorProxy)
+        }
+
+
+        callComposite?.events.onCallStateChanged = { callState in
+            guard let callback = onCallStateChangedCallback else { return }
+            let callStateProxy = CommunicationCallStateProxy()
+            callStateProxy.code = callState.requestString
+            callback(callStateProxy)
+        }
+
+        callComposite?.events.onDismissed = { dismissedEvent in
+            guard let callback = onDismissedCallback else { return }
+            let dismissedProxy = CommunicationDismissedProxy()
+            dismissedProxy.errorCode = dismissedEvent.errorCode
+            dismissedProxy.error = dismissedEvent.error as NSError?
+
+            callback(dismissedProxy)
         }
         
         callComposite?.events.onRemoteParticipantJoined = { identifiers in
@@ -142,11 +190,16 @@ public class CommunicationUIProxy: NSObject {
                                 localData: CommunicationLocalDataOptionProxy?,
                                 theme: CommunicationThemeProxy?,
                                 localization: CommunicationLocalizationProxy?,
+                                orientationProxy: CommunicationScreenOrientationProxy?,
                                 errorCallback: ((CommunicationErrorProxy) -> Void)?,
-                                onRemoteParticipantJoinedCallback: (([String]) -> Void)?) {
+                                onRemoteParticipantJoinedCallback: (([String]) -> Void)?,
+                                onCallStateChangedCallback: ((CommunicationCallStateProxy) -> Void)?,
+                                onDismissedCallback: ((CommunicationDismissedProxy) -> Void)?) {
         let options: CallCompositeOptions
         var xamarinTheme: XamarinTheme?
         var localizationOptions: LocalizationOptions?
+        var setupOrientation: OrientationOptions?
+        var callOrientation: OrientationOptions?
         if let theme = theme {
             xamarinTheme = XamarinTheme(customPrimaryColor: theme.primaryColor)
         }
@@ -156,8 +209,14 @@ public class CommunicationUIProxy: NSObject {
                                                       localizableFilename: localization.localizableFilename,
                                                       layoutDirection: (localization.isLeftToRight) ? .leftToRight : .rightToLeft)
         }
+        if let orientationSetupProxy = orientationProxy {
+            setupOrientation = getOrientation(orientation: orientationSetupProxy.setupScreenOrientation)
+        }
+        if let orientationCallProxy = orientationProxy {
+            callOrientation = getOrientation(orientation: orientationCallProxy.callScreenOrientation)
+        }
 
-        options = CallCompositeOptions(theme: xamarinTheme, localization: localizationOptions)
+        options = CallCompositeOptions(theme: xamarinTheme, localization: localizationOptions, setupScreenOrientation: setupOrientation, callingScreenOrientation: callOrientation)
 
         callComposite = CallComposite(withOptions: options)
         callComposite?.events.onError = { errorEvent in
@@ -167,6 +226,23 @@ public class CommunicationUIProxy: NSObject {
                 errorProxy.error = errorEvent.error as NSError?
 
                 callback(errorProxy)
+        }
+
+
+        callComposite?.events.onCallStateChanged = { callState in
+            guard let callback = onCallStateChangedCallback else { return }
+            let callStateProxy = CommunicationCallStateProxy()
+            callStateProxy.code = callState.requestString
+            callback(callStateProxy)
+        }
+
+        callComposite?.events.onDismissed = { dismissedEvent in
+            guard let callback = onDismissedCallback else { return }
+            let dismissedProxy = CommunicationDismissedProxy()
+            dismissedProxy.errorCode = dismissedEvent.errorCode
+            dismissedProxy.error = dismissedEvent.error as NSError?
+
+            callback(dismissedProxy)
         }
         
         callComposite?.events.onRemoteParticipantJoined = { identifiers in
@@ -233,6 +309,14 @@ public class CommunicationUIProxy: NSObject {
     public func getAvailableLanguages() -> [String] {
         return SupportedLocale.values.map{ $0.identifier }
     }
+
+    public func dismiss() {
+        callComposite?.dismiss()
+    }
+
+    public func getCallStateCode() -> String {
+        return callComposite?.callState.requestString ?? ""
+    }
 }
 
 extension CommunicationUIProxy {
@@ -242,7 +326,28 @@ extension CommunicationUIProxy {
         let renderDisplayName = localDataOptionsProxy.personaData?.renderDisplayName
         let persona: ParticipantViewData = ParticipantViewData(avatar: avatar, displayName: renderDisplayName)
 
-        return LocalOptions(participantViewData: persona)
+        return LocalOptions(participantViewData: persona,
+                            cameraOn: localDataOptionsProxy.cameraOn,
+                            microphoneOn: localDataOptionsProxy.microphoneOn,
+                            skipSetupScreen: localDataOptionsProxy.skipSetupScreen)
+    }
+
+    private func getOrientation(orientation: String) -> OrientationOptions {
+        switch orientation {
+            case "portrait": 
+                return OrientationOptions.portrait
+            case "landscape":
+                return OrientationOptions.landscape
+            case "landscapeRight":
+                return OrientationOptions.landscapeRight
+            case "landscapeLeft":
+                return OrientationOptions.landscapeLeft
+            case "allButUpsideDown":
+                return OrientationOptions.allButUpsideDown
+            default:
+                return OrientationOptions.allButUpsideDown
+        }
+        return OrientationOptions.allButUpsideDown
     }
 }
 

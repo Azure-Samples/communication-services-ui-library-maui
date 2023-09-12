@@ -33,6 +33,11 @@
       <ForceLoad>True</ForceLoad>
       <SmartLink>False</SmartLink>
     </NativeReference>
+    <NativeReference Include="..\ProxyLibs\CommunicationUI-Proxy\Framework\Debug-universal\AzureCore.framework">
+      <Kind>Framework</Kind>
+      <ForceLoad>True</ForceLoad>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
     <NativeReference Include="..\ProxyLibs\CommunicationUI-Proxy\Framework\Debug-universal\CommunicationUI_Proxy.framework">
       <Kind>Framework</Kind>
       <ForceLoad>True</ForceLoad>
