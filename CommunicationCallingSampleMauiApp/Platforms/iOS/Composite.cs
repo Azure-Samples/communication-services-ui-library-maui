@@ -82,9 +82,9 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
             Console.WriteLine("handleCall errorCode " + error.Code);
         }
 
-        private void onDismissed(CommunicationExitProxy dismissed)
+        private void onDismissed(CommunicationDismissedProxy dismissed)
         {
-            Console.WriteLine("onDismissed " + exited.ErrorCode);
+            Console.WriteLine("onDismissed " + dismissed.ErrorCode);
         }
 
         private void onCallStateChanged(CommunicationCallStateProxy callstate)
