@@ -8,6 +8,10 @@ This project demonstrates the integration of Azure Communication UI library into
 
 Please refer to our native [UI Library overview](https://docs.microsoft.com/en-us/azure/communication-services/concepts/ui-library/ui-library-overview?pivots=platform-mobile)
 
+## ❤️ Feedback
+
+We appreciate your feedback and energy helping us improve our services. [If you've tried the service, please give us feedback through this survey](https://microsoft.qualtrics.com/jfe/form/SV_9WTOR2ItSo0oFee). 
+
 ## Prerequisites
 
 - iOS [Requirements](https://github.com/Azure/communication-ui-library-ios#requirements)
