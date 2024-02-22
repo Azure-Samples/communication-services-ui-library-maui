@@ -22,6 +22,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 .Localization(new CallCompositeLocalizationOptions(Java.Util.Locale.ForLanguageTag(localization.Value.locale), layoutDirection))
                 .SetupScreenOrientation(GetOrientation(orientationProps.Value.setupScreenOrientation))
                 .CallScreenOrientation(GetOrientation(orientationProps.Value.callScreenOrientation))
+                .Multitasking(new CallCompositeMultitaskingOptions(Java.Lang.Boolean.True, Java.Lang.Boolean.True))
                 .Build();
 
 
@@ -29,6 +30,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             callComposite.AddOnRemoteParticipantJoinedEventHandler(new RemoteParticipantJoinedHandler(callComposite, dataModelInjection));
             callComposite.AddOnCallStateChangedEventHandler(new CallStateChangedEventHandler());
             callComposite.AddOnDismissedEventHandler(new CallCompositeDismissedEventHandler());
+            callComposite.AddOnUserReportedEventHandler(new CallCompositeUserReportedEventHandler());
 
             CallCompositeParticipantViewData personaData = null;
 
@@ -36,6 +38,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 .SetSkipSetupScreen(callControlProps.Value.isSkipSetupON)
                 .SetCameraOn(callControlProps.Value.isCameraON)
                 .SetMicrophoneOn(callControlProps.Value.isMicrophoneON);
+                //.SetAudioVideoMode(CallCompositeAudioVideoMode.AudioOnly);
 
             if (dataModelInjection != null)
             {
@@ -159,6 +162,58 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 {
                     var error = eventArgs as CallCompositeErrorEvent;
                     Console.WriteLine(error.ErrorCode.ToString());
+                }
+            }
+
+            public void SetJniIdentityHashCode(int value)
+            {
+            }
+
+            public void SetJniManagedPeerState(JniManagedPeerStates value)
+            {
+            }
+
+            public void SetPeerReference(JniObjectReference reference)
+            {
+            }
+
+            public void UnregisterFromRuntime()
+            {
+            }
+
+            protected virtual void Dispose(bool disposing)
+            {
+
+            }
+
+            public void Dispose()
+            {
+
+            }
+        }
+
+        private class CallCompositeUserReportedEventHandler: Java.Lang.Object, ICallCompositeEventHandler
+        {
+            public void Disposed()
+            {
+            }
+
+            public void DisposeUnlessReferenced()
+            {
+            }
+
+            public void Finalized()
+            {
+            }
+
+            public void Handle(Java.Lang.Object eventArgs)
+            {
+                if (eventArgs is CallCompositeUserReportedIssueEvent)
+                {
+                    var dismissedEvent = eventArgs as CallCompositeUserReportedIssueEvent;
+                    var info = dismissedEvent.DebugInfo;
+                    Console.WriteLine("Inderpal CallCompositeDismissedEvent" + dismissedEvent.UserMessage);
+                    Console.WriteLine("Inderpal CallCompositeDismissedEvent" + info.LogFiles.ToString);
                 }
             }
 
