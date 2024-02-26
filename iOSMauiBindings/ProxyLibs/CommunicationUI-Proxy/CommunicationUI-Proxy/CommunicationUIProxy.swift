@@ -123,7 +123,12 @@ public class CommunicationUIProxy: NSObject {
             callOrientation = getOrientation(orientation: orientationCallProxy.callScreenOrientation)
         }
         
-        options = CallCompositeOptions(theme: xamarinTheme, localization: localizationOptions, setupScreenOrientation: setupOrientation, callingScreenOrientation: callOrientation)
+        options = CallCompositeOptions(theme: xamarinTheme, 
+        localization: localizationOptions,
+        setupScreenOrientation: setupOrientation,
+        callingScreenOrientation: callOrientation,
+        enableMultitasking: true,
+        enableSystemPictureInPictureWhenMultitasking: true)
 
         callComposite = CallComposite(withOptions: options)
         callComposite?.events.onError = { errorEvent in
@@ -216,7 +221,12 @@ public class CommunicationUIProxy: NSObject {
             callOrientation = getOrientation(orientation: orientationCallProxy.callScreenOrientation)
         }
 
-        options = CallCompositeOptions(theme: xamarinTheme, localization: localizationOptions, setupScreenOrientation: setupOrientation, callingScreenOrientation: callOrientation)
+        options = CallCompositeOptions(theme: xamarinTheme, 
+        localization: localizationOptions,
+        setupScreenOrientation: setupOrientation,
+        callingScreenOrientation: callOrientation,
+        enableMultitasking: true,
+        enableSystemPictureInPictureWhenMultitasking: true)
 
         callComposite = CallComposite(withOptions: options)
         callComposite?.events.onError = { errorEvent in
@@ -329,7 +339,8 @@ extension CommunicationUIProxy {
         return LocalOptions(participantViewData: persona,
                             cameraOn: localDataOptionsProxy.cameraOn,
                             microphoneOn: localDataOptionsProxy.microphoneOn,
-                            skipSetupScreen: localDataOptionsProxy.skipSetupScreen)
+                            skipSetupScreen: localDataOptionsProxy.skipSetupScreen,
+                            audioVideoMode: .audioOnly)
     }
 
     private func getOrientation(orientation: String) -> OrientationOptions {
