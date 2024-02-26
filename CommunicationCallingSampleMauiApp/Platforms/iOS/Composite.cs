@@ -4,6 +4,7 @@ using iOS.CallingUI.Binding;
 using UIKit;
 using System;
 using System.Collections.Generic;
+using Microsoft.Maui.Platform;
 
 namespace CommunicationCallingSampleMauiApp.Platforms.iOS
 {
@@ -14,6 +15,8 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
 
         public void joinCall(string name, string acsToken, string callID, bool isTeamsCall, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
         {
+            KeyboardAutoManagerScroll.Disconnect();
+
             CommunicationLocalizationProxy localizationProxy = null;
             if (!(localization is null))
             {

@@ -156,6 +156,10 @@ public class CommunicationUIProxy: NSObject {
 
             callback(dismissedProxy)
         }
+
+        callComposite?.events.onUserReportedIssue = { issue in
+            print("User reported issue: \(issue.userMessage)")
+        }
         
         callComposite?.events.onRemoteParticipantJoined = { identifiers in
             guard let callback = onRemoteParticipantJoinedCallback else { return }
@@ -253,6 +257,10 @@ public class CommunicationUIProxy: NSObject {
             dismissedProxy.error = dismissedEvent.error as NSError?
 
             callback(dismissedProxy)
+        }
+
+        callComposite?.events.onUserReportedIssue = { issue in
+            print("User reported issue: \(issue.userMessage)")
         }
         
         callComposite?.events.onRemoteParticipantJoined = { identifiers in
