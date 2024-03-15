@@ -47,6 +47,7 @@ public class CommunicationLocalDataOptionProxy: NSObject {
     public var skipSetupScreen: Bool = false
     public var microphoneOn: Bool = false
     public var cameraOn: Bool = false
+    public var audioVideoMode: String? = nil
 
     public func setLocalDataOptionProperties(_ personaData: CommunicationPersonaDataProxy) {
         self.personaData = personaData
@@ -89,6 +90,30 @@ public class CommunicationScreenOrientationProxy: NSObject {
 }
 
 @objcMembers
+public class CallHistoryRecordProxy: NSObject  {
+    public var callStartedOn: Date?
+    public var callIds: [String]?
+}
+
+@objcMembers
+public class VersionsProxy: NSObject   {
+    public var callingUIVersion: String?
+}
+
+@objcMembers
+public class DebugInfoProxy: NSObject  {
+    public var callHistoryRecords: [CallHistoryRecordProxy]?
+    public var logFiles: [URL]?
+    public var versions: VersionsProxy?
+}
+
+@objcMembers
+public class CallCompositeUserReportedIssueProxy: NSObject  {
+    public var userMessage: String?
+    public var debugInfo: DebugInfoProxy?
+}
+
+@objcMembers
 public class CommunicationUIProxy: NSObject {
     var callComposite: CallComposite? = nil
     
@@ -98,10 +123,13 @@ public class CommunicationUIProxy: NSObject {
                                 theme: CommunicationThemeProxy?,
                                 localization: CommunicationLocalizationProxy?,
                                 orientationProxy: CommunicationScreenOrientationProxy?,
+                                enableMultitasking: Bool,
+                                enableSystemPictureInPictureWhenMultitasking: Bool,
                                 errorCallback: ((CommunicationErrorProxy) -> Void)?,
                                 onRemoteParticipantJoinedCallback: (([String]) -> Void)?,
                                 onCallStateChangedCallback: ((CommunicationCallStateProxy) -> Void)?,
-                                onDismissedCallback: ((CommunicationDismissedProxy) -> Void)?) {
+                                onDismissedCallback: ((CommunicationDismissedProxy) -> Void)?,
+                                onUserReportedIssueCallback: ((CallCompositeUserReportedIssueProxy) -> Void)?) {
         let options: CallCompositeOptions
         var xamarinTheme: XamarinTheme?
         var localizationOptions: LocalizationOptions?
@@ -127,8 +155,8 @@ public class CommunicationUIProxy: NSObject {
         localization: localizationOptions,
         setupScreenOrientation: setupOrientation,
         callingScreenOrientation: callOrientation,
-        enableMultitasking: true,
-        enableSystemPictureInPictureWhenMultitasking: true)
+        enableMultitasking: enableMultitasking,
+        enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking)
 
         callComposite = CallComposite(withOptions: options)
         callComposite?.events.onError = { errorEvent in
@@ -157,8 +185,31 @@ public class CommunicationUIProxy: NSObject {
             callback(dismissedProxy)
         }
 
-        callComposite?.events.onUserReportedIssue = { issue in
-            print("User reported issue: \(issue.userMessage)")
+        callComposite?.events.onUserReportedIssue = { issueEvent in
+            guard let callback = onUserReportedIssueCallback else { return }
+           
+            var callHistoryRecords = [CallHistoryRecordProxy]() 
+
+            issueEvent.debugInfo.callHistoryRecords.forEach { record in
+                let callHistoryRecordsProxy = CallHistoryRecordProxy()
+                callHistoryRecordsProxy.callStartedOn = record.callStartedOn
+                callHistoryRecordsProxy.callIds = record.callIds
+                callHistoryRecords.append(callHistoryRecordsProxy)
+            }
+
+            let versionsProxy = VersionsProxy()
+            versionsProxy.callingUIVersion = issueEvent.debugInfo.versions.callingUIVersion
+
+            let debugInfoProxy = DebugInfoProxy()
+            debugInfoProxy.versions = versionsProxy
+            debugInfoProxy.logFiles = issueEvent.debugInfo.logFiles
+            debugInfoProxy.callHistoryRecords = callHistoryRecords
+
+            let proxy = CallCompositeUserReportedIssueProxy()
+            proxy.userMessage = issueEvent.userMessage
+            proxy.debugInfo = debugInfoProxy
+
+            callback(proxy)
         }
         
         callComposite?.events.onRemoteParticipantJoined = { identifiers in
@@ -200,10 +251,13 @@ public class CommunicationUIProxy: NSObject {
                                 theme: CommunicationThemeProxy?,
                                 localization: CommunicationLocalizationProxy?,
                                 orientationProxy: CommunicationScreenOrientationProxy?,
+                                enableMultitasking: Bool,
+                                enableSystemPictureInPictureWhenMultitasking: Bool,
                                 errorCallback: ((CommunicationErrorProxy) -> Void)?,
                                 onRemoteParticipantJoinedCallback: (([String]) -> Void)?,
                                 onCallStateChangedCallback: ((CommunicationCallStateProxy) -> Void)?,
-                                onDismissedCallback: ((CommunicationDismissedProxy) -> Void)?) {
+                                onDismissedCallback: ((CommunicationDismissedProxy) -> Void)?,
+                                onUserReportedIssueCallback: ((CallCompositeUserReportedIssueProxy) -> Void)?) {
         let options: CallCompositeOptions
         var xamarinTheme: XamarinTheme?
         var localizationOptions: LocalizationOptions?
@@ -229,8 +283,8 @@ public class CommunicationUIProxy: NSObject {
         localization: localizationOptions,
         setupScreenOrientation: setupOrientation,
         callingScreenOrientation: callOrientation,
-        enableMultitasking: true,
-        enableSystemPictureInPictureWhenMultitasking: true)
+        enableMultitasking: enableMultitasking,
+        enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking)
 
         callComposite = CallComposite(withOptions: options)
         callComposite?.events.onError = { errorEvent in
@@ -259,8 +313,31 @@ public class CommunicationUIProxy: NSObject {
             callback(dismissedProxy)
         }
 
-        callComposite?.events.onUserReportedIssue = { issue in
-            print("User reported issue: \(issue.userMessage)")
+        callComposite?.events.onUserReportedIssue = { issueEvent in
+            guard let callback = onUserReportedIssueCallback else { return }
+           
+            var callHistoryRecords = [CallHistoryRecordProxy]() 
+
+            issueEvent.debugInfo.callHistoryRecords.forEach { record in
+                let callHistoryRecordsProxy = CallHistoryRecordProxy()
+                callHistoryRecordsProxy.callStartedOn = record.callStartedOn
+                callHistoryRecordsProxy.callIds = record.callIds
+                callHistoryRecords.append(callHistoryRecordsProxy)
+            }
+
+            let versionsProxy = VersionsProxy()
+            versionsProxy.callingUIVersion = issueEvent.debugInfo.versions.callingUIVersion
+
+            let debugInfoProxy = DebugInfoProxy()
+            debugInfoProxy.versions = versionsProxy
+            debugInfoProxy.logFiles = issueEvent.debugInfo.logFiles
+            debugInfoProxy.callHistoryRecords = callHistoryRecords
+
+            let proxy = CallCompositeUserReportedIssueProxy()
+            proxy.userMessage = issueEvent.userMessage
+            proxy.debugInfo = debugInfoProxy
+
+            callback(proxy)
         }
         
         callComposite?.events.onRemoteParticipantJoined = { identifiers in
@@ -348,7 +425,19 @@ extension CommunicationUIProxy {
                             cameraOn: localDataOptionsProxy.cameraOn,
                             microphoneOn: localDataOptionsProxy.microphoneOn,
                             skipSetupScreen: localDataOptionsProxy.skipSetupScreen,
-                            audioVideoMode: .audioOnly)
+                            audioVideoMode: getAudioVideoMode(mode: localDataOptionsProxy.audioVideoMode ?? "audioAndVideo"))
+    }
+
+    private func getAudioVideoMode(mode: String) -> CallCompositeAudioVideoMode {
+        switch mode {
+            case "audioOnly": 
+                return CallCompositeAudioVideoMode.audioOnly
+            case "audioAndVideo":
+                return CallCompositeAudioVideoMode.audioAndVideo
+            default:
+                return CallCompositeAudioVideoMode.audioAndVideo
+        }
+        return CallCompositeAudioVideoMode.audioAndVideo
     }
 
     private func getOrientation(orientation: String) -> OrientationOptions {

@@ -28,7 +28,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
             localDataOption.SkipSetupScreen = callControlProps.Value.isSkipSetupON;
             localDataOption.MicrophoneOn = callControlProps.Value.isMicrophoneON;
             localDataOption.CameraOn = callControlProps.Value.isCameraON;
-
+            localDataOption.AudioVideoMode = "audioAndVideo";
             CommunicationScreenOrientationProxy screenOrientationProxy = new CommunicationScreenOrientationProxy();
             screenOrientationProxy.CallScreenOrientation = orientationProps.Value.callScreenOrientation;
             screenOrientationProxy.SetupScreenOrientation = orientationProps.Value.setupScreenOrientation;
@@ -53,25 +53,31 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 theme: null,
                 localization: localizationProxy,
                 orientationProxy: screenOrientationProxy,
+                enableMultitasking: true,
+                enableSystemPictureInPictureWhenMultitasking: true,
                 errorCallback: null, 
                 onRemoteParticipantJoinedCallback: null,
                 (callstate) => onCallStateChanged(callstate),
-                (dismissed)=> onDismissed(dismissed));
+                (dismissed)=> onDismissed(dismissed),
+                (issue)=> onUserReportedIssueCallback(issue));
             }
             else
             {
                 GroupCallObjectProxy _groupCallObject = new GroupCallObjectProxy();
                 _groupCallObject.SetGroupCallProperties(callID, name);
                 _p.StartExperienceWithGroupCall(_groupCallObject,
-                 acsToken,
-                  localDataOption,
-                   null,
-                   localizationProxy,
-                   screenOrientationProxy,
-                    (error) => handleError(error),
-                     (rawIds) => onRemoteParticipant(rawIds),
-                    (callstate) => onCallStateChanged(callstate),
-                    (dismissed)=> onDismissed(dismissed));
+                acsToken,
+                localDataOption,
+                null,
+                localizationProxy,
+                screenOrientationProxy,
+                enableMultitasking: true,
+                enableSystemPictureInPictureWhenMultitasking: true,
+                (error) => handleError(error),
+                (rawIds) => onRemoteParticipant(rawIds),
+                (callstate) => onCallStateChanged(callstate),
+                (dismissed)=> onDismissed(dismissed),
+                (issue) => onUserReportedIssueCallback(issue));
             }
         }
 
@@ -88,6 +94,11 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
         private void onDismissed(CommunicationDismissedProxy dismissed)
         {
             Console.WriteLine("onDismissed " + dismissed.ErrorCode);
+        }
+
+        private void onUserReportedIssueCallback(CallCompositeUserReportedIssueProxy issue)
+        {
+            Console.WriteLine("onUserReportedIssueCallback " + issue.UserMessage);
         }
 
         private void onCallStateChanged(CommunicationCallStateProxy callstate)
