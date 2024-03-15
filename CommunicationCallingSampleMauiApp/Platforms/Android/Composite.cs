@@ -14,8 +14,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
         {
             CommunicationTokenCredential credentials = new CommunicationTokenCredential(acsToken);
 
-
-            int layoutDirection = (int)(localization.Value.isLeftToRight ? FlowDirection.LeftToRight : FlowDirection.RightToLeft);
+            int layoutDirection = (int)(localization.Value.isLeftToRight != true ? FlowDirection.LeftToRight : FlowDirection.RightToLeft);
 
             CallComposite callComposite =
                 new CallCompositeBuilder()
@@ -37,8 +36,8 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             CallCompositeLocalOptions localOptions = new CallCompositeLocalOptions()
                 .SetSkipSetupScreen(callControlProps.Value.isSkipSetupON)
                 .SetCameraOn(callControlProps.Value.isCameraON)
-                .SetMicrophoneOn(callControlProps.Value.isMicrophoneON);
-                //.SetAudioVideoMode(CallCompositeAudioVideoMode.AudioOnly);
+                .SetMicrophoneOn(callControlProps.Value.isMicrophoneON)
+                .SetAudioVideoMode(CallCompositeAudioVideoMode.AudioAndVideo);
 
             if (dataModelInjection != null)
             {
