@@ -211,8 +211,8 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 {
                     var dismissedEvent = eventArgs as CallCompositeUserReportedIssueEvent;
                     var info = dismissedEvent.DebugInfo;
-                    Console.WriteLine("Inderpal CallCompositeDismissedEvent" + dismissedEvent.UserMessage);
-                    Console.WriteLine("Inderpal CallCompositeDismissedEvent" + info.LogFiles.ToString);
+                    Console.WriteLine("CallCompositeDismissedEvent" + dismissedEvent.UserMessage);
+                    Console.WriteLine("CallCompositeDismissedEvent" + info.LogFiles.ToString);
                 }
             }
 
