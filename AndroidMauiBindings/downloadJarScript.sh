@@ -16,7 +16,7 @@ fi
 cd Jars
 
 echo "Downloading CommunicationUILibrary Jars"
-curl "https://repo1.maven.org/maven2/com/azure/android/azure-communication-ui-calling/1.4.0/azure-communication-ui-calling-1.4.0.aar" --output azure-communication-ui-calling-1.4.0.aar
+curl "https://repo1.maven.org/maven2/com/azure/android/azure-communication-ui-calling/1.6.0/azure-communication-ui-calling-1.6.0.aar" --output azure-communication-ui-calling-1.6.0.aar
 
 echo "CommunicationUILibrary Jars Download Complete"
 cd ../../
@@ -82,7 +82,7 @@ fi
 
 cd aar
 
-curl  "https://repo1.maven.org/maven2/com/azure/android/azure-communication-calling/2.6.0.beta-1/azure-communication-calling-2.6.0.beta-1.aar" --output azure-communication-calling-2.6.0.beta-1.aar
+curl  "https://repo1.maven.org/maven2/com/azure/android/azure-communication-calling/2.5.0/azure-communication-calling-2.5.0.aar" --output azure-communication-calling-2.5.0.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_core/0.0.21/fluentui_core-0.0.21.aar" --output fluentui_core-0.0.21.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_drawer/0.0.21/fluentui_drawer-0.0.21.aar" --output fluentui_drawer-0.0.21.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_listitem/0.0.21/fluentui_listitem-0.0.21.aar" --output fluentui_listitem-0.0.21.aar

@@ -14,14 +14,14 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
         {
             CommunicationTokenCredential credentials = new CommunicationTokenCredential(acsToken);
 
-
-            int layoutDirection = (int)(localization.Value.isLeftToRight ? FlowDirection.LeftToRight : FlowDirection.RightToLeft);
+            int layoutDirection = (int)(localization.Value.isLeftToRight != true ? FlowDirection.LeftToRight : FlowDirection.RightToLeft);
 
             CallComposite callComposite =
                 new CallCompositeBuilder()
                 .Localization(new CallCompositeLocalizationOptions(Java.Util.Locale.ForLanguageTag(localization.Value.locale), layoutDirection))
                 .SetupScreenOrientation(GetOrientation(orientationProps.Value.setupScreenOrientation))
                 .CallScreenOrientation(GetOrientation(orientationProps.Value.callScreenOrientation))
+                .Multitasking(new CallCompositeMultitaskingOptions(Java.Lang.Boolean.True, Java.Lang.Boolean.True))
                 .Build();
 
 
@@ -29,13 +29,15 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             callComposite.AddOnRemoteParticipantJoinedEventHandler(new RemoteParticipantJoinedHandler(callComposite, dataModelInjection));
             callComposite.AddOnCallStateChangedEventHandler(new CallStateChangedEventHandler());
             callComposite.AddOnDismissedEventHandler(new CallCompositeDismissedEventHandler());
+            callComposite.AddOnUserReportedEventHandler(new CallCompositeUserReportedEventHandler());
 
             CallCompositeParticipantViewData personaData = null;
 
             CallCompositeLocalOptions localOptions = new CallCompositeLocalOptions()
                 .SetSkipSetupScreen(callControlProps.Value.isSkipSetupON)
                 .SetCameraOn(callControlProps.Value.isCameraON)
-                .SetMicrophoneOn(callControlProps.Value.isMicrophoneON);
+                .SetMicrophoneOn(callControlProps.Value.isMicrophoneON)
+                .SetAudioVideoMode(CallCompositeAudioVideoMode.AudioAndVideo);
 
             if (dataModelInjection != null)
             {
@@ -159,6 +161,58 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 {
                     var error = eventArgs as CallCompositeErrorEvent;
                     Console.WriteLine(error.ErrorCode.ToString());
+                }
+            }
+
+            public void SetJniIdentityHashCode(int value)
+            {
+            }
+
+            public void SetJniManagedPeerState(JniManagedPeerStates value)
+            {
+            }
+
+            public void SetPeerReference(JniObjectReference reference)
+            {
+            }
+
+            public void UnregisterFromRuntime()
+            {
+            }
+
+            protected virtual void Dispose(bool disposing)
+            {
+
+            }
+
+            public void Dispose()
+            {
+
+            }
+        }
+
+        private class CallCompositeUserReportedEventHandler: Java.Lang.Object, ICallCompositeEventHandler
+        {
+            public void Disposed()
+            {
+            }
+
+            public void DisposeUnlessReferenced()
+            {
+            }
+
+            public void Finalized()
+            {
+            }
+
+            public void Handle(Java.Lang.Object eventArgs)
+            {
+                if (eventArgs is CallCompositeUserReportedIssueEvent)
+                {
+                    var dismissedEvent = eventArgs as CallCompositeUserReportedIssueEvent;
+                    var info = dismissedEvent.DebugInfo;
+                    Console.WriteLine("CallCompositeDismissedEvent" + dismissedEvent.UserMessage);
+                    Console.WriteLine("CallCompositeDismissedEvent" + info.LogFiles.ToString);
                 }
             }
 

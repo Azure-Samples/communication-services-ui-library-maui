@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-android</TargetFramework>
+    <TargetFramework>net8.0-android</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -8,7 +8,7 @@
     <EnableDefaultAndroidItems>false</EnableDefaultAndroidItems>
   </PropertyGroup>
   <ItemGroup>
-    <AndroidLibrary Include="Jars\azure-communication-ui-calling-1.4.0.aar" />
+    <AndroidLibrary Include="Jars\azure-communication-ui-calling-1.6.0.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Android.Azure.Common.Bindings\Android.Azure.Common.Bindings.csproj" />

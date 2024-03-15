@@ -20,6 +20,11 @@ Sharpie bind helps to generate `iOSMauiBindings/iOS.CallingUI.Binding/ApiDefinit
 sharpie bind -sdk iphoneos -output ./ -namespace iOS.CallingUI.Binding -scope ./CommunicationUI_Proxy.framework/Headers ./CommunicationUI_Proxy.framework/Headers/CommunicationUI_Proxy-Swift.h
 ```
 
+``` 
+// alternative to run on .framework
+sharpie bind --output=outputdata -framework ./CommunicationUI_Proxy.framework 
+```
+
 Sharpie should now have created new file in the directory `ApiDefinitions.cs`.
 
 ### Binding Library
