@@ -114,6 +114,16 @@ public class CallCompositeUserReportedIssueProxy: NSObject  {
 }
 
 @objcMembers
+public class CallScreenControlBarOptionsProxy: NSObject {
+        public var leaveCallConfirmationMode: String = "always_enabled"
+}
+
+@objcMembers
+public class CallScreenOptionsProxy: NSObject {
+    public var callScreenControlBarOptions: CallScreenControlBarOptionsProxy? = nil
+}
+
+@objcMembers
 public class CommunicationUIProxy: NSObject {
     var callComposite: CallComposite? = nil
     
@@ -125,6 +135,7 @@ public class CommunicationUIProxy: NSObject {
                                 orientationProxy: CommunicationScreenOrientationProxy?,
                                 enableMultitasking: Bool,
                                 enableSystemPictureInPictureWhenMultitasking: Bool,
+                                callScreenOptionsProxy: CallScreenOptionsProxy?,
                                 errorCallback: ((CommunicationErrorProxy) -> Void)?,
                                 onRemoteParticipantJoinedCallback: (([String]) -> Void)?,
                                 onCallStateChangedCallback: ((CommunicationCallStateProxy) -> Void)?,
@@ -135,6 +146,9 @@ public class CommunicationUIProxy: NSObject {
         var localizationOptions: LocalizationOptions?
         var setupOrientation: OrientationOptions?
         var callOrientation: OrientationOptions?
+        var callScreenControlBarOptions: CallScreenControlBarOptions?
+        var callScreenOptions: CallScreenOptions?
+
         if let theme = theme {
             xamarinTheme = XamarinTheme(customPrimaryColor: theme.primaryColor)
         }
@@ -150,13 +164,19 @@ public class CommunicationUIProxy: NSObject {
         if let orientationCallProxy = orientationProxy {
             callOrientation = getOrientation(orientation: orientationCallProxy.callScreenOrientation)
         }
+
+        if let callScreenOptionsProxy = callScreenOptionsProxy {
+            callScreenControlBarOptions = CallScreenControlBarOptions(leaveCallConfirmationMode: getLeaveCallConfirmationMode(mode: callScreenOptionsProxy.callScreenControlBarOptions?.leaveCallConfirmationMode ?? "always_enabled"))
+            callScreenOptions = CallScreenOptions(controlBarOptions: callScreenControlBarOptions)
+        }
         
         options = CallCompositeOptions(theme: xamarinTheme, 
         localization: localizationOptions,
         setupScreenOrientation: setupOrientation,
         callingScreenOrientation: callOrientation,
         enableMultitasking: enableMultitasking,
-        enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking)
+        enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking,
+        callScreenOptions: callScreenOptions)
 
         callComposite = CallComposite(withOptions: options)
         callComposite?.events.onError = { errorEvent in
@@ -253,6 +273,7 @@ public class CommunicationUIProxy: NSObject {
                                 orientationProxy: CommunicationScreenOrientationProxy?,
                                 enableMultitasking: Bool,
                                 enableSystemPictureInPictureWhenMultitasking: Bool,
+                                callScreenOptionsProxy: CallScreenOptionsProxy?,
                                 errorCallback: ((CommunicationErrorProxy) -> Void)?,
                                 onRemoteParticipantJoinedCallback: (([String]) -> Void)?,
                                 onCallStateChangedCallback: ((CommunicationCallStateProxy) -> Void)?,
@@ -263,6 +284,9 @@ public class CommunicationUIProxy: NSObject {
         var localizationOptions: LocalizationOptions?
         var setupOrientation: OrientationOptions?
         var callOrientation: OrientationOptions?
+        var callScreenControlBarOptions: CallScreenControlBarOptions?
+        var callScreenOptions: CallScreenOptions?
+
         if let theme = theme {
             xamarinTheme = XamarinTheme(customPrimaryColor: theme.primaryColor)
         }
@@ -279,12 +303,18 @@ public class CommunicationUIProxy: NSObject {
             callOrientation = getOrientation(orientation: orientationCallProxy.callScreenOrientation)
         }
 
+        if let callScreenOptionsProxy = callScreenOptionsProxy {
+            callScreenControlBarOptions = CallScreenControlBarOptions(leaveCallConfirmationMode: getLeaveCallConfirmationMode(mode: callScreenOptionsProxy.callScreenControlBarOptions?.leaveCallConfirmationMode ?? "always_enabled"))
+            callScreenOptions = CallScreenOptions(controlBarOptions: callScreenControlBarOptions)
+        }
+
         options = CallCompositeOptions(theme: xamarinTheme, 
         localization: localizationOptions,
         setupScreenOrientation: setupOrientation,
         callingScreenOrientation: callOrientation,
         enableMultitasking: enableMultitasking,
-        enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking)
+        enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking,
+        callScreenOptions: callScreenOptions)
 
         callComposite = CallComposite(withOptions: options)
         callComposite?.events.onError = { errorEvent in
@@ -456,6 +486,18 @@ extension CommunicationUIProxy {
                 return OrientationOptions.allButUpsideDown
         }
         return OrientationOptions.allButUpsideDown
+    }
+
+    private func getLeaveCallConfirmationMode(mode: String) -> LeaveCallConfirmationMode {
+        switch mode {
+            case "always_enabled": 
+                return LeaveCallConfirmationMode.alwaysEnabled
+            case "always_disabled":
+                return LeaveCallConfirmationMode.alwaysDisabled
+            default:
+                return LeaveCallConfirmationMode.alwaysEnabled
+        }
+        return LeaveCallConfirmationMode.alwaysEnabled
     }
 }
 

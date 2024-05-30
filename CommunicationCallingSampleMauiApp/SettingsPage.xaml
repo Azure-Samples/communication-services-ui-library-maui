@@ -43,6 +43,8 @@
                 <Switch x:Name="onMicrophoneOnToggle" IsToggled="False" Margin="16, 0" Toggled="OnMicOnToggled"/>
                 <Label Text="On Camera On By Default" FontSize="12" HorizontalTextAlignment="Start" Margin="16, 8" TextColor="#6E6E6E"/>
                 <Switch x:Name="onCameraOnToggle" IsToggled="False" Margin="16, 0" Toggled="OnCameraOnToggled"/>
+                <Label Text="Disable leave call confirmation" FontSize="12" HorizontalTextAlignment="Start" Margin="16, 8" TextColor="#6E6E6E"/>
+                <Switch x:Name="onDisableLeaveCallConfirmation" IsToggled="False" Margin="16, 0" Toggled="onDisableLeaveCallConfirmationToggled"/>
                 <Button x:Name="dismissBtn" Text="Close" Margin="16, 0, 16, 0" Clicked="OnDismissButtonClicked" BackgroundColor="#0078D4" TextColor="White"></Button>
             </StackLayout>
         </ScrollView>
