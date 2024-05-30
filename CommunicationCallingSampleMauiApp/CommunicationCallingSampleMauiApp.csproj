@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<!-- <TargetFrameworks>net8.0-ios</TargetFrameworks> -->
 		<!-- <TargetFrameworks>net8.0-android</TargetFrameworks> -->
-		<TargetFrameworks>net8.0-android</TargetFrameworks>
+		<TargetFrameworks>net8.0-ios</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>CommunicationCallingSampleMauiApp</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -19,7 +19,7 @@
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 

@@ -17,6 +17,12 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
         {
             KeyboardAutoManagerScroll.Disconnect();
 
+            var isLeaveCallConfirmationEnabled = callControlProps.Value.isDisableLeaveCallConfirmation ? ".always_disabled" : ".always_enabled";
+            CallScreenControlBarOptionsProxy callScreenControlBarOptionsProxy = new CallScreenControlBarOptionsProxy();
+            callScreenControlBarOptionsProxy.LeaveCallConfirmationMode = isLeaveCallConfirmationEnabled;
+            CallScreenOptionsProxy callScreenOptions = new CallScreenOptionsProxy();
+            callScreenOptions.CallScreenControlBarOptions = callScreenControlBarOptionsProxy;
+
             CommunicationLocalizationProxy localizationProxy = null;
             if (!(localization is null))
             {
@@ -55,6 +61,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 orientationProxy: screenOrientationProxy,
                 enableMultitasking: true,
                 enableSystemPictureInPictureWhenMultitasking: true,
+                callScreenOptionsProxy: callScreenOptions,
                 errorCallback: null, 
                 onRemoteParticipantJoinedCallback: null,
                 (callstate) => onCallStateChanged(callstate),
@@ -73,6 +80,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 screenOrientationProxy,
                 enableMultitasking: true,
                 enableSystemPictureInPictureWhenMultitasking: true,
+                callScreenOptionsProxy: callScreenOptions,
                 (error) => handleError(error),
                 (rawIds) => onRemoteParticipant(rawIds),
                 (callstate) => onCallStateChanged(callstate),
