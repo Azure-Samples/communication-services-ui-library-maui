@@ -15,6 +15,11 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             CommunicationTokenCredential credentials = new CommunicationTokenCredential(acsToken);
 
             int layoutDirection = (int)(localization.Value.isLeftToRight != true ? FlowDirection.LeftToRight : FlowDirection.RightToLeft);
+            CallCompositeCallScreenControlBarOptions callScreenControlBarOptions = new CallCompositeCallScreenControlBarOptions();
+            var isLeaveCallConfirmationEnabled = callControlProps.Value.isDisableLeaveCallConfirmation ? CallCompositeLeaveCallConfirmationMode.AlwaysDisabled : CallCompositeLeaveCallConfirmationMode.AlwaysEnabled;
+            callScreenControlBarOptions.SetLeaveCallConfirmation(isLeaveCallConfirmationEnabled);
+            CallCompositeCallScreenOptions callScreenOptions = new CallCompositeCallScreenOptions();
+            callScreenOptions.SetControlBarOptions(callScreenControlBarOptions);
 
             CallComposite callComposite =
                 new CallCompositeBuilder()
@@ -22,6 +27,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 .SetupScreenOrientation(GetOrientation(orientationProps.Value.setupScreenOrientation))
                 .CallScreenOrientation(GetOrientation(orientationProps.Value.callScreenOrientation))
                 .Multitasking(new CallCompositeMultitaskingOptions(Java.Lang.Boolean.True, Java.Lang.Boolean.True))
+                .CallScreenOptions(callScreenOptions)
                 .Build();
 
 
