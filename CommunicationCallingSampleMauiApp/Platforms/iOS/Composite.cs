@@ -17,7 +17,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
         {
             KeyboardAutoManagerScroll.Disconnect();
 
-            var isLeaveCallConfirmationEnabled = callControlProps.Value.isDisableLeaveCallConfirmation ? ".always_disabled" : ".always_enabled";
+            var isLeaveCallConfirmationEnabled = callControlProps.Value.isDisableLeaveCallConfirmation ? "always_disabled" : "always_enabled";
             CallScreenControlBarOptionsProxy callScreenControlBarOptionsProxy = new CallScreenControlBarOptionsProxy();
             callScreenControlBarOptionsProxy.LeaveCallConfirmationMode = isLeaveCallConfirmationEnabled;
             CallScreenOptionsProxy callScreenOptions = new CallScreenOptionsProxy();
