@@ -5,12 +5,13 @@ using Com.Azure.Android.Communication.UI.Calling;
 using Com.Azure.Android.Communication.UI.Calling.Models;
 using Java.Interop;
 using Java.Util;
+using static Android.Renderscripts.ScriptGroup;
 
 namespace CommunicationCallingSampleMauiApp.Platforms.Android
 {
     public class Composite : IComposite
     {
-        public void joinCall(string name, string acsToken, string callID, bool isTeamsCall, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
+        public void joinCall(string name, string acsToken, string callID, CallType callType, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
         {
             CommunicationTokenCredential credentials = new CommunicationTokenCredential(acsToken);
 
@@ -28,6 +29,9 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 .CallScreenOrientation(GetOrientation(orientationProps.Value.callScreenOrientation))
                 .Multitasking(new CallCompositeMultitaskingOptions(Java.Lang.Boolean.True, Java.Lang.Boolean.True))
                 .CallScreenOptions(callScreenOptions)
+                .ApplicationContext(MainActivity.Instance)
+                .DisplayName(name)
+                .Credential(credentials)
                 .Build();
 
 
@@ -57,36 +61,41 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
 
             }
 
-
-            if (isTeamsCall)
+            if (callType == CallType.TeamsCall)
             {
-
                 CallCompositeTeamsMeetingLinkLocator locator = new CallCompositeTeamsMeetingLinkLocator(callID);
-
-
-                CallCompositeRemoteOptions remoteOptions = new CallCompositeRemoteOptions(locator, credentials, name);
-
 
                 if (personaData != null)
                 {
                     localOptions.SetParticipantViewData(personaData);
                 }
 
-                callComposite.Launch(MainActivity.Instance, remoteOptions, localOptions);
+                callComposite.Launch(MainActivity.Instance, locator, localOptions);
+            }
+            else if (callType == CallType.OneToN)
+            {
+                if (personaData != null)
+                {
+                    localOptions.SetParticipantViewData(personaData);
+                }
+                List<CommunicationIdentifier> participants = new List<CommunicationIdentifier>();
+                List<string> mris = new List<string>(callID.Split(','));
+                foreach (string mri in mris)
+                {
+                    participants.Add(new CommunicationUserIdentifier(mri));
+                }
+                callComposite.Launch(MainActivity.Instance, participants, localOptions);
             }
             else
             {
-
                 CallCompositeGroupCallLocator locator = new CallCompositeGroupCallLocator(UUID.FromString(callID));
-
-                CallCompositeRemoteOptions remoteOptions = new CallCompositeRemoteOptions(locator, credentials, name);
 
                 if (personaData != null)
                 {
                     localOptions.SetParticipantViewData(personaData);
                 }
 
-                callComposite.Launch(MainActivity.Instance, remoteOptions, localOptions);
+                callComposite.Launch(MainActivity.Instance, locator, localOptions);
             }
 
             // to dismiss composite
