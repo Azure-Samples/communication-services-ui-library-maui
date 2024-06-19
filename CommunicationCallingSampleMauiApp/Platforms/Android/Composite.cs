@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.Graphics;
+using AndroidX.ViewBinding;
 using Com.Azure.Android.Communication.Common;
 using Com.Azure.Android.Communication.UI.Calling;
 using Com.Azure.Android.Communication.UI.Calling.Models;
@@ -11,6 +12,8 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
 {
     public class Composite : IComposite
     {
+        CallComposite callComposite;
+
         public void joinCall(string name, string acsToken, string callID, CallType callType, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
         {
             CommunicationTokenCredential credentials = new CommunicationTokenCredential(acsToken);
@@ -22,7 +25,11 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             CallCompositeCallScreenOptions callScreenOptions = new CallCompositeCallScreenOptions();
             callScreenOptions.SetControlBarOptions(callScreenControlBarOptions);
 
-            CallComposite callComposite =
+            CallCompositeTelecomManagerOptions callCompositeTelecomManagerOptions = new CallCompositeTelecomManagerOptions(
+                CallCompositeTelecomManagerIntegrationMode.SdkProvidedTelecomManager,
+                        "applicationid");
+
+            callComposite =
                 new CallCompositeBuilder()
                 .Localization(new CallCompositeLocalizationOptions(Java.Util.Locale.ForLanguageTag(localization.Value.locale), layoutDirection))
                 .SetupScreenOrientation(GetOrientation(orientationProps.Value.setupScreenOrientation))
@@ -32,6 +39,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 .ApplicationContext(MainActivity.Instance)
                 .DisplayName(name)
                 .Credential(credentials)
+                .TelecomManagerOptions(callCompositeTelecomManagerOptions)
                 .Build();
 
 
@@ -40,6 +48,8 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             callComposite.AddOnCallStateChangedEventHandler(new CallStateChangedEventHandler());
             callComposite.AddOnDismissedEventHandler(new CallCompositeDismissedEventHandler());
             callComposite.AddOnUserReportedEventHandler(new CallCompositeUserReportedEventHandler());
+            callComposite.AddOnIncomingCallEventHandler(new EventHandler());
+            callComposite.AddOnIncomingCallCancelledEventHandler(new EventHandler());
 
             CallCompositeParticipantViewData personaData = null;
 
@@ -100,6 +110,18 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
 
             // to dismiss composite
             // callComposite.Dismiss();
+        }
+
+        public void handlePushNotification()
+        {
+            // value is payload received from APNS or EventGrid for incoming call
+            Dictionary<string, string> value = new Dictionary<string, string>();
+            callComposite.HandlePushNotification(new CallCompositePushNotification(value));
+        }
+
+        public void registerPushNotification()
+        {
+            callComposite?.RegisterPushNotification("device registeration token from Firebase");
         }
 
         public List<string> languages()
@@ -176,6 +198,16 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 {
                     var error = eventArgs as CallCompositeErrorEvent;
                     Console.WriteLine(error.ErrorCode.ToString());
+                }
+                if (eventArgs is CallCompositeIncomingCallEvent)
+                {
+                    var callEvent = eventArgs as CallCompositeIncomingCallEvent;
+                    Console.WriteLine(callEvent.CallId.ToString());
+                }
+                if (eventArgs is CallCompositeIncomingCallCancelledEvent)
+                {
+                    var callEvent = eventArgs as CallCompositeIncomingCallCancelledEvent;
+                    Console.WriteLine(callEvent.CallId.ToString());
                 }
             }
 

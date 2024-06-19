@@ -52,6 +52,7 @@ public partial class JoinCallPage : ContentPage
         groupCallFrame.IsVisible = true;
         teamsCallFrame.IsVisible = false;
         onetoNCallFrame.IsVisible = false;
+        callType = CallType.GroupCall;
     }
 
     async void OnToolbarClicked(object sender, EventArgs e)
