@@ -49,43 +49,55 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 localDataOption.SetLocalDataOptionProperties(personaDataProxy);
             }
 
-            if (callType == CallType.TeamsCall)
-            {
-                TeamsMeetingObjectProxy _teamsMeetingObject = new TeamsMeetingObjectProxy();
-                _teamsMeetingObject.SetTeamsMeetingsProperties(callID, name);
-                _p.StartExperienceWithTeamsMeeting(teamsMeeting: _teamsMeetingObject, 
-                token: acsToken, 
-                localData: localDataOption, 
+            _p.CreateCallCompositeWithToken(token: acsToken,
+                displayName: name,
                 theme: null,
                 localization: localizationProxy,
                 orientationProxy: screenOrientationProxy,
                 enableMultitasking: true,
                 enableSystemPictureInPictureWhenMultitasking: true,
+                enableCallKit: true,
                 callScreenOptionsProxy: callScreenOptions,
-                errorCallback: null, 
+                errorCallback: null,
                 onRemoteParticipantJoinedCallback: null,
                 (callstate) => onCallStateChanged(callstate),
-                (dismissed)=> onDismissed(dismissed),
-                (issue)=> onUserReportedIssueCallback(issue));
+                (dismissed) => onDismissed(dismissed),
+                (issue) => onUserReportedIssueCallback(issue),
+                (mri) => onIncomingCallProvideRemoteInfo(mri),
+                (incomingCall) => onIncomingCall(incomingCall),
+                (incomingCallCancelled) => onIncomingCallCancelled(incomingCallCancelled),
+                (callId) => onIncomingCallAcceptedFromCallKit(callId));
+
+            if (callType == CallType.TeamsCall)
+            {
+                TeamsMeetingObjectProxy _teamsMeetingObject = new TeamsMeetingObjectProxy();
+                _teamsMeetingObject.SetTeamsMeetingsProperties(callID, name);
+                CallKitRemoteInfoProxy callKitRemoteInfo = new CallKitRemoteInfoProxy();
+                callKitRemoteInfo.CxHandleName = "TeamsCall";
+                callKitRemoteInfo.DisplayName = name;
+                _p.StartExperienceWithTeamsMeeting(teamsMeeting: _teamsMeetingObject,
+                localData: localDataOption,
+                callKitRemoteInfo: callKitRemoteInfo);
+            }
+            else if (callType == CallType.OneToN)
+            {
+                CallKitRemoteInfoProxy callKitRemoteInfo = new CallKitRemoteInfoProxy();
+                callKitRemoteInfo.CxHandleName = "Outgoing Call";
+                callKitRemoteInfo.DisplayName = name;
+                _p.StartExperienceWithParticipants(participants: callID,
+                localData: localDataOption,
+                callKitRemoteInfo: callKitRemoteInfo);
             }
             else
             {
                 GroupCallObjectProxy _groupCallObject = new GroupCallObjectProxy();
                 _groupCallObject.SetGroupCallProperties(callID, name);
-                _p.StartExperienceWithGroupCall(_groupCallObject,
-                acsToken,
-                localDataOption,
-                null,
-                localizationProxy,
-                screenOrientationProxy,
-                enableMultitasking: true,
-                enableSystemPictureInPictureWhenMultitasking: true,
-                callScreenOptionsProxy: callScreenOptions,
-                (error) => handleError(error),
-                (rawIds) => onRemoteParticipant(rawIds),
-                (callstate) => onCallStateChanged(callstate),
-                (dismissed)=> onDismissed(dismissed),
-                (issue) => onUserReportedIssueCallback(issue));
+                CallKitRemoteInfoProxy callKitRemoteInfo = new CallKitRemoteInfoProxy();
+                callKitRemoteInfo.CxHandleName = "GroupCall";
+                callKitRemoteInfo.DisplayName = name;
+                _p.StartExperienceWithGroupCall(groupCall: _groupCallObject,
+                localData: localDataOption,
+                callKitRemoteInfo: callKitRemoteInfo);
             }
         }
 
@@ -101,12 +113,36 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
 
         private void onDismissed(CommunicationDismissedProxy dismissed)
         {
+            _p.Dismiss();
             Console.WriteLine("onDismissed " + dismissed.ErrorCode);
         }
 
         private void onUserReportedIssueCallback(CallCompositeUserReportedIssueProxy issue)
         {
             Console.WriteLine("onUserReportedIssueCallback " + issue.UserMessage);
+        }
+
+        private CallKitRemoteInfoProxy onIncomingCallProvideRemoteInfo(String mri)
+        {
+            CallKitRemoteInfoProxy proxy = new CallKitRemoteInfoProxy();
+            proxy.CxHandleName = "handleName";
+            proxy.DisplayName = "displayName";
+            return proxy;
+        }
+
+        private void onIncomingCall(IncomingCallProxy incomingCall)
+        {
+            Console.WriteLine("onIncomingCall " + incomingCall.CallId);
+        }
+
+        private void onIncomingCallCancelled(IncomingCallCancelledProxy incomingCallCancelled)
+        {
+            Console.WriteLine("onIncomingCallCancelled " + incomingCallCancelled.CallId);
+        }
+
+        private void onIncomingCallAcceptedFromCallKit(String callId)
+        {
+            Console.WriteLine("onIncomingCallAcceptedFromCallKit " + callId);
         }
 
         private void onCallStateChanged(CommunicationCallStateProxy callstate)
