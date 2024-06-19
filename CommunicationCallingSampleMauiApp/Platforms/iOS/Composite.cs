@@ -13,7 +13,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
         CommunicationUIProxy _p = new CommunicationUIProxy();
         DataModelInjectionProps? _dataModelInjection;
 
-        public void joinCall(string name, string acsToken, string callID, bool isTeamsCall, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
+        public void joinCall(string name, string acsToken, string callID, CallType callType, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
         {
             KeyboardAutoManagerScroll.Disconnect();
 
@@ -49,7 +49,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 localDataOption.SetLocalDataOptionProperties(personaDataProxy);
             }
 
-            if (isTeamsCall)
+            if (callType == CallType.TeamsCall)
             {
                 TeamsMeetingObjectProxy _teamsMeetingObject = new TeamsMeetingObjectProxy();
                 _teamsMeetingObject.SetTeamsMeetingsProperties(callID, name);

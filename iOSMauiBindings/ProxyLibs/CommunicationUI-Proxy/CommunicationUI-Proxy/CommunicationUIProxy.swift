@@ -176,9 +176,11 @@ public class CommunicationUIProxy: NSObject {
         callingScreenOrientation: callOrientation,
         enableMultitasking: enableMultitasking,
         enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking,
-        callScreenOptions: callScreenOptions)
+        callScreenOptions: callScreenOptions,
+        displayName: groupCall.displayName)
 
-        callComposite = CallComposite(withOptions: options)
+        let tokenCredential = try? CommunicationTokenCredential(token: token)
+        callComposite = CallComposite(credential: tokenCredential!, withOptions: options)
         callComposite?.events.onError = { errorEvent in
                 guard let callback = errorCallback else { return }
                 let errorProxy = CommunicationErrorProxy()
@@ -251,17 +253,12 @@ public class CommunicationUIProxy: NSObject {
             callback(rawIds);
         }
 
-        if let uuid = UUID(uuidString: groupCall.groupId),
-           let tokenCredential = try? CommunicationTokenCredential(token: token) {
-            let remoteOptions = RemoteOptions(for: .groupCall(groupId: uuid),
-                                              credential: tokenCredential,
-                                              displayName: groupCall.displayName)
-
+        if let uuid = UUID(uuidString: groupCall.groupId) {
             var localDataOptions: LocalOptions?
             if let localData = localData {
                 localDataOptions = createLocalDataOptions(localData)
             }
-            callComposite?.launch(remoteOptions: remoteOptions, localOptions: localDataOptions)
+            callComposite?.launch(locator: .groupCall(groupId: uuid), localOptions: localDataOptions)
         }
     }
 
@@ -314,15 +311,16 @@ public class CommunicationUIProxy: NSObject {
         callingScreenOrientation: callOrientation,
         enableMultitasking: enableMultitasking,
         enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking,
-        callScreenOptions: callScreenOptions)
+        callScreenOptions: callScreenOptions,
+        displayName: teamsMeeting.displayName)
 
-        callComposite = CallComposite(withOptions: options)
+        let tokenCredential = try? CommunicationTokenCredential(token: token)
+        callComposite = CallComposite(credential: tokenCredential!, withOptions: options)
         callComposite?.events.onError = { errorEvent in
                 guard let callback = errorCallback else { return }
                 let errorProxy = CommunicationErrorProxy()
                 errorProxy.code = errorEvent.code
                 errorProxy.error = errorEvent.error as NSError?
-
                 callback(errorProxy)
         }
 
@@ -389,17 +387,12 @@ public class CommunicationUIProxy: NSObject {
             callback(rawIds);
         }
 
-        if let tokenCredential = try? CommunicationTokenCredential(token: token) {
-            let remoteOptions = RemoteOptions(for: .teamsMeeting(teamsLink: teamsMeeting.teamsMeetingLink),
-                                              credential: tokenCredential,
-                                              displayName: teamsMeeting.displayName)
-            var localDataOptions: LocalOptions?
-            if let localData = localData {
+        var localDataOptions: LocalOptions?
+        if let localData = localData {
                 localDataOptions = createLocalDataOptions(localData)
-            }
-
-            callComposite?.launch(remoteOptions: remoteOptions, localOptions: localDataOptions)
         }
+
+        callComposite?.launch(locator: .teamsMeeting(teamsLink: teamsMeeting.teamsMeetingLink), localOptions: localDataOptions)
     }
     
     public func setRemote(participantDataOption: CommunicationPersonaDataProxy,
