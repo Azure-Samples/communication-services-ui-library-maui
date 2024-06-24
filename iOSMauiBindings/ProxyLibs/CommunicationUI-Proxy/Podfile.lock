@@ -1,9 +1,9 @@
 PODS:
-  - AzureCommunicationCalling (2.10.1):
+  - AzureCommunicationCalling (2.11.0):
     - AzureCommunicationCommon (~> 1.0)
   - AzureCommunicationCommon (1.2.0)
-  - AzureCommunicationUICalling (1.7.0):
-    - AzureCommunicationCalling (= 2.10.1)
+  - AzureCommunicationUICalling (1.8.0):
+    - AzureCommunicationCalling (= 2.11.0)
     - AzureCore (= 1.0.0-beta.15)
     - MicrosoftFluentUI/ActivityIndicator_ios (= 0.10.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.10.0)
@@ -49,7 +49,7 @@ PODS:
     - MicrosoftFluentUI/Core_ios
 
 DEPENDENCIES:
-  - AzureCommunicationUICalling (= 1.7.0)
+  - AzureCommunicationUICalling (= 1.8.0)
 
 SPEC REPOS:
   trunk:
@@ -60,12 +60,12 @@ SPEC REPOS:
     - MicrosoftFluentUI
 
 SPEC CHECKSUMS:
-  AzureCommunicationCalling: 708e0c83cb82b90b42d1e66f8f3ddfc84b7fadc6
+  AzureCommunicationCalling: 35bebb366c5d423bacdd43550df35c9d89d25235
   AzureCommunicationCommon: 130a21be2be889f83dc4adbf994af6285f962de8
-  AzureCommunicationUICalling: 3796244f7ecf4b8fa992095d6a85a4f6d8e85235
+  AzureCommunicationUICalling: 9f2151de8c0c0f85cbf6e7a01519608d596034a2
   AzureCore: ebbf7cf4dfe72afc7584088c38d1c99f5a35d647
   MicrosoftFluentUI: f6db695718efb93f4ca9bdc366c00b80a1f91dba
 
-PODFILE CHECKSUM: b21241515b9f724d638f955070a666a1a9f9b5c2
+PODFILE CHECKSUM: e9c299a58f01bd8dba91b1f2fe16c1244fcdb379
 
 COCOAPODS: 1.15.0

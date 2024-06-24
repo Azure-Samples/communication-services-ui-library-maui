@@ -1,16 +1,20 @@
 ﻿using System;
 using Android.Graphics;
+using AndroidX.ViewBinding;
 using Com.Azure.Android.Communication.Common;
 using Com.Azure.Android.Communication.UI.Calling;
 using Com.Azure.Android.Communication.UI.Calling.Models;
 using Java.Interop;
 using Java.Util;
+using static Android.Renderscripts.ScriptGroup;
 
 namespace CommunicationCallingSampleMauiApp.Platforms.Android
 {
     public class Composite : IComposite
     {
-        public void joinCall(string name, string acsToken, string callID, bool isTeamsCall, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
+        CallComposite callComposite;
+
+        public void joinCall(string name, string acsToken, string callID, CallType callType, LocalizationProps? localization, DataModelInjectionProps? dataModelInjection, OrientationProps? orientationProps, CallControlProps? callControlProps)
         {
             CommunicationTokenCredential credentials = new CommunicationTokenCredential(acsToken);
 
@@ -21,13 +25,21 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             CallCompositeCallScreenOptions callScreenOptions = new CallCompositeCallScreenOptions();
             callScreenOptions.SetControlBarOptions(callScreenControlBarOptions);
 
-            CallComposite callComposite =
+            CallCompositeTelecomManagerOptions callCompositeTelecomManagerOptions = new CallCompositeTelecomManagerOptions(
+                CallCompositeTelecomManagerIntegrationMode.SdkProvidedTelecomManager,
+                        "applicationid");
+
+            callComposite =
                 new CallCompositeBuilder()
                 .Localization(new CallCompositeLocalizationOptions(Java.Util.Locale.ForLanguageTag(localization.Value.locale), layoutDirection))
                 .SetupScreenOrientation(GetOrientation(orientationProps.Value.setupScreenOrientation))
                 .CallScreenOrientation(GetOrientation(orientationProps.Value.callScreenOrientation))
                 .Multitasking(new CallCompositeMultitaskingOptions(Java.Lang.Boolean.True, Java.Lang.Boolean.True))
                 .CallScreenOptions(callScreenOptions)
+                .ApplicationContext(MainActivity.Instance)
+                .DisplayName(name)
+                .Credential(credentials)
+                .TelecomManagerOptions(callCompositeTelecomManagerOptions)
                 .Build();
 
 
@@ -36,6 +48,8 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             callComposite.AddOnCallStateChangedEventHandler(new CallStateChangedEventHandler());
             callComposite.AddOnDismissedEventHandler(new CallCompositeDismissedEventHandler());
             callComposite.AddOnUserReportedEventHandler(new CallCompositeUserReportedEventHandler());
+            callComposite.AddOnIncomingCallEventHandler(new EventHandler());
+            callComposite.AddOnIncomingCallCancelledEventHandler(new EventHandler());
 
             CallCompositeParticipantViewData personaData = null;
 
@@ -57,40 +71,57 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
 
             }
 
-
-            if (isTeamsCall)
+            if (callType == CallType.TeamsCall)
             {
-
                 CallCompositeTeamsMeetingLinkLocator locator = new CallCompositeTeamsMeetingLinkLocator(callID);
-
-
-                CallCompositeRemoteOptions remoteOptions = new CallCompositeRemoteOptions(locator, credentials, name);
-
 
                 if (personaData != null)
                 {
                     localOptions.SetParticipantViewData(personaData);
                 }
 
-                callComposite.Launch(MainActivity.Instance, remoteOptions, localOptions);
+                callComposite.Launch(MainActivity.Instance, locator, localOptions);
+            }
+            else if (callType == CallType.OneToN)
+            {
+                if (personaData != null)
+                {
+                    localOptions.SetParticipantViewData(personaData);
+                }
+                List<CommunicationIdentifier> participants = new List<CommunicationIdentifier>();
+                List<string> mris = new List<string>(callID.Split(','));
+                foreach (string mri in mris)
+                {
+                    participants.Add(new CommunicationUserIdentifier(mri));
+                }
+                callComposite.Launch(MainActivity.Instance, participants, localOptions);
             }
             else
             {
-
                 CallCompositeGroupCallLocator locator = new CallCompositeGroupCallLocator(UUID.FromString(callID));
-
-                CallCompositeRemoteOptions remoteOptions = new CallCompositeRemoteOptions(locator, credentials, name);
 
                 if (personaData != null)
                 {
                     localOptions.SetParticipantViewData(personaData);
                 }
 
-                callComposite.Launch(MainActivity.Instance, remoteOptions, localOptions);
+                callComposite.Launch(MainActivity.Instance, locator, localOptions);
             }
 
             // to dismiss composite
             // callComposite.Dismiss();
+        }
+
+        public void handlePushNotification()
+        {
+            // value is payload received from APNS or EventGrid for incoming call
+            Dictionary<string, string> value = new Dictionary<string, string>();
+            callComposite.HandlePushNotification(new CallCompositePushNotification(value));
+        }
+
+        public void registerPushNotification()
+        {
+            callComposite?.RegisterPushNotification("device registeration token from Firebase");
         }
 
         public List<string> languages()
@@ -167,6 +198,16 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 {
                     var error = eventArgs as CallCompositeErrorEvent;
                     Console.WriteLine(error.ErrorCode.ToString());
+                }
+                if (eventArgs is CallCompositeIncomingCallEvent)
+                {
+                    var callEvent = eventArgs as CallCompositeIncomingCallEvent;
+                    Console.WriteLine(callEvent.CallId.ToString());
+                }
+                if (eventArgs is CallCompositeIncomingCallCancelledEvent)
+                {
+                    var callEvent = eventArgs as CallCompositeIncomingCallCancelledEvent;
+                    Console.WriteLine(callEvent.CallId.ToString());
                 }
             }
 
