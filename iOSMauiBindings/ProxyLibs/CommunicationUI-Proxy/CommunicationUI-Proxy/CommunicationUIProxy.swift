@@ -22,6 +22,17 @@ public class GroupCallObjectProxy: NSObject {
 }
 
 @objcMembers
+public class RoomsCallObjectProxy: NSObject {
+    public var roomId: String = ""
+    public var displayName: String = ""
+    
+    public func setRoomsCallProperties(_ roomId: String, displayName: String) {
+        self.roomId = roomId
+        self.displayName = displayName
+    }
+}
+
+@objcMembers
 public class TeamsMeetingObjectProxy: NSObject {
     public var teamsMeetingLink: String = ""
     public var displayName: String = ""
@@ -329,6 +340,18 @@ public class CommunicationUIProxy: NSObject {
         }
 
         callComposite?.launch(locator: .teamsMeeting(teamsLink: teamsMeeting.teamsMeetingLink), localOptions: localDataOptions)
+    }
+    
+    public func startExperience(roomsCall: RoomsCallObjectProxy,
+                                localData: CommunicationLocalDataOptionProxy?,
+                                callKitRemoteInfo: CallKitRemoteInfoProxy?) {
+        var localDataOptions: LocalOptions?
+        if let localData = localData {
+            localDataOptions = createLocalDataOptions(localData)
+        }
+        
+        callComposite?.launch(locator: .roomCall(roomId: roomsCall.roomId),
+                              localOptions: localDataOptions)
     }
 
     public func startExperience(participants: String,

@@ -88,6 +88,17 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
                 localData: localDataOption,
                 callKitRemoteInfo: callKitRemoteInfo);
             }
+            else if (callType == CallType.RoomsCall)
+            {
+                RoomsCallObjectProxy _roomsCallObject = new RoomsCallObjectProxy();
+                _roomsCallObject.SetRoomsCallProperties(callID, name);
+                CallKitRemoteInfoProxy callKitRemoteInfo = new CallKitRemoteInfoProxy();
+                callKitRemoteInfo.CxHandleName = "RoomsCall";
+                callKitRemoteInfo.DisplayName = name;
+                _p.StartExperienceWithRoomsCall(roomsCall: _roomsCallObject,
+                localData: localDataOption,
+                callKitRemoteInfo: callKitRemoteInfo);
+            }
             else
             {
                 GroupCallObjectProxy _groupCallObject = new GroupCallObjectProxy();
