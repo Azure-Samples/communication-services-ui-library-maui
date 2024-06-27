@@ -84,6 +84,10 @@ To learn more about how this sample was created and communicates with the native
 
 [iOS Bridging Guide](iOSMauiBindings/README.md)
 
+### Troubleshooting Guide
+
+Please follow this [Wiki](https://github.com/Azure-Samples/communication-services-ui-library-maui/wiki/Troubleshooting-Guide) to troubleshoot your issues.
+
 ### Known Issues
 
 [Known Issues](https://github.com/Azure-Samples/communication-services-ui-library-maui/wiki/Known-Issues)
