@@ -254,8 +254,12 @@ namespace iOS.CallingUI.Binding
 		[Export ("startExperienceWithGroupCall:localData:callKitRemoteInfo:")]
 		void StartExperienceWithGroupCall (GroupCallObjectProxy groupCall, [NullAllowed] CommunicationLocalDataOptionProxy localData, [NullAllowed] CallKitRemoteInfoProxy callKitRemoteInfo);
 
-		// -(void)startExperienceWithTeamsMeeting:(TeamsMeetingObjectProxy * _Nonnull)teamsMeeting localData:(CommunicationLocalDataOptionProxy * _Nullable)localData callKitRemoteInfo:(CallKitRemoteInfoProxy * _Nullable)callKitRemoteInfo;
-		[Export ("startExperienceWithTeamsMeeting:localData:callKitRemoteInfo:")]
+        // -(void)startExperienceWithRoomsCall:(RoomsCallObjectProxy * _Nonnull)roomsCall localData:(CommunicationLocalDataOptionProxy * _Nullable)localData callKitRemoteInfo:(CallKitRemoteInfoProxy * _Nullable)callKitRemoteInfo;
+        [Export("startExperienceWithRoomsCall:localData:callKitRemoteInfo:")]
+        void StartExperienceWithRoomsCall(RoomsCallObjectProxy roomsCall, [NullAllowed] CommunicationLocalDataOptionProxy localData, [NullAllowed] CallKitRemoteInfoProxy callKitRemoteInfo);
+
+        // -(void)startExperienceWithTeamsMeeting:(TeamsMeetingObjectProxy * _Nonnull)teamsMeeting localData:(CommunicationLocalDataOptionProxy * _Nullable)localData callKitRemoteInfo:(CallKitRemoteInfoProxy * _Nullable)callKitRemoteInfo;
+        [Export ("startExperienceWithTeamsMeeting:localData:callKitRemoteInfo:")]
 		void StartExperienceWithTeamsMeeting (TeamsMeetingObjectProxy teamsMeeting, [NullAllowed] CommunicationLocalDataOptionProxy localData, [NullAllowed] CallKitRemoteInfoProxy callKitRemoteInfo);
 
 		// -(void)startExperienceWithParticipants:(NSString * _Nonnull)participants localData:(CommunicationLocalDataOptionProxy * _Nullable)localData callKitRemoteInfo:(CallKitRemoteInfoProxy * _Nullable)callKitRemoteInfo;
@@ -312,8 +316,25 @@ namespace iOS.CallingUI.Binding
 		void SetGroupCallProperties (string groupId, string displayName);
 	}
 
-	// @interface TeamsMeetingObjectProxy : NSObject
-	[BaseType (typeof(NSObject), Name = "_TtC21CommunicationUI_Proxy23TeamsMeetingObjectProxy")]
+    // @interface RoomsCallObjectProxy : NSObject
+    [BaseType(typeof(NSObject), Name = "_TtC21CommunicationUI_Proxy20RoomsCallObjectProxy")]
+    interface RoomsCallObjectProxy
+    {
+        // @property (copy, nonatomic) NSString * _Nonnull roomId;
+        [Export("roomId")]
+        string RoomId { get; set; }
+
+        // @property (copy, nonatomic) NSString * _Nonnull displayName;
+        [Export("displayName")]
+        string DisplayName { get; set; }
+
+        // -(void)setRoomsCallProperties:(NSString * _Nonnull)roomId displayName:(NSString * _Nonnull)displayName;
+        [Export("setRoomsCallProperties:displayName:")]
+        void SetRoomsCallProperties(string roomId, string displayName);
+    }
+
+    // @interface TeamsMeetingObjectProxy : NSObject
+    [BaseType (typeof(NSObject), Name = "_TtC21CommunicationUI_Proxy23TeamsMeetingObjectProxy")]
 	interface TeamsMeetingObjectProxy
 	{
 		// @property (copy, nonatomic) NSString * _Nonnull teamsMeetingLink;

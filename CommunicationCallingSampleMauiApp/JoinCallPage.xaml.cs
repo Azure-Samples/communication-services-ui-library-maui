@@ -22,6 +22,10 @@ public partial class JoinCallPage : ContentPage
     const String onetoNCallPlaceholder = "Enter comma separated MRIs";
     const String onetoNCallSubtitle = "Get CommunicationIdentifiers MRIs to dial.";
 
+    const String roomsCallTitle = "Rooms call";
+    const String roomsCallPlaceholder = "Enter room id";
+    const String roomsCallSubtitle = "Get Room Id to join a rooms call";
+
     LocalizationProps _localization;
     DataModelInjectionProps _dataModelInjection;
     OrientationProps _orientationProps;
@@ -52,6 +56,7 @@ public partial class JoinCallPage : ContentPage
         groupCallFrame.IsVisible = true;
         teamsCallFrame.IsVisible = false;
         onetoNCallFrame.IsVisible = false;
+        roomsCallFrame.IsVisible = false;
         callType = CallType.GroupCall;
     }
 
@@ -77,9 +82,11 @@ public partial class JoinCallPage : ContentPage
         groupCallFrame.IsVisible = true;
         teamsCallFrame.IsVisible = false;
         onetoNCallFrame.IsVisible = false;
+        roomsCallFrame.IsVisible = false;
         teamsMeetingPivot.TextColor = Color.FromHex("#6E6E6E");
         onetoNCallPivot.TextColor = Color.FromHex("#6E6E6E");
         groupCallPivot.TextColor = Colors.White;
+        roomsCallPivot.TextColor = Color.FromHex("#6E6E6E");
         meetingTitleLabel.Text = groupCallTitle;
         meetingEntry.Placeholder = groupCallEntryPlaceholder;
         meetingSubtitleLabel.Text = groupCallSubtitle;
@@ -91,9 +98,11 @@ public partial class JoinCallPage : ContentPage
         groupCallFrame.IsVisible = false;
         teamsCallFrame.IsVisible = true;
         onetoNCallFrame.IsVisible = false;
+        roomsCallFrame.IsVisible = false;
         groupCallPivot.TextColor = Color.FromHex("#6E6E6E");
         onetoNCallPivot.TextColor = Color.FromHex("#6E6E6E");
         teamsMeetingPivot.TextColor = Colors.White;
+        roomsCallPivot.TextColor = Color.FromHex("#6E6E6E");
         meetingTitleLabel.Text = teamsMeetingTitle;
         meetingEntry.Placeholder = teamsMeetingEntryPlaceholder;
         meetingSubtitleLabel.Text = teamsMeetingSubtitle;
@@ -105,12 +114,30 @@ public partial class JoinCallPage : ContentPage
         groupCallFrame.IsVisible = false;
         teamsCallFrame.IsVisible = false;
         onetoNCallFrame.IsVisible = true;
+        roomsCallFrame.IsVisible = false;
         groupCallPivot.TextColor = Color.FromHex("#6E6E6E");
         teamsMeetingPivot.TextColor = Color.FromHex("#6E6E6E");
-        onetoNCallPivot.TextColor = Colors.White; ;
+        onetoNCallPivot.TextColor = Colors.White;
+        roomsCallPivot.TextColor = Color.FromHex("#6E6E6E");
         meetingTitleLabel.Text = onetoNCallTitle;
         meetingEntry.Placeholder = onetoNCallPlaceholder;
         meetingSubtitleLabel.Text = onetoNCallSubtitle;
+    }
+
+    void OnRoomsCallClicked(object sender, EventArgs e)
+    {
+        callType = CallType.RoomsCall;
+        groupCallFrame.IsVisible = false;
+        teamsCallFrame.IsVisible = false;
+        onetoNCallFrame.IsVisible = false;
+        roomsCallFrame.IsVisible = true;
+        groupCallPivot.TextColor = Color.FromHex("#6E6E6E");
+        teamsMeetingPivot.TextColor = Color.FromHex("#6E6E6E");
+        onetoNCallPivot.TextColor = Color.FromHex("#6E6E6E");
+        roomsCallPivot.TextColor = Colors.White;
+        meetingTitleLabel.Text = roomsCallTitle;
+        meetingEntry.Placeholder = roomsCallPlaceholder;
+        meetingSubtitleLabel.Text = roomsCallSubtitle;
     }
 
     void OnButtonClicked(object sender, EventArgs e)
@@ -126,5 +153,6 @@ public enum CallType
 {
     TeamsCall,
     GroupCall,
-    OneToN
+    OneToN,
+    RoomsCall
 }

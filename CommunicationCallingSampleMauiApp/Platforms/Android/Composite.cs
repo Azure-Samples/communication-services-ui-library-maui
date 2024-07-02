@@ -96,6 +96,15 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 }
                 callComposite.Launch(MainActivity.Instance, participants, localOptions);
             }
+            else if (callType == CallType.RoomsCall)
+            {
+                CallCompositeRoomLocator locator = new CallCompositeRoomLocator(callID);
+                if (personaData != null)
+                {
+                    localOptions.SetParticipantViewData(personaData);
+                }
+                callComposite.Launch(MainActivity.Instance, locator, localOptions);
+            }
             else
             {
                 CallCompositeGroupCallLocator locator = new CallCompositeGroupCallLocator(UUID.FromString(callID));
