@@ -36,7 +36,7 @@ We appreciate your feedback and energy helping us improve our services. [If you'
 
 1. Navigate to `communication-services-ui-library-maui/iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `./iOSFramework.sh -d`.
 2. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.sln` in Visual Studio
-3. Edit `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net7.0-ios</TargetFrameworks>`.
+3. Edit `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net8.0-ios</TargetFrameworks>`.
 4. Select iOS device/simulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
 
 ### Folder Structure
