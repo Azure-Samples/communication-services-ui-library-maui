@@ -81,8 +81,8 @@ if [ ! -d "$aar" ]; then
 fi
 
 cd aar
-
-curl  "https://repo1.maven.org/maven2/com/azure/android/azure-communication-calling/2.9.0/azure-communication-calling-2.9.0.aar" --output azure-communication-calling-2.9.0.aar
+curl  "https://repo1.maven.org/maven2/com/microsoft/trouter-client-android/0.1.2/trouter-client-android-0.1.2.aar --output trouter-client-android-0.1.2.aar
+curl  "https://repo1.maven.org/maven2/com/azure/android/azure-communication-calling/2.11.0-beta.1/azure-communication-calling-2.11.0-beta.1.aar" --output azure-communication-calling-2.11.0-beta.1.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_core/0.0.21/fluentui_core-0.0.21.aar" --output fluentui_core-0.0.21.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_drawer/0.0.21/fluentui_drawer-0.0.21.aar" --output fluentui_drawer-0.0.21.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_listitem/0.0.21/fluentui_listitem-0.0.21.aar" --output fluentui_listitem-0.0.21.aar
