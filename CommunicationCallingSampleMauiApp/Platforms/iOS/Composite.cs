@@ -35,6 +35,9 @@ namespace CommunicationCallingSampleMauiApp.Platforms.iOS
             localDataOption.MicrophoneOn = callControlProps.Value.isMicrophoneON;
             localDataOption.CameraOn = callControlProps.Value.isCameraON;
             localDataOption.AudioVideoMode = "audioAndVideo";
+            localDataOption.CallScreenTitle = callControlProps.Value.title;
+            localDataOption.CallScreenSubtitle = callControlProps.Value.subtitle;
+            localDataOption.UpdateTitleSubtitleOnParticipantCountChange = callControlProps.Value.updateSubtitleOnParticipantCountChange;
             CommunicationScreenOrientationProxy screenOrientationProxy = new CommunicationScreenOrientationProxy();
             screenOrientationProxy.CallScreenOrientation = orientationProps.Value.callScreenOrientation;
             screenOrientationProxy.SetupScreenOrientation = orientationProps.Value.setupScreenOrientation;

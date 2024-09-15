@@ -53,6 +53,11 @@ public partial class SettingsPage : ContentPage
         onDisableLeaveCallConfirmation.IsToggled = e.Value;
     }
 
+    void onUpdateTitleWithParticipantCountToggled(object sender, ToggledEventArgs e)
+    {
+        updateTitleWithParticipantCount.IsToggled = e.Value;
+    }
+
     async void OnDismissButtonClicked(object sender, EventArgs args)
     {
         if (Callback != null)
@@ -74,6 +79,9 @@ public partial class SettingsPage : ContentPage
             callControlProps.isMicrophoneON = onMicrophoneOnToggle.IsToggled;
             callControlProps.isCameraON = onCameraOnToggle.IsToggled;
             callControlProps.isDisableLeaveCallConfirmation = onDisableLeaveCallConfirmation.IsToggled;
+            callControlProps.title = callScreenTitle.Text;
+            callControlProps.subtitle = callScreenSubtitle.Text;
+            callControlProps.updateSubtitleOnParticipantCountChange = updateTitleWithParticipantCount.IsToggled;
             Callback(localization, dataModelInjection, orientationProps, callControlProps);
         }
 
@@ -216,4 +224,7 @@ public struct CallControlProps
     public Boolean isMicrophoneON;
     public Boolean isCameraON;
     public Boolean isDisableLeaveCallConfirmation;
+    public String title;
+    public String subtitle;
+    public Boolean updateSubtitleOnParticipantCountChange;
 }

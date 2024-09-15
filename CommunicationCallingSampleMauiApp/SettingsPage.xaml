@@ -45,6 +45,11 @@
                 <Switch x:Name="onCameraOnToggle" IsToggled="False" Margin="16, 0" Toggled="OnCameraOnToggled"/>
                 <Label Text="Disable leave call confirmation" FontSize="12" HorizontalTextAlignment="Start" Margin="16, 8" TextColor="#6E6E6E"/>
                 <Switch x:Name="onDisableLeaveCallConfirmation" IsToggled="False" Margin="16, 0" Toggled="onDisableLeaveCallConfirmationToggled"/>
+                <Label x:Name="callScreenTitleSubtitle" Text="Call screen title and subtitle" Margin="16, 8" TextColor="#6E6E6E"/>
+                <Entry x:Name="callScreenTitle" Margin="16, 8" Placeholder="Call screen title"/>
+                <Entry x:Name="callScreenSubtitle" Margin="16, 8" Placeholder="Call screen subtitle"/>
+                <Label x:Name="updateTitleSubtitle" Text="Update title subtitle when participants count changes" Margin="16, 8" TextColor="#6E6E6E"/>
+                <Switch x:Name="updateTitleWithParticipantCount" IsToggled="False" Margin="16, 0" Toggled="onUpdateTitleWithParticipantCountToggled"/>
                 <Button x:Name="dismissBtn" Text="Close" Margin="16, 0, 16, 0" Clicked="OnDismissButtonClicked" BackgroundColor="#0078D4" TextColor="White"></Button>
             </StackLayout>
         </ScrollView>

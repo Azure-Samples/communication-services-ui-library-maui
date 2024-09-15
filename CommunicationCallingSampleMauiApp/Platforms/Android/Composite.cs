@@ -25,9 +25,28 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             CallCompositeCallScreenOptions callScreenOptions = new CallCompositeCallScreenOptions();
             callScreenOptions.SetControlBarOptions(callScreenControlBarOptions);
 
+            CallCompositeCallScreenHeaderViewData headerViewData = new CallCompositeCallScreenHeaderViewData();
+            bool isTitleSet = !string.IsNullOrEmpty(callControlProps.Value.title);
+            bool isSubtitleSet = !string.IsNullOrEmpty(callControlProps.Value.subtitle);
+
+            if (isTitleSet)
+            {
+                headerViewData.SetTitle(callControlProps.Value.title);
+            }
+
+            if (isSubtitleSet)
+            {
+                headerViewData.SetSubtitle(callControlProps.Value.subtitle);
+            }
+
+            if (isTitleSet || isSubtitleSet)
+            {
+                callScreenOptions.SetHeaderViewData(headerViewData);
+            }
+
             CallCompositeTelecomManagerOptions callCompositeTelecomManagerOptions = new CallCompositeTelecomManagerOptions(
                 CallCompositeTelecomManagerIntegrationMode.SdkProvidedTelecomManager,
-                        "applicationid");
+                        "com.azure.communication.ui.calling.mauisampleapp");
 
             callComposite =
                 new CallCompositeBuilder()
@@ -35,7 +54,6 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 .SetupScreenOrientation(GetOrientation(orientationProps.Value.setupScreenOrientation))
                 .CallScreenOrientation(GetOrientation(orientationProps.Value.callScreenOrientation))
                 .Multitasking(new CallCompositeMultitaskingOptions(Java.Lang.Boolean.True, Java.Lang.Boolean.True))
-                .CallScreenOptions(callScreenOptions)
                 .ApplicationContext(MainActivity.Instance)
                 .DisplayName(name)
                 .Credential(credentials)
@@ -44,7 +62,7 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
 
 
             callComposite.AddOnErrorEventHandler(new EventHandler());
-            callComposite.AddOnRemoteParticipantJoinedEventHandler(new RemoteParticipantJoinedHandler(callComposite, dataModelInjection));
+            callComposite.AddOnRemoteParticipantJoinedEventHandler(new RemoteParticipantJoinedHandler(callComposite, dataModelInjection, headerViewData, callControlProps));
             callComposite.AddOnCallStateChangedEventHandler(new CallStateChangedEventHandler());
             callComposite.AddOnDismissedEventHandler(new CallCompositeDismissedEventHandler());
             callComposite.AddOnUserReportedEventHandler(new CallCompositeUserReportedEventHandler());
@@ -57,7 +75,8 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
                 .SetSkipSetupScreen(callControlProps.Value.isSkipSetupON)
                 .SetCameraOn(callControlProps.Value.isCameraON)
                 .SetMicrophoneOn(callControlProps.Value.isMicrophoneON)
-                .SetAudioVideoMode(CallCompositeAudioVideoMode.AudioAndVideo);
+                .SetAudioVideoMode(CallCompositeAudioVideoMode.AudioAndVideo)
+                .SetCallScreenOptions(callScreenOptions);
 
             if (dataModelInjection != null)
             {
