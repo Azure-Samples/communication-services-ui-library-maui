@@ -12,11 +12,16 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
 
         private CallComposite callComposite;
         private DataModelInjectionProps? dataModelInjection;
+        private int participantCount = 0;
+        private CallCompositeCallScreenHeaderViewData headerViewData;
+        private CallControlProps? callControlProps;
 
-        public RemoteParticipantJoinedHandler(CallComposite callComposite, DataModelInjectionProps? dataModelInjection)
+        public RemoteParticipantJoinedHandler(CallComposite callComposite, DataModelInjectionProps? dataModelInjection, CallCompositeCallScreenHeaderViewData headerViewData, CallControlProps? callControlProps)
         {
             this.callComposite = callComposite;
             this.dataModelInjection = dataModelInjection;
+            this.headerViewData = headerViewData;
+            this.callControlProps = callControlProps;
         }
 
         public void Disposed()
@@ -36,6 +41,12 @@ namespace CommunicationCallingSampleMauiApp.Platforms.Android
             if (eventArgs is CallCompositeRemoteParticipantJoinedEvent)
             {
                 var participantJoinedEvent = eventArgs as CallCompositeRemoteParticipantJoinedEvent;
+                participantCount += participantJoinedEvent.Identifiers.Count;
+
+                if (callControlProps?.updateSubtitleOnParticipantCountChange == true)
+                {
+                    headerViewData.SetSubtitle("Remote participants " + participantCount);
+                }
 
                 foreach (var id in participantJoinedEvent.Identifiers)
                 {

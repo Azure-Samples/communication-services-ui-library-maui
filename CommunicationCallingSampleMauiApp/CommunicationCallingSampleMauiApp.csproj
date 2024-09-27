@@ -93,9 +93,12 @@
 		<AndroidAarLibrary Include="aar\fluentui_persona-0.0.21.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
-		<AndroidAarLibrary Include="aar\azure-communication-calling-2.9.0.aar">
+		<AndroidAarLibrary Include="aar\azure-communication-calling-2.11.0.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>
+		<AndroidAarLibrary Include="aar\trouter-client-android-0.1.4.aar">
+			<AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
+		  </AndroidAarLibrary>
 		<AndroidAarLibrary Include="aar\dualscreen-layout-1.0.0-alpha01.aar">
 		  <AndroidSkipResourceProcessing></AndroidSkipResourceProcessing>
 		</AndroidAarLibrary>

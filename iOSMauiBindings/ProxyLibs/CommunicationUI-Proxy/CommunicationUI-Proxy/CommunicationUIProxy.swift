@@ -61,6 +61,9 @@ public class CommunicationLocalDataOptionProxy: NSObject {
     public var microphoneOn: Bool = false
     public var cameraOn: Bool = false
     public var audioVideoMode: String? = nil
+    public var callScreenTitle: String? = nil
+    public var callScreenSubtitle: String? = nil
+    public var updateTitleSubtitleOnParticipantCountChange: Bool = false
 
     public func setLocalDataOptionProperties(_ personaData: CommunicationPersonaDataProxy) {
         self.personaData = personaData
@@ -160,6 +163,10 @@ public class CallKitRemoteInfoProxy: NSObject   {
 public class CommunicationUIProxy: NSObject {
     var callComposite: CallComposite? = nil
     private var onIncomingCallProvideRemoteInfo: (((String) -> CallKitRemoteInfoProxy))?
+    var callScreenOptionsProxy: CallScreenOptionsProxy?
+    var headerViewData: CallScreenHeaderViewData?
+    var participantCount: Int = 0
+    var updateTitleSubtitleOnParticipantCountChange: Bool = false
 
     public func createCallComposite(token: String,
                                     displayName: String,
@@ -185,8 +192,8 @@ public class CommunicationUIProxy: NSObject {
             var setupOrientation: OrientationOptions?
             var callOrientation: OrientationOptions?
             var callScreenControlBarOptions: CallScreenControlBarOptions?
-            var callScreenOptions: CallScreenOptions?
             self.onIncomingCallProvideRemoteInfo = onIncomingCallProvideRemoteInfo
+            self.callScreenOptionsProxy = callScreenOptionsProxy
 
             if let theme = theme {
                 xamarinTheme = XamarinTheme(customPrimaryColor: theme.primaryColor)
@@ -203,11 +210,6 @@ public class CommunicationUIProxy: NSObject {
             if let orientationCallProxy = orientationProxy {
                 callOrientation = getOrientation(orientation: orientationCallProxy.callScreenOrientation)
             }
-
-            if let callScreenOptionsProxy = callScreenOptionsProxy {
-                callScreenControlBarOptions = CallScreenControlBarOptions(leaveCallConfirmationMode: getLeaveCallConfirmationMode(mode: callScreenOptionsProxy.callScreenControlBarOptions?.leaveCallConfirmationMode ?? "always_enabled"))
-                callScreenOptions = CallScreenOptions(controlBarOptions: callScreenControlBarOptions)
-            }
         
             let callKitOptions = enableCallKit ? getCallKitOptions() : nil
         
@@ -217,7 +219,6 @@ public class CommunicationUIProxy: NSObject {
             callingScreenOrientation: callOrientation,
             enableMultitasking: enableMultitasking,
             enableSystemPictureInPictureWhenMultitasking: enableSystemPictureInPictureWhenMultitasking,
-            callScreenOptions: callScreenOptions,
             callKitOptions: callKitOptions,
             displayName: displayName)
 
@@ -277,7 +278,15 @@ public class CommunicationUIProxy: NSObject {
             }
             
             callComposite?.events.onRemoteParticipantJoined = { identifiers in
+                self.participantCount += identifiers.count
+                if self.updateTitleSubtitleOnParticipantCountChange {
+                    if let headerViewData = self.headerViewData {
+                        headerViewData.subtitle = "\(self.participantCount) participants"
+                    }
+                }
+
                 guard let callback = onRemoteParticipantJoinedCallback else { return }
+                
                 let rawIds = identifiers.map { identifier -> String in
                     switch identifier {
                     case is CommunicationUserIdentifier:
@@ -489,12 +498,29 @@ extension CommunicationUIProxy {
         let avatar = localDataOptionsProxy.personaData?.avatarImage
         let renderDisplayName = localDataOptionsProxy.personaData?.renderDisplayName
         let persona: ParticipantViewData = ParticipantViewData(avatar: avatar, displayName: renderDisplayName)
+        let title = localDataOptionsProxy.callScreenTitle ?? ""
+        let subtitle = localDataOptionsProxy.callScreenSubtitle ?? ""
+        var callScreenOptions: CallScreenOptions? = nil
+        
+        if let callScreenOptionsProxy = self.callScreenOptionsProxy {
+            let callScreenControlBarOptions = CallScreenControlBarOptions(leaveCallConfirmationMode: getLeaveCallConfirmationMode(mode: callScreenOptionsProxy.callScreenControlBarOptions?.leaveCallConfirmationMode ?? "always_enabled"))
+            if !title.isEmpty || !subtitle.isEmpty {
+                self.headerViewData = CallScreenHeaderViewData(
+                    title: title,
+                    subtitle: subtitle
+                )
+                self.updateTitleSubtitleOnParticipantCountChange = localDataOptionsProxy.updateTitleSubtitleOnParticipantCountChange
+            }
+            callScreenOptions = CallScreenOptions(controlBarOptions: callScreenControlBarOptions,
+                                                  headerViewData: self.headerViewData)
+        }
 
         return LocalOptions(participantViewData: persona,
                             cameraOn: localDataOptionsProxy.cameraOn,
                             microphoneOn: localDataOptionsProxy.microphoneOn,
                             skipSetupScreen: localDataOptionsProxy.skipSetupScreen,
-                            audioVideoMode: getAudioVideoMode(mode: localDataOptionsProxy.audioVideoMode ?? "audioAndVideo"))
+                            audioVideoMode: getAudioVideoMode(mode: localDataOptionsProxy.audioVideoMode ?? "audioAndVideo"),
+                            callScreenOptions: callScreenOptions)
     }
 
     private func getAudioVideoMode(mode: String) -> CallCompositeAudioVideoMode {

@@ -82,6 +82,18 @@ namespace iOS.CallingUI.Binding
 		[NullAllowed, Export ("audioVideoMode")]
 		string AudioVideoMode { get; set; }
 
+		// @property (copy, nonatomic) NSString * _Nullable callScreenTitle;
+		[NullAllowed, Export ("callScreenTitle")]
+		string CallScreenTitle { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable callScreenSubtitle;
+		[NullAllowed, Export ("callScreenSubtitle")]
+		string CallScreenSubtitle { get; set; }
+
+		// @property(nonatomic) BOOL updateTitleSubtitleOnParticipantCountChange;
+		[NullAllowed, Export ("updateTitleSubtitleOnParticipantCountChange")]
+		bool UpdateTitleSubtitleOnParticipantCountChange { get; set; }
+
         // -(void)setLocalDataOptionProperties:(CommunicationPersonaDataProxy * _Nonnull)personaData;
         [Export ("setLocalDataOptionProperties:")]
 		void SetLocalDataOptionProperties (CommunicationPersonaDataProxy personaData);
