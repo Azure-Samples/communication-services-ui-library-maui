@@ -17,6 +17,7 @@ We appreciate your feedback and energy helping us improve our services. [If you'
 - iOS [Requirements](https://github.com/Azure/communication-ui-library-ios#requirements)
 - Android [Requirements](https://github.com/Azure/communication-ui-library-android#prerequisites)
 - Visual Studio [Setup Instructions](https://docs.microsoft.com/en-us/xamarin/get-started/installation/?pivots=macos)
+- Visual Studio Code [Setup Instructions Android](https://learn.microsoft.com/en-us/dotnet/maui/get-started/first-app?pivots=devices-android&view=net-maui-8.0&tabs=visual-studio-code) [Setup Instructions iOS](https://learn.microsoft.com/en-us/dotnet/maui/get-started/first-app?pivots=devices-ios&view=net-maui-8.0&tabs=visual-studio-code)
 - Azure Communication Services Token [See example](https://docs.microsoft.com/azure/communication-services/tutorials/trusted-service-tutorial)
 
 ## Run Sample
@@ -38,6 +39,15 @@ We appreciate your feedback and energy helping us improve our services. [If you'
 2. Open `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.sln` in Visual Studio
 3. Edit `CommunicationCallingSampleMauiApp/CommunicationCallingSampleMauiApp.csproj` and set `<TargetFrameworks>net8.0-ios</TargetFrameworks>`.
 4. Select iOS device/simulator in visual studio and run `CommunicationCallingSampleMauiApp` app.
+
+##### Visual Studio Code
+
+1. Navigate to `/AndroidMauiBindings` and in this directory in terminal run `./downloadJarScript.sh`. `GitBash` or `Windows Subsystem for Linux (WSL)` should be enabled to run `.sh` on Windows.
+2. Navigate to `communication-services-ui-library-maui/iOSMauiBindings/ProxyLibs/CommunicationUI-Proxy` and in this directory in terminal run `./iOSFramework.sh -d`.
+3. Open `communication-services-ui-library-maui/CommunicationCallingSampleMauiApp` in Visual Studio code.
+4. Click `CommunicationCallingSampleMauiApp.sln`, `Solution Explorer` will become visible.
+5. Click `CommunicationCallingSampleMauiApp.csproj`, `{}` will become visible in Visual Studio Code bottom bar. Select `Android` or `iOS` device following `net8.0-ios/net8.0-android` in `CommunicationCallingSampleMauiApp.csproj`.
+6. Right click on `CommunicationCallingSampleMauiApp` in solution explorer and click on `Debug` -> `Start`.
 
 ### Folder Structure
 
