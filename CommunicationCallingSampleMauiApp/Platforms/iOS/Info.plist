@@ -40,6 +40,6 @@
         <string>voip</string>
     </array>
 	<key>MinimumOSVersion</key>
-	<string>15.2</string>
+	<string>16</string>
 </dict>
 </plist>

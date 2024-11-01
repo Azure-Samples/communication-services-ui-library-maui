@@ -8,7 +8,7 @@
     <EnableDefaultAndroidItems>false</EnableDefaultAndroidItems>
   </PropertyGroup>
   <ItemGroup>
-    <AndroidLibrary Include="Jars\azure-communication-ui-calling-1.11.0.aar" />
+    <AndroidLibrary Include="Jars\azure-communication-ui-calling-1.12.0.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Android.Azure.Common.Bindings\Android.Azure.Common.Bindings.csproj" />
