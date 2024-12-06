@@ -16,7 +16,7 @@ fi
 cd Jars
 
 echo "Downloading CommunicationUILibrary Jars"
-curl "https://repo1.maven.org/maven2/com/azure/android/azure-communication-ui-calling/1.12.0/azure-communication-ui-calling-1.12.0.aar" --output azure-communication-ui-calling-1.12.0.aar
+curl "https://repo1.maven.org/maven2/com/azure/android/azure-communication-ui-calling/1.13.0/azure-communication-ui-calling-1.13.0.aar" --output azure-communication-ui-calling-1.13.0.aar
 
 echo "CommunicationUILibrary Jars Download Complete"
 cd ../../
@@ -82,7 +82,7 @@ fi
 
 cd aar
 
-curl  "https://repo1.maven.org/maven2/com/azure/android/azure-communication-calling/2.11.0/azure-communication-calling-2.11.0.aar" --output azure-communication-calling-2.11.0.aar
+curl  "https://repo1.maven.org/maven2/com/azure/android/azure-communication-calling/2.12.0/azure-communication-calling-2.12.0.aar" --output azure-communication-calling-2.12.0.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/trouter-client-android/0.1.4/trouter-client-android-0.1.4.aar" --output trouter-client-android-0.1.4.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_core/0.0.21/fluentui_core-0.0.21.aar" --output fluentui_core-0.0.21.aar
 curl  "https://repo1.maven.org/maven2/com/microsoft/fluentui/fluentui_drawer/0.0.21/fluentui_drawer-0.0.21.aar" --output fluentui_drawer-0.0.21.aar
