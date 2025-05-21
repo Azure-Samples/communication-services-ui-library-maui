@@ -21,14 +21,14 @@
   </ItemGroup>
    <ItemGroup>
 
-       <AndroidLibrary Include="Jars\jackson-annotations-2.11.2.jar" Bind="false" />
-        <AndroidLibrary Include="Jars\jackson-core-2.11.2.jar" Bind="false" />
+       <AndroidLibrary Include="Jars\jackson-annotations-2.12.7.jar" Bind="false" />
+        <AndroidLibrary Include="Jars\jackson-core-2.12.7.jar" Bind="false" />
         <AndroidLibrary Include="Jars\jackson-databind-2.11.3.jar" Bind="false" />
-        <AndroidLibrary Include="Jars\jackson-dataformat-xml-2.11.2.jar" Bind="false" />
-        <AndroidLibrary Include="Jars\jackson-module-jaxb-annotations-2.11.2.jar" Bind="false" />
+        <AndroidLibrary Include="Jars\jackson-dataformat-xml-2.12.7.jar" Bind="false" />
+        <AndroidLibrary Include="Jars\jackson-module-jaxb-annotations-2.12.7.jar" Bind="false" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidLibrary Include="Jars\azure-core-1.0.0-beta.12.aar" />
+    <AndroidLibrary Include="Jars\azure-core-1.0.0-beta.14.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Android.Azure.Log.Bindings\Android.Azure.Log.Bindings.csproj" />

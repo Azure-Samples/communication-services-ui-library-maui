@@ -7,9 +7,9 @@ This project demonstrates the integration of Communication UI library into .Net 
 The sample application has following dependencies.
 
 * Bindings for `azure-communication-ui-calling-*.aar`
-* Bindings for `azure-core-logging-1.0.0-beta.9.aar`
-* Bindings for `azure-core-1.0.0-beta.9.aar`
-* Bindings for `azure-communication-common-1.0.0.aar`
+* Bindings for `azure-core-logging-1.0.0-beta.14.aar`
+* Bindings for `azure-core-1.0.0-beta.14.aar`
+* Bindings for `azure-communication-common-1.2.1.aar`
 * .aar - The aar's not requiring bindings included in sample application `aar` folder. 
   * azure-communication-calling
   * dualscreen-layout
@@ -55,7 +55,7 @@ To support .Net MAUI for Calling UI library, the following bindings are required
 
 ``` xml
   <ItemGroup>
-    <AndroidLibrary Include="Jars\azure-communication-common-1.0.0.aar" />
+    <AndroidLibrary Include="Jars\azure-communication-common-1.2.1.aar" />
   </ItemGroup>
 ```
 
@@ -64,7 +64,7 @@ To support .Net MAUI for Calling UI library, the following bindings are required
 
 ```xml
   <ItemGroup>
-    <AndroidLibrary Include="Jars\azure-core-1.0.0-beta.9.aar" />
+    <AndroidLibrary Include="Jars\azure-core-1.0.0-beta.14.aar" />
   </ItemGroup>
 ```
 
@@ -72,7 +72,7 @@ To support .Net MAUI for Calling UI library, the following bindings are required
 
 ```xml
   <ItemGroup>
-    <AndroidLibrary Include="Jars\azure-core-logging-1.0.0-beta.9.aar" />
+    <AndroidLibrary Include="Jars\azure-core-logging-1.0.0-beta.14.aar" />
   </ItemGroup>
 ```
 
