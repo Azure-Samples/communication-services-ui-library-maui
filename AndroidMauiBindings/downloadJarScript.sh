@@ -48,7 +48,7 @@ cd Jars
 
 curl  "https://repo1.maven.org/maven2/com/azure/android/azure-core/1.0.0-beta.14/azure-core-1.0.0-beta.14.aar" --output azure-core-1.0.0-beta.14.aar
 curl  "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.12.7/jackson-annotations-2.12.7.jar" --output jackson-annotations-2.12.7.jar
-curl  "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.12.7/jackson-core-2.12.7.jar" --output jackson-core-2.11.7.jar
+curl  "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.12.7/jackson-core-2.12.7.jar" --output jackson-core-2.12.7.jar
 curl  "https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.11.3/jackson-databind-2.11.3.jar" --output jackson-databind-2.11.3.jar
 curl  "https://repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.12.7/jackson-dataformat-xml-2.12.7.jar" --output jackson-dataformat-xml-2.12.7.jar
 curl  "https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.12.7/jackson-module-jaxb-annotations-2.12.7.jar" --output jackson-module-jaxb-annotations-2.12.7.jar
