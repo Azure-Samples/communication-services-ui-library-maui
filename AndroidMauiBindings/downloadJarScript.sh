@@ -67,7 +67,7 @@ cd Jars
 curl  "https://repo1.maven.org/maven2/net/sourceforge/streamsupport/android-retrofuture/1.7.4/android-retrofuture-1.7.4.jar" --output android-retrofuture-1.7.4.jar
 curl  "https://repo1.maven.org/maven2/net/sourceforge/streamsupport/android-retrostreams/1.7.4/android-retrostreams-1.7.4.jar" --output android-retrostreams-1.7.4.jar
 curl  "https://repo1.maven.org/maven2/com/azure/android/azure-communication-common/1.2.1/azure-communication-common-1.2.1.aar" --output azure-communication-common-1.2.1.aar
-curl  "https://repo1.maven.org/maven2/com/azure/android/azure-core/1.0.0-beta.12/azure-core-1.0.0-beta.14.aar" --output azure-core-1.0.0-beta.14.aar
+curl  "https://repo1.maven.org/maven2/com/azure/android/azure-core/1.0.0-beta.14/azure-core-1.0.0-beta.14.aar" --output azure-core-1.0.0-beta.14.aar
 curl  "https://repo1.maven.org/maven2/com/azure/android/azure-core-logging/1.0.0-beta.14/azure-core-logging-1.0.0-beta.14.aar" --output azure-core-logging-1.0.0-beta.14.aar
 echo "CommunicationCommon Jars Download Complete"
 echo "Downloading aars..."
