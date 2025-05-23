@@ -8,11 +8,11 @@
     <EnableDefaultAndroidItems>false</EnableDefaultAndroidItems>
   </PropertyGroup>
     <ItemGroup>
-       <AndroidLibrary Include="Jars\android-retrofuture-1.7.3.jar" Bind="false" />
-       <AndroidLibrary Include="Jars\android-retrostreams-1.7.3.jar" Bind="false" />
+       <AndroidLibrary Include="Jars\android-retrofuture-1.7.4.jar" Bind="false" />
+       <AndroidLibrary Include="Jars\android-retrostreams-1.7.4.jar" Bind="false" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidLibrary Include="Jars\azure-communication-common-1.1.0.aar" />
+    <AndroidLibrary Include="Jars\azure-communication-common-1.2.1.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Android.Azure.Core.Bindings\Android.Azure.Core.Bindings.csproj" />
